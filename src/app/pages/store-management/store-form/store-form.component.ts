@@ -133,9 +133,11 @@ export class StoreFormComponent implements OnInit {
         //console.log('Is retailer ' + this.isRetailer);
 
         this.adjustForm();
+        if (this.store && this.store.id > 0) {
+          this.fillForm();
+        }
 
         this.loading = false;
-
       });
     if (this.env.googleApiKey) {
       this.addressAutocomplete();
@@ -144,6 +146,12 @@ export class StoreFormComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+  }
+
+  onCurrencySelected(code: string) {
+    const selectedCurrency = this.supportedCurrency.find(c => c.code === code);
+    const symbolOverride = selectedCurrency ? selectedCurrency.symbolOverride : '';
+    this.form.patchValue({ currencySymbolOverride: symbolOverride });
   }
 
   addressAutocomplete() {
@@ -214,6 +222,7 @@ export class StoreFormComponent implements OnInit {
       supportedLanguages: [[], [Validators.required]],
       defaultLanguage: ['', [Validators.required]],
       currency: [''],
+      currencySymbolOverride: [''],
       currencyFormatNational: [true],
       weight: ['', [Validators.required]],
       dimension: ['', [Validators.required]],
@@ -231,9 +240,6 @@ export class StoreFormComponent implements OnInit {
 
     //console.log('Creating form 3 ');
     //console.log('Store id' + this.store.id);
-    if (this.store && this.store.id > 0) {
-      this.fillForm();
-    }
 
   }
 
@@ -249,7 +255,8 @@ export class StoreFormComponent implements OnInit {
 
         supportedLanguages: this.parent.supportedLanguages,
         defaultLanguage: this.parent.defaultLanguage,
-        currency: this.parent.currency,
+        currency: this.parent.currency.code,
+        currencySymbolOverride: this.parent.currency.symbolOverride,
         currencyFormatNational: this.parent.currencyFormatNational,
         weight: this.parent.weight,
         dimension: this.parent.dimension,
@@ -283,6 +290,10 @@ export class StoreFormComponent implements OnInit {
     this.store.supportedLanguages.forEach(lang => {
       this.supportedLanguagesSelected.push(lang.code);
     });
+
+    const selectedCurrency = this.supportedCurrency.find(c => c.code === this.store.currency);
+    const symbolOverride = selectedCurrency ? selectedCurrency.symbolOverride : '';
+
     this.form.patchValue({
       name: this.store.name,
       code: this.store.code,
@@ -291,6 +302,7 @@ export class StoreFormComponent implements OnInit {
       supportedLanguages: this.store.supportedLanguages,
       defaultLanguage: this.store.defaultLanguage,
       currency: this.store.currency,
+      currencySymbolOverride: symbolOverride,
       currencyFormatNational: this.store.currencyFormatNational,
       weight: this.store.weight,
       dimension: this.store.dimension,
@@ -383,6 +395,13 @@ export class StoreFormComponent implements OnInit {
     storeObj.supportedLanguages = this.supportedLanguagesSelected;
 
     if (this.store && this.store.id) {
+      const selectedCurrency = this.supportedCurrency.find(c => c.code === storeObj.currency);
+      const originalOverride = selectedCurrency ? selectedCurrency.symbolOverride : '';
+
+      if (storeObj.currencySymbolOverride !== originalOverride) {
+        this.configService.updateCurrencySymbol(storeObj.currency, storeObj.currencySymbolOverride).subscribe();
+      }
+
       this.storeService.updateStore(storeObj)
         .subscribe(store => {
           this.toastr.success(this.translate.instant('STORE_FORM.' + this.establishmentType + '_UPDATED'));

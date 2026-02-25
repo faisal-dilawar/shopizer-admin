@@ -184,8 +184,8 @@ export class OrderListComponent implements OnInit {
           title: this.translate.instant('ORDER.TOTAL'),
           type: 'string',
           filter: false,
-          valuePrepareFunction: (total) => {
-            return total.value;
+          valuePrepareFunction: (total, data) => {
+            return data.currencySymbol + total.value;
           }
         },
         datePurchased: {

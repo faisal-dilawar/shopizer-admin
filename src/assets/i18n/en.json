@@ -217,6 +217,8 @@
     "COUNTRY": "Country",
     "SUPPORTED_LANGUAGES": "Supported languages",
     "CURRENCY": "Currency",
+    "CURRENCY_SYMBOL_OVERRIDE": "Currency Symbol Override",
+    "CURRENCY_SYMBOL_OVERRIDE_INFO": "Override the default Java currency symbol (e.g. ₹ for INR). Leave blank for default.",
     "CURRENCY_FORMAT": "National currency format",
     "CURRENCY_FORMAT_RULE": "National currency format ex $1,234.79 or International currency format ex USD1,345.79",
     "WEIGHT_UNITS": "Weight units",

@@ -122,6 +122,10 @@ export class ConfigService {
     return this.crudService.get(`/v1/currency`);
   }
 
+  updateCurrencySymbol(code: string, symbolOverride: string) {
+    return this.crudService.put(`/v1/private/currency/${code}`, { symbolOverride });
+  }
+
   getWeightAndSizes() {
     return this.crudService.get(`/v1/measures`);
   }

@@ -200,10 +200,21 @@
           <label class="col-sm-10 col-form-label inputLabel">{{ 'STORE_FORM.CURRENCY' | translate }}</label>
           <div class="col-sm-12">
             <nb-select *ngIf="supportedCurrency.length" placeholder="{{ 'STORE_FORM.CURRENCY' | translate }}"
-              formControlName='currency' outline shape="rectangle" class="fullWidth">
+              formControlName='currency' (selectedChange)="onCurrencySelected($event)" outline shape="rectangle" class="fullWidth">
               <nb-option *ngFor="let currency of supportedCurrency" [value]="currency.code">{{ currency.code }}
               </nb-option>
             </nb-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="currencySymbolOverride" class="col-sm-10 col-form-label inputLabel">{{ 'STORE_FORM.CURRENCY_SYMBOL_OVERRIDE' | translate }}</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control inputText" id="currencySymbolOverride" formControlName='currencySymbolOverride'
+              placeholder="{{ 'STORE_FORM.CURRENCY_SYMBOL_OVERRIDE' | translate }}">
+            <div class="err-message" style="color: #8f9bb3">
+              {{ 'STORE_FORM.CURRENCY_SYMBOL_OVERRIDE_INFO' | translate }}
+            </div>
           </div>
         </div>
 
