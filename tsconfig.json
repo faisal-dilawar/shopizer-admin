@@ -17,6 +17,8 @@
       "es2017",
       "dom"
     ],
+    "skipLibCheck": true,
+    "noEmitOnError": false,
     "plugins": [
       {
         "name": "tslint-language-service"
