@@ -476,7 +476,7 @@ export class ProductFormComponent implements OnInit {
           .subscribe(res => {
             this.loading = false;
             this.toastr.success(this.translate.instant('PRODUCT.PRODUCT_CREATED'));
-            this.router.navigate(['pages/catalogue/products/products-list']);
+            this.router.navigate(['pages/catalogue/products/product', res.id]);
           }
             , err => {
               this.toastr.error(err.error.message);

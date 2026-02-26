@@ -44,7 +44,7 @@ export class ProductService {
     const params = {
       lang: '_all'
     };
-    return this.crudService.get(`/v2/private/product/definition/${id}`, params);
+    return this.crudService.get(`/v2/private/product/${id}`, params);
   }
 
   getProductDefinitionBySku(sku): Observable<any> {
@@ -58,7 +58,7 @@ export class ProductService {
     const params = {
       store: this.storageService.getMerchant()
     };
-    return this.crudService.post(`/v2/private/product/definition`, product, { params });
+    return this.crudService.post(`/v2/private/product`, product, { params });
   }
 
   deleteProduct(id): Observable<any> {
