@@ -1,0 +1,43 @@
+name: Admin Frontend CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'shopizer-admin/**'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'shopizer-admin/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          cache: 'npm'
+          cache-dependency-path: 'shopizer-admin/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: shopizer-admin
+        run: npm install
+
+      - name: Run Linting
+        working-directory: shopizer-admin
+        run: npm run lint
+
+      - name: Build
+        working-directory: shopizer-admin
+        run: npm run build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: shopizer-admin
+          path: shopizer-admin/dist/
