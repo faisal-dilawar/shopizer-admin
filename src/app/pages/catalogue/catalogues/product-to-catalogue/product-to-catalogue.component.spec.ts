@@ -8,7 +8,7 @@ describe('ProductToCatalogueComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductToCatalogueComponent ]
+      declarations: [ ProductToCatalogueComponent ],
     })
     .compileComponents();
   }));

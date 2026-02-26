@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { CrudService } from '../../shared/services/crud.service';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) { }
 
   private subject = new Subject<any>();
@@ -26,7 +26,7 @@ export class SharedService {
     return this.subject1.asObservable();
   }
   getCountry(): Observable<any> {
-    return this.crudService.get('/v1/country')
+    return this.crudService.get('/v1/country');
   }
   getExpedition(storeCode): Observable<any> {
     return this.crudService.get('/v1/private/shipping/expedition?store=' + storeCode);

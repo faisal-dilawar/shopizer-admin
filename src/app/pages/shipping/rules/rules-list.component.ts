@@ -12,12 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ngx-rules-list',
   templateUrl: './rules-list.component.html',
-  styleUrls: ['./rules-list.component.scss']
+  styleUrls: ['./rules-list.component.scss'],
 })
 export class RulesListComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
-  loadingList: boolean = false;
+  loadingList = false;
   settings = {};
   perPage = 10;
   currentPage = 1;
@@ -47,7 +47,7 @@ export class RulesListComponent implements OnInit {
     this.getStoreList();
   }
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -72,7 +72,7 @@ export class RulesListComponent implements OnInit {
   }
 
   setSettings() {
-    var me = this;
+    const me = this;
     this.settings = {
       mode: 'external',
       hideSubHeader: true,
@@ -85,30 +85,30 @@ export class RulesListComponent implements OnInit {
         custom: [
           {
             name: 'edit',
-            title: '<i class="nb-edit"></i>'
+            title: '<i class="nb-edit"></i>',
           },
           {
             name: 'delete',
-            title: '<i class="nb-trash"></i>'
-          }
-        ]
+            title: '<i class="nb-trash"></i>',
+          },
+        ],
       },
       columns: {
         id: {
           title: this.translate.instant('COMMON.ID'),
           type: 'string',
-          filter: false
+          filter: false,
         },
         code: {
           title: this.translate.instant('PACKAGING.CODE'),
           type: 'string',
-          filter: false
+          filter: false,
         },
         name: {
           title: this.translate.instant('RULES.NAME'),
           type: 'string',
-          filter: false
-        }
+          filter: false,
+        },
 
       },
     };
@@ -148,15 +148,15 @@ export class RulesListComponent implements OnInit {
 
   }
   delete(e) {
-    console.log(e)
+    console.log(e);
     this.loadingList = true;
     this.sharedService.deleteRules(e.data.id)
       .subscribe(res => {
         this.loadingList = false;
-        this.toastr.success("Packages has been deleted successfully");
-        this.getShippingRulesList()
+        this.toastr.success('Packages has been deleted successfully');
+        this.getShippingRulesList();
       }, error => {
-        this.toastr.success("Packages has been deleted fail");
+        this.toastr.success('Packages has been deleted fail');
         this.loadingList = false;
 
       });

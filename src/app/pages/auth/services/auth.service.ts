@@ -7,7 +7,7 @@ import { UserService } from '../../shared/services/user.service';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
@@ -57,12 +57,12 @@ export class AuthService {
   }
   checkIfStoreExist(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v1/store/unique`, params);
   }
   register(param): Observable<any> {
-    return this.crudService.post('/v1/store/signup', param)
+    return this.crudService.post('/v1/store/signup', param);
   }
 
 }

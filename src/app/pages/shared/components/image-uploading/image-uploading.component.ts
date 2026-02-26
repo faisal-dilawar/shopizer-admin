@@ -7,34 +7,34 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
-} from "@angular/core";
+} from '@angular/core';
 
-import { CdkDropListGroup, CdkDragEnter, CdkDropList, CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { CdkDropListGroup, CdkDragEnter, CdkDropList, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { ToastrService } from "ngx-toastr";
-import { TranslateService } from "@ngx-translate/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { ImageUploadingAdapter } from "./image-uploading-adapter";
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ImageUploadingAdapter } from './image-uploading-adapter';
 import {
   FilePickerComponent,
   FilePreviewModel,
   UploaderCaptions,
   ValidationError,
-} from "ngx-awesome-uploader";
-import { Observable, of } from "rxjs";
-import { delay, map } from "rxjs/operators";
-import { Image } from "../../../shared/models/image";
-import { StoreService } from "../../../store-management/services/store.service";
+} from 'ngx-awesome-uploader';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
+import { Image } from '../../../shared/models/image';
+import { StoreService } from '../../../store-management/services/store.service';
 import { ViewportRuler } from '@angular/cdk/overlay';
-import { UserService } from "../../../../@core/mock/users.service";
+import { UserService } from '../../../../@core/mock/users.service';
 
 @Component({
-  selector: "ngx-image-uploading",
-  templateUrl: "./image-uploading.component.html",
-  styleUrls: ["./image-uploading.component.scss"],
+  selector: 'ngx-image-uploading',
+  templateUrl: './image-uploading.component.html',
+  styleUrls: ['./image-uploading.component.scss'],
 })
 export class ImageUploadingComponent implements OnInit {
-  @ViewChild("uploader", { static: false }) uploader: FilePickerComponent;
+  @ViewChild('uploader', { static: false }) uploader: FilePickerComponent;
   @ViewChild(CdkDropListGroup) listGroup: CdkDropListGroup<CdkDropList>;
   @ViewChild(CdkDropList) placeholder: CdkDropList;
 
@@ -81,7 +81,7 @@ export class ImageUploadingComponent implements OnInit {
     private translate: TranslateService,
     private http: HttpClient,
     private storeService: UserService,
-    private viewportRuler: ViewportRuler
+    private viewportRuler: ViewportRuler,
   ) {
     this.target = null;
     this.source = null;
@@ -119,7 +119,7 @@ export class ImageUploadingComponent implements OnInit {
     parent.appendChild(phElement);
     parent.insertBefore(
       this.source.element.nativeElement,
-      parent.children[this.sourceIndex]
+      parent.children[this.sourceIndex],
     );
 
     this.target = null;
@@ -151,16 +151,16 @@ export class ImageUploadingComponent implements OnInit {
 
     const dragIndex = __indexOf(
       dropElement.parentElement.children,
-      this.source ? phElement : sourceElement
+      this.source ? phElement : sourceElement,
     );
     const dropIndex = __indexOf(
       dropElement.parentElement.children,
-      dropElement
+      dropElement,
     );
 
-    console.log("drag::", dragIndex, dropIndex);
-    let newObj = { "id": this.images[dragIndex].id, "position": dropIndex + 1 }
-    this.update.emit(newObj)
+    console.log('drag::', dragIndex, dropIndex);
+    const newObj = { id: this.images[dragIndex].id, position: dropIndex + 1 };
+    this.update.emit(newObj);
 
 
     if (!this.source) {
@@ -181,14 +181,14 @@ export class ImageUploadingComponent implements OnInit {
     phElement.style.display = '';
     dropElement.parentElement.insertBefore(
       phElement,
-      dropIndex > dragIndex ? dropElement.nextSibling : dropElement
+      dropIndex > dragIndex ? dropElement.nextSibling : dropElement,
     );
 
     requestAnimationFrame(() => {
       this.placeholder._dropListRef.enter(
         drag._dragRef,
         drag.element.nativeElement.offsetLeft,
-        drag.element.nativeElement.offsetTop
+        drag.element.nativeElement.offsetTop,
       );
     });
   }
@@ -202,7 +202,7 @@ export class ImageUploadingComponent implements OnInit {
 
 
   errorImage(code) {
-    console.log("Error image " + code);
+    console.log('Error image ' + code);
     this.error.emit(code);
 
     //hide upload status
@@ -223,12 +223,12 @@ export class ImageUploadingComponent implements OnInit {
   }
 
   public onChangeimage(e: any): void {
-    console.log("function==>", e);
+    console.log('function==>', e);
 
   }
 
   public onUploadSuccess(e: FilePreviewModel): void {
-    var me = this;
+    const me = this;
     this.timer = setTimeout(() => {
       me.success.emit(e.fileName);
       me.details = false;
@@ -237,12 +237,12 @@ export class ImageUploadingComponent implements OnInit {
 
   /* remove success */
   public onRemoveSuccess(e: FilePreviewModel) {
-    console.log("Remove");
+    console.log('Remove');
     console.log(e);
   }
 
   public onFileAdded(file: FilePreviewModel) {
-    console.log("File added ", file);
+    console.log('File added ', file);
     this.fileAdded.emit(true);
     clearTimeout(this.timer);
   }

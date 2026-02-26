@@ -5,7 +5,7 @@ import { StoreService } from '../services/store.service';
 @Component({
   selector: 'ngx-store-details',
   templateUrl: './store-details.component.html',
-  styleUrls: ['./store-details.component.scss']
+  styleUrls: ['./store-details.component.scss'],
 })
 export class StoreDetailsComponent implements OnInit {
   store: any;
@@ -16,20 +16,20 @@ export class StoreDetailsComponent implements OnInit {
       id: '0',
       title: 'Store branding',
       key: 'COMPONENTS.STORE_BRANDING',
-      link: 'store-branding'
+      link: 'store-branding',
     },
     {
       id: '1',
       title: 'Store home page',
       key: 'COMPONENTS.STORE_LANDING',
-      link: 'store-landing'
+      link: 'store-landing',
     },
     {
       id: '2',
       title: 'Store details',
       key: 'COMPONENTS.STORE_DETAILS',
-      link: 'store'
-    }
+      link: 'store',
+    },
   ];
 
   constructor(
@@ -49,7 +49,7 @@ export class StoreDetailsComponent implements OnInit {
   }
 
   route(link) {
-    this.router.navigate(['pages/store-management/' + link + "/", this.store.code]);
+    this.router.navigate(['pages/store-management/' + link + '/', this.store.code]);
   }
 
 }

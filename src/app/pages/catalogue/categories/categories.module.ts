@@ -29,10 +29,10 @@ import { TreeModule, TreeDraggedElement } from 'angular-tree-component';
     SharedModule,
     NgxSummernoteModule,
     NbDialogModule.forChild(),
-    TreeModule
+    TreeModule,
   ],
   entryComponents: [ButtonRenderComponent],
-  providers: [TreeDraggedElement]
+  providers: [TreeDraggedElement],
 })
 
 export class CategoriesModule {

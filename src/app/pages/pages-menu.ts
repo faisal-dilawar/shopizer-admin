@@ -9,13 +9,9 @@ import { environment } from '../../environments/environment';
  * other admins
  */
 
-const IsAccessToOrder = () => {
-  return (JSON.parse(localStorage.getItem('roles'))).canAccessToOrder;
-};
+const IsAccessToOrder = () => (JSON.parse(localStorage.getItem('roles'))).canAccessToOrder;
 
-const IsSuperadmin = () => {
-  return (JSON.parse(localStorage.getItem('roles'))).isSuperadmin;
-};
+const IsSuperadmin = () => (JSON.parse(localStorage.getItem('roles'))).isSuperadmin;
 
 const IsAdmin = () => {
   if (
@@ -28,25 +24,15 @@ const IsAdmin = () => {
   }
 };
 
-const IsAdminCatalogue = () => {
-  return (JSON.parse(localStorage.getItem('roles'))).isAdminCatalogue;
-};
+const IsAdminCatalogue = () => (JSON.parse(localStorage.getItem('roles'))).isAdminCatalogue;
 
-const IsAdminStore = () => {
-  return (JSON.parse(localStorage.getItem('roles'))).isAdminStore;
-};
+const IsAdminStore = () => (JSON.parse(localStorage.getItem('roles'))).isAdminStore;
 
-const IsAdminOrder = () => {
-  return (JSON.parse(localStorage.getItem('roles'))).isAdminOrder;
-};
+const IsAdminOrder = () => (JSON.parse(localStorage.getItem('roles'))).isAdminOrder;
 
-const IsAdminContent = () => {
-  return (JSON.parse(localStorage.getItem('roles'))).isAdminContent;
-};
+const IsAdminContent = () => (JSON.parse(localStorage.getItem('roles'))).isAdminContent;
 
-const IsCustomer = () => {
-  return (JSON.parse(localStorage.getItem('roles'))).isCustomer;
-};
+const IsCustomer = () => (JSON.parse(localStorage.getItem('roles'))).isCustomer;
 
 const isCategoryManagementVisible = () => {
   if ('MARKETPLACE' === environment.mode) {
@@ -57,11 +43,11 @@ const isCategoryManagementVisible = () => {
     if (IsAdminRetail() || IsAdmin()) {
       return true;
     } else {
-      'Not admin retail'
+      'Not admin retail';
     }
   }
 
-}
+};
 
 const IsAdminRetail = () => {
   if (
@@ -105,21 +91,21 @@ export const MENU_ITEMS: MenuItem[] = [
         title: 'COMPONENTS.MY_PROFILE',
         key: 'COMPONENTS.MY_PROFILE',
         link: '/pages/user-management/profile',
-        hidden: false
+        hidden: false,
       },
       {
         title: 'COMPONENTS.CREATE_USER',
         key: 'COMPONENTS.CREATE_USER',
         link: '/pages/user-management/create-user',
         hidden: false,
-        guards: [IsAdmin]
+        guards: [IsAdmin],
       },
       {
         title: 'COMPONENTS.USER_LIST',
         key: 'COMPONENTS.USER_LIST',
         link: '/pages/user-management/users',
         hidden: false,
-        guards: [IsAdmin]
+        guards: [IsAdmin],
       },
     ],
   },
@@ -136,22 +122,22 @@ export const MENU_ITEMS: MenuItem[] = [
         key: 'COMPONENTS.STORE',
         link: '/pages/store-management/store',
         hidden: false,
-        guards: [IsSuperadmin, IsAdmin, IsAdminRetail, IsAdminStore]
+        guards: [IsSuperadmin, IsAdmin, IsAdminRetail, IsAdminStore],
       },
       {
         title: 'COMPONENTS.STORES_LIST',
         key: 'COMPONENTS.STORES_LIST',
         link: '/pages/store-management/stores-list',
         hidden: false,
-        guards: [IsAdmin]
+        guards: [IsAdmin],
       },
       {
         title: 'COMPONENTS.CREATE_STORE',
         key: 'COMPONENTS.CREATE_STORE',
         link: '/pages/store-management/create-store',
         hidden: false,
-        guards: [IsSuperadmin, IsAdminRetail]
-      }
+        guards: [IsSuperadmin, IsAdminRetail],
+      },
     ],
   },
   {
@@ -201,15 +187,15 @@ export const MENU_ITEMS: MenuItem[] = [
             key: 'COMPONENTS.PRODUCTS_LIST',
             link: '/pages/catalogue/products/products-list',
             hidden: false,
-            guards: [IsAdminRetail]
+            guards: [IsAdminRetail],
           },
           {
             title: 'COMPONENTS.PRODUCT_ORDERING',
             key: 'COMPONENTS.PRODUCT_ORDERING',
             link: '/pages/catalogue/products/product-ordering',
             hidden: false,
-            guards: [IsAdminRetail]
-          }
+            guards: [IsAdminRetail],
+          },
         ],
       },
       {
@@ -246,7 +232,7 @@ export const MENU_ITEMS: MenuItem[] = [
             hidden: false,
             guards: [IsSuperadmin, IsAdmin, IsAdminRetail, IsAdminCatalogue],
           },
-        ]
+        ],
       },
       {
         title: 'COMPONENTS.BRANDS',
@@ -267,8 +253,8 @@ export const MENU_ITEMS: MenuItem[] = [
             link: '/pages/catalogue/brands/create-brand',
             hidden: false,
             guards: [IsSuperadmin, IsAdmin, IsAdminRetail, IsAdminCatalogue],
-          }
-        ]
+          },
+        ],
       },
       {
         title: 'COMPONENTS.PRODUCTS_GROUPS',
@@ -291,7 +277,7 @@ export const MENU_ITEMS: MenuItem[] = [
           //   hidden: false,
           //   guards: [IsSuperadmin, IsAdmin, IsAdminRetail, IsAdminCatalogue],
           // }
-        ]
+        ],
       },
       {
         title: 'COMPONENTS.PRODUCT_TYPES',
@@ -306,8 +292,8 @@ export const MENU_ITEMS: MenuItem[] = [
             link: '/pages/catalogue/types/types-list',
             hidden: false,
             guards: [IsSuperadmin, IsAdmin, IsAdminRetail, IsAdminCatalogue],
-          }
-        ]
+          },
+        ],
       },
 
       /**
@@ -327,9 +313,9 @@ export const MENU_ITEMS: MenuItem[] = [
           }
         ],
       },
-      **/
+       **/
 
-    ]
+    ],
   },
   {
     title: 'COMPONENTS.CONTENT_MANAGEMENT',
@@ -388,14 +374,14 @@ export const MENU_ITEMS: MenuItem[] = [
         title: 'SHIPPING.PACKAGING',
         key: 'SHIPPING.PACKAGING',
         link: '/pages/shipping/packaging',
-      }
+      },
       /**
       {
         title: 'COMPONENTS.RULES',
         key: 'COMPONENTS.RULES',
         link: '/pages/shipping/rules',
       },
-      */
+       */
 
       // {
       //   title: 'Options',
@@ -407,13 +393,13 @@ export const MENU_ITEMS: MenuItem[] = [
       //   key: 'sideNav.packaging',
       //   link: '/pages/shipping/config',
       // }
-    ]
+    ],
   },
   {
     title: 'COMPONENTS.PAYMENT',
     key: 'COMPONENTS.PAYMENT',
     icon: 'credit-card',
-    link: '/pages/payment/methods'
+    link: '/pages/payment/methods',
   },
   {
     title: 'COMPONENTS.TAX_MANAGEMENT',
@@ -423,14 +409,14 @@ export const MENU_ITEMS: MenuItem[] = [
       {
         title: 'COMPONENTS.TAX_CLASS',
         key: 'COMPONENTS.TAX_CLASS',
-        link: '/pages/tax-management/classes-list'
+        link: '/pages/tax-management/classes-list',
       },
       {
         title: 'COMPONENTS.TAX_RATE',
         key: 'COMPONENTS.TAX_RATE',
-        link: '/pages/tax-management/rate-list'
-      }
-    ]
+        link: '/pages/tax-management/rate-list',
+      },
+    ],
   },
   // {
   //   title: 'Payment',
@@ -462,7 +448,7 @@ export const MENU_ITEMS: MenuItem[] = [
       //   key: 'COMPONENTS.MANAGE_OPTIONS',
       //   link: '/pages/customer/manage/list',
       // }
-    ]
+    ],
   },
   // {
   //   title: 'Shipping',
@@ -492,9 +478,9 @@ export const MENU_ITEMS: MenuItem[] = [
         title: 'COMPONENTS.ORDERS',
         key: 'COMPONENTS.ORDERS',
         link: '/pages/orders',
-        guards: [IsOrderManagementVisible]
-      }
-    ]
+        guards: [IsOrderManagementVisible],
+      },
+    ],
   },
   // {
   //   title: 'Manage taxes',

@@ -5,7 +5,7 @@ import { StoreService } from '../services/store.service';
 @Component({
   selector: 'ngx-retailer',
   templateUrl: './retailer.component.html',
-  styleUrls: ['./retailer.component.scss']
+  styleUrls: ['./retailer.component.scss'],
 })
 export class RetailerComponent implements OnInit {
   store: any = {};

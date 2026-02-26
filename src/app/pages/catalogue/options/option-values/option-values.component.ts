@@ -13,16 +13,16 @@ import { OptionValueImageService } from '../services/option-value-image.service'
 @Component({
   selector: 'ngx-option-values',
   templateUrl: './option-values.component.html',
-  styleUrls: ['./option-values.component.scss']
+  styleUrls: ['./option-values.component.scss'],
 })
 export class OptionValuesComponent implements OnInit {
   form: FormGroup;
   loader = false;
-  loadingInfo: boolean = false;
+  loadingInfo = false;
   optionValue = new OptionValue();
   languages = [];
   types = [
-    'Select', 'Radio', 'Checkbox', 'Text'
+    'Select', 'Radio', 'Checkbox', 'Text',
   ];
   isCodeUnique = true;
   uploadImage = new FormData();
@@ -35,7 +35,7 @@ export class OptionValuesComponent implements OnInit {
     private toastr: ToastrService,
     private translate: TranslateService,
     private router: Router,
-    private optionValueImageService: OptionValueImageService
+    private optionValueImageService: OptionValueImageService,
   ) {
     this.languages = [...this.configService.languages];
   }
@@ -69,7 +69,7 @@ export class OptionValuesComponent implements OnInit {
     this.form = this.fb.group({
       code: ['', [Validators.required, Validators.pattern(validators.alphanumeric)]],
       selectedLanguage: ['en'],
-      descriptions: this.fb.array([])
+      descriptions: this.fb.array([]),
     });
     this.addFormArray();
   }
@@ -80,8 +80,8 @@ export class OptionValuesComponent implements OnInit {
       control.push(
         this.fb.group({
           language: [lang.code, []],
-          name: ['', []]
-        })
+          name: ['', []],
+        }),
       );
     });
   }

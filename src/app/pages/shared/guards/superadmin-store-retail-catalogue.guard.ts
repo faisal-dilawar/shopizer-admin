@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SuperadminStoreRetailCatalogueGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
   ) {
   }
 
@@ -27,5 +27,6 @@ export class SuperadminStoreRetailCatalogueGuard implements CanActivate {
     } else {
     this.router.navigate(['home']);
     return false;
-  }}
+  }
+}
 }

@@ -16,14 +16,14 @@ const routes: Routes = [
       {
         path: ':productId/inventory/:inventoryId/price/:priceId',
         component: PriceFormComponent,
-      }
+      },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 
 export class PriceRoutingModule {

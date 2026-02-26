@@ -25,11 +25,11 @@ const routes: Routes = [
         component: InventoryCreationComponent,
       },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class InventoryRoutingModule { }

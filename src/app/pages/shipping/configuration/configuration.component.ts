@@ -15,13 +15,13 @@ export class ConfigurationComponent {
   leftAreaLabel = this.translate.instant('SHIPPING.COUNTRY_AVAILABLE');
   rightAreaLabel = this.translate.instant('SHIPPING.COUNTRY_SELECTED');
 
-  leftAreaId = "Available";
-  rightAreaId = "Selected";
-  code = "code";
-  label = "label";
+  leftAreaId = 'Available';
+  rightAreaId = 'Selected';
+  code = 'code';
+  label = 'label';
   loading = false;
-  expedition: boolean = false;
-  taxOnShipping: boolean = false;
+  expedition = false;
+  taxOnShipping = false;
   stores: Array<any> = [];
   selectedStore: String = '';
   isSuperAdmin: boolean;
@@ -34,7 +34,7 @@ export class ConfigurationComponent {
     private translate: TranslateService,
   ) {
     this.isSuperAdmin = this.storageService.getUserRoles().isSuperadmin;
-    this.selectedStore = this.storageService.getMerchant()
+    this.selectedStore = this.storageService.getMerchant();
   }
 
 
@@ -45,12 +45,12 @@ export class ConfigurationComponent {
   initService() {
     this.loading = true;
     const store = localStorage.getItem('merchant');
-    forkJoin([this.sharedService.getExpedition(this.selectedStore), this.storeService.getListOfMerchantStoreNames({ 'store': '' }), this.sharedService.getCountry()])
+    forkJoin([this.sharedService.getExpedition(this.selectedStore), this.storeService.getListOfMerchantStoreNames({ store: '' }), this.sharedService.getCountry()])
       .subscribe(([expedition, stores, countries]) => {
 
         this.getCountry(countries);
-        this.expedition = expedition.iternationalShipping
-        this.taxOnShipping = expedition.taxOnShipping
+        this.expedition = expedition.iternationalShipping;
+        this.taxOnShipping = expedition.taxOnShipping;
         this.rightAreaItems = expedition.shipToCountry;
 
         stores.forEach((store) => {
@@ -64,7 +64,7 @@ export class ConfigurationComponent {
 
   getCountry(values) {
       values.forEach((item) => {
-        this.leftAreaItems.push({ 'code': item.id, 'label': item.name, 'countryCode': item.code })
+        this.leftAreaItems.push({ code: item.id, label: item.name, countryCode: item.code });
       });
   }
 

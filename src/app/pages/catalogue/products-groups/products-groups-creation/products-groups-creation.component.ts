@@ -7,7 +7,7 @@ import { OptionValuesService } from '../../options/services/option-values.servic
 @Component({
   selector: 'ngx-products-groups-creation',
   templateUrl: './products-groups-creation.component.html',
-  styleUrls: ['./products-groups-creation.component.scss']
+  styleUrls: ['./products-groups-creation.component.scss'],
 })
 export class ProductsGroupsCreationComponent implements OnInit {
   form: FormGroup;
@@ -46,7 +46,7 @@ export class ProductsGroupsCreationComponent implements OnInit {
       order: [0, [Validators.required]],
       defaultOption: [false, [Validators.required]],
       requiredOption: [false, [Validators.required]],
-      additionalWeight: [0, [Validators.required]]
+      additionalWeight: [0, [Validators.required]],
     });
   }
 

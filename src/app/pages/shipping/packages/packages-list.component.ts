@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ngx-packages-list',
   templateUrl: './packages-list.component.html',
-  styleUrls: ['./packages-list.component.scss']
+  styleUrls: ['./packages-list.component.scss'],
 })
 export class PackagesListComponent implements OnInit {
   @ViewChild('item', { static: false }) accordion;
@@ -54,7 +54,7 @@ export class PackagesListComponent implements OnInit {
   }
 
   setSettings() {
-    var me = this;
+    const me = this;
     this.settings = {
 
       hideSubHeader: true,
@@ -67,49 +67,49 @@ export class PackagesListComponent implements OnInit {
         custom: [
           {
             name: 'edit',
-            title: '<i class="nb-edit"></i>'
+            title: '<i class="nb-edit"></i>',
           },
           {
             name: 'delete',
-            title: '<i class="nb-trash"></i>'
-          }
+            title: '<i class="nb-trash"></i>',
+          },
         ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         code: {
           title: this.translate.instant('PACKAGING.CODE'),
           type: 'string',
-          filter: false
+          filter: false,
         },
         shippingWidth: {
           title: this.translate.instant('PACKAGING.WIDTH'),
           type: 'double',
-          filter: false
+          filter: false,
         },
         shippingHeight: {
           title: this.translate.instant('PACKAGING.HEIGHT'),
           type: 'double',
-          filter: false
+          filter: false,
         },
         shippingLength: {
           title: this.translate.instant('PACKAGING.LENGTH'),
           type: 'double',
-          filter: false
+          filter: false,
         },
         shippingWeight: {
           title: this.translate.instant('PACKAGING.WEIGHT'),
           type: 'double',
-          filter: false
+          filter: false,
         },
 
         type: {
           title: this.translate.instant('PACKAGING.TYPE'),
           type: 'string',
-          filter: false
-        }
+          filter: false,
+        },
       },
 
     };
@@ -146,8 +146,8 @@ export class PackagesListComponent implements OnInit {
     this.sharedService.deletePackaging(e.data.code)
       .subscribe(res => {
         this.loadingList = false;
-        this.toastr.success("Packages has been deleted successfully");
-        this.getPackagesList()
+        this.toastr.success('Packages has been deleted successfully');
+        this.getPackagesList();
       }, error => {
         this.loadingList = false;
 

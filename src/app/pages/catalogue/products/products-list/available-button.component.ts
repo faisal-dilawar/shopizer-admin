@@ -26,7 +26,7 @@ export class AvailableButtonComponent implements OnInit {
     const product = {
       available: this.value,
       price: this.rowData.price,
-      quantity: this.rowData.quantity
+      quantity: this.rowData.quantity,
     };
     this.productService.updateProductFromTable(this.rowData.id, product)
       .subscribe(res => {

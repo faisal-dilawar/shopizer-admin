@@ -9,13 +9,13 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'ngx-set-credentials',
   templateUrl: './set-credentials.component.html',
-  styleUrls: ['./set-credentials.component.scss']
+  styleUrls: ['./set-credentials.component.scss'],
 })
 export class SetCredentialsComponent implements OnInit {
 
   form: FormGroup;
   loading = false;
-  pwdPattern : string = constants.PASSWORD_PATTERN;
+  pwdPattern: string = constants.PASSWORD_PATTERN;
   customerID: any;
   errorMessage = '';
   selectedItem = '0';
@@ -24,19 +24,19 @@ export class SetCredentialsComponent implements OnInit {
       id: '0',
       title: 'Set credentials',
       key: 'FORGOT_PASSWORD.RESET',
-      link: 'customer/set-credentials'
+      link: 'customer/set-credentials',
     },
     {
       id: '1',
       title: 'Customer details',
       key: 'CUSTOMERS.DETAILS',
-      link: 'customer/add'
-    }
+      link: 'customer/add',
+    },
   ];
 
   customer = {
-    emailAddress: ''
-  }
+    emailAddress: '',
+  };
 
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
@@ -51,7 +51,7 @@ export class SetCredentialsComponent implements OnInit {
     if (!localStorage.getItem('customerid')) {
     }
 
-    this.customerID = localStorage.getItem('customerid')
+    this.customerID = localStorage.getItem('customerid');
     this.getCustomerDetails();
 
   }
@@ -101,7 +101,7 @@ export class SetCredentialsComponent implements OnInit {
     this.loading = true;
     const obj = {
       username: this.customer.emailAddress,
-      password: this.form.value.newPassword
+      password: this.form.value.newPassword,
     };
     this.customersService
       .setPassword(obj)
@@ -110,12 +110,12 @@ export class SetCredentialsComponent implements OnInit {
         this.toastr.success(this.translate.instant('USER.PASSWORD_CHANGED'));
       }, err => {
         this.loading = false;
-        console.log("An error occured " + err);
+        console.log('An error occured ' + err);
         this.toastr.error(this.translate.instant('USER.PASSWORD_NOT_MATCH'));
         //this.errorMessage = this.translate.instant('USER.PASSWORD_NOT_MATCH');
       });
   }
-  
+
 
 }
 

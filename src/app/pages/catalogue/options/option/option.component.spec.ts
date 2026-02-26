@@ -8,7 +8,7 @@ describe('OptionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OptionComponent ]
+      declarations: [ OptionComponent ],
     })
     .compileComponents();
   }));

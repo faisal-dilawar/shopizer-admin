@@ -10,18 +10,18 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-transferlistbox',
   templateUrl: './transferlistbox.component.html',
-  styleUrls: ['./transferlistbox.component.scss']
+  styleUrls: ['./transferlistbox.component.scss'],
 })
 export class TransferlistboxComponent implements OnInit {
 
-  @Input("leftAreaList") leftAreaList: any[];
-  @Input("rightAreaList") rightAreaList: any[];
-  @Input("code") code: string;
-  @Input("label") label: string;
-  @Input("leftAreaLabel") leftAreaLabel: string;
-  @Input("rightAreaLabel") rightAreaLabel: string;
-  @Input("leftAreaId") leftAreaId: string;
-  @Input("rightAreaId") rightAreaId: string;
+  @Input('leftAreaList') leftAreaList: any[];
+  @Input('rightAreaList') rightAreaList: any[];
+  @Input('code') code: string;
+  @Input('label') label: string;
+  @Input('leftAreaLabel') leftAreaLabel: string;
+  @Input('rightAreaLabel') rightAreaLabel: string;
+  @Input('leftAreaId') leftAreaId: string;
+  @Input('rightAreaId') rightAreaId: string;
   toggleButtonClicked = new EventEmitter<Object>();
   leftAreaMap: Map<string, any>;
   rightAreaMap: Map<string, any> = new Map<string, any>();
@@ -30,30 +30,30 @@ export class TransferlistboxComponent implements OnInit {
   clickEventsubscription: Subscription;
 
   /**
-   *alerts component params 
+   *alerts component params
    */
-  isSrOnly: boolean = true;
-  message: string = "";
-  ariaLive: string = "polite";
-  alertsClass = "default";
-  alertAriaLive: string = "polite";
+  isSrOnly = true;
+  message = '';
+  ariaLive = 'polite';
+  alertsClass = 'default';
+  alertAriaLive = 'polite';
   /**
-     *end of alerts component params 
-     */
-  showDelete: boolean = true;
+   *end of alerts component params
+   */
+  showDelete = true;
   constructor(private toastr: ToastrService, private translate: TranslateService, private storageService: StorageService, private sharedService: SharedService) {
     this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(() => {
       this.saveShipToCountries();
-    })
+    });
 
     this.clickEventsubscription = this.sharedService.getStoreEvent().subscribe(data => {
       this.store = data;
       this.generateLocalData();
-    })
+    });
   }
 
   /**
-   * 
+   *
    */
   ngOnInit() {
     this.store = this.storageService.getMerchant();
@@ -79,14 +79,14 @@ export class TransferlistboxComponent implements OnInit {
   // }
   //save shipToCountries
   saveShipToCountries() {
-    let selectedCountries = Array.from(this.rightAreaMap.values());
+    const selectedCountries = Array.from(this.rightAreaMap.values());
     selectedCountries.forEach(item => {
       this.shipToCountries.push(item.countryCode);
     });
-    let param = {
-      "iternationalShipping": true,
-      "shipToCountry": this.shipToCountries
-    }
+    const param = {
+      iternationalShipping: true,
+      shipToCountry: this.shipToCountries,
+    };
     this.sharedService.saveExpedition(this.store, param)
       .subscribe(data => {
         this.shipToCountries = [];
@@ -102,20 +102,26 @@ export class TransferlistboxComponent implements OnInit {
    * Creates a map based on the array information passed. addes additional properties required down the line
    */
   generateLocalData() {
-    if (this.code == null) { throw Error("code attribute is required") };
-    if (this.label == null) { throw Error("label attribute is required") };
-    if (this.leftAreaList == null) { throw Error("leftAreaList attribute is required") };
+    if (this.code == null) {
+ throw Error('code attribute is required');
+};
+    if (this.label == null) {
+ throw Error('label attribute is required');
+};
+    if (this.leftAreaList == null) {
+ throw Error('leftAreaList attribute is required');
+};
     // console.log(this.leftAreaList)
     this.leftAreaMap = new Map<string, any>();
     this.rightAreaMap = new Map<string, any>();
     // if (this.shipToCountries.length > 0) {
 
-    let availableCountries: any[] = this.leftAreaList;
+    const availableCountries: any[] = this.leftAreaList;
     this.shipToCountries = this.rightAreaList;
 
 
-    let leftAreaListData = availableCountries.filter(o => !this.shipToCountries.find((countryCode) => o.countryCode === countryCode));
-    let rightAreaListData = availableCountries.filter(o => this.shipToCountries.some((countryCode) => o.countryCode === countryCode));
+    const leftAreaListData = availableCountries.filter(o => !this.shipToCountries.find((countryCode) => o.countryCode === countryCode));
+    const rightAreaListData = availableCountries.filter(o => this.shipToCountries.some((countryCode) => o.countryCode === countryCode));
     //filling available countries
     leftAreaListData.forEach((item) => {
       this.leftAreaMap.set(item[this.code], item);
@@ -136,14 +142,15 @@ export class TransferlistboxComponent implements OnInit {
     // }
   }
   /**
-   * Sets the items into map 
-   * @param wrapperItem 
+   * Sets the items into map
+   *
+   * @param wrapperItem
    */
   itemSelectedOrUnSelected(wrapperItem: any) {
     if (wrapperItem == null) {
       return;
     }
-    let item = wrapperItem.item;
+    const item = wrapperItem.item;
     switch (wrapperItem.componentId) {
       case this.leftAreaId:
         this.leftAreaMap.set(item.key, item.value);
@@ -170,12 +177,12 @@ export class TransferlistboxComponent implements OnInit {
       }
     });
     this.updateMessage(this.leftAreaLabel, this.rightAreaLabel, counter);
-    this.toggleButtonClicked.emit({ "componentId": this.leftAreaId });
+    this.toggleButtonClicked.emit({ componentId: this.leftAreaId });
 
   }
   /**
-     * Toggles items from Right to Left
-     */
+   * Toggles items from Right to Left
+   */
   toggleRightToLeft() {
     let counter = 0;
     this.rightAreaMap.forEach((item: any, key: string) => {
@@ -187,11 +194,11 @@ export class TransferlistboxComponent implements OnInit {
       }
     });
     this.updateMessage(this.rightAreaLabel, this.leftAreaLabel, counter);
-    this.toggleButtonClicked.emit({ "componentId": this.rightAreaId });
+    this.toggleButtonClicked.emit({ componentId: this.rightAreaId });
   }
 
   updateMessage(from: String, to: string, counter: number) {
-    this.message = counter + " item(s) moved from " + from + " to " + to;
+    this.message = counter + ' item(s) moved from ' + from + ' to ' + to;
   }
 
 }

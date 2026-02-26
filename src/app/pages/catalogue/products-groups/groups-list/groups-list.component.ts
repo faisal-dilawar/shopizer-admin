@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'ngx-groups-list',
     templateUrl: './groups-list.component.html',
-    styleUrls: ['./groups-list.component.scss']
+    styleUrls: ['./groups-list.component.scss'],
 })
 export class GroupsListComponent implements OnInit {
     source: LocalDataSource = new LocalDataSource();
@@ -25,12 +25,12 @@ export class GroupsListComponent implements OnInit {
         private translate: TranslateService,
         private productGroupsService: ProductGroupsService,
         private storageService: StorageService,
-        private router: Router
+        private router: Router,
     ) {
     }
     loadParams() {
         return {
-            store: this.storageService.getMerchant()
+            store: this.storageService.getMerchant(),
         };
     }
     ngOnInit() {
@@ -65,7 +65,7 @@ export class GroupsListComponent implements OnInit {
                 sort: true,
                 custom: [
                     { name: 'edit', title: '<i class="nb-edit"></i>' },
-                    { name: 'remove', title: '<i class="nb-trash"></i>' }
+                    { name: 'remove', title: '<i class="nb-trash"></i>' },
                 ],
             },
             pager: { display: false },
@@ -73,7 +73,7 @@ export class GroupsListComponent implements OnInit {
                 code: {
                     title: this.translate.instant('COMMON.CODE'),
                     type: 'string',
-                    editable: false
+                    editable: false,
                 },
                 active: {
                     filter: false,
@@ -83,8 +83,8 @@ export class GroupsListComponent implements OnInit {
                     defaultValue: false,
                     editable: true,
                     editor: {
-                        type: 'checkbox'
-                    }
+                        type: 'checkbox',
+                    },
                 },
             },
         };
@@ -92,12 +92,12 @@ export class GroupsListComponent implements OnInit {
 
     onSelectStore(e) {
         console.log(e);
-        this.params["store"] = e;
+        this.params['store'] = e;
         this.getList();
     }
     deleteRecord(event) {
         console.log(event);
-        if (event.action == "remove") {
+        if (event.action == 'remove') {
             this.dialogService.open(ShowcaseDialogComponent, {})
                 .onClose.subscribe(res => {
                     if (res) {
@@ -111,7 +111,7 @@ export class GroupsListComponent implements OnInit {
                     }
                 });
         } else {
-            localStorage.setItem('groupData', JSON.stringify(event.data))
+            localStorage.setItem('groupData', JSON.stringify(event.data));
             this.router.navigate(['/pages/catalogue/products-groups/create-products-group/' + event.data.code]);
         }
     }

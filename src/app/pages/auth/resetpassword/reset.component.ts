@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ngx-reset',
   templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.scss']
+  styleUrls: ['./reset.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
   errorMessage = '';
@@ -15,12 +15,12 @@ export class ResetPasswordComponent implements OnInit {
   passwordType = 0;
   newPasswordType = 0;
   token: any;
-  loadingList: boolean = false;
-  isValid: boolean = true;
+  loadingList = false;
+  isValid = true;
   user = {
     password: '',
-    newpassword: ''
-  }
+    newpassword: '',
+  };
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -29,7 +29,7 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.route.params.subscribe(params => {
-      console.log(params)
+      console.log(params);
       this.token = params['id']; // (+) converts string 'id' to a number
     });
   }
@@ -52,30 +52,28 @@ export class ResetPasswordComponent implements OnInit {
   showPassword() {
     if (this.passwordType == 0) {
       this.passwordType = 1;
-    }
-    else {
+    } else {
       this.passwordType = 0;
     }
   }
   showNewPassword() {
     if (this.newPasswordType == 0) {
       this.newPasswordType = 1;
-    }
-    else {
+    } else {
       this.newPasswordType = 0;
     }
   }
   onClickSubmit() {
     this.loadingList = true;
     this.errorMessage = '';
-    let param = { 'password': this.user.password, 'repeatPassword': this.user.newpassword }
+    const param = { password: this.user.password, repeatPassword: this.user.newpassword };
     this.authService.resetPassword(this.token, param)
       .subscribe(res => {
         this.loadingList = false;
         this.user = {
           password: '',
-          newpassword: ''
-        }
+          newpassword: '',
+        };
         this.successMessage = this.translate.instant('FORGOT_PASSWORD.SUCCESS');
         setTimeout(() => {
           this.router.navigate(['auth']);

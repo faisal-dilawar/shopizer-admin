@@ -8,13 +8,13 @@ import { StorageService } from '../../../shared/services/storage.service';
 @Component({
   selector: 'ngx-product-ordering',
   templateUrl: './product-ordering.component.html',
-  styleUrls: ['./product-ordering.component.scss']
+  styleUrls: ['./product-ordering.component.scss'],
 })
 export class ProductOrderingComponent implements OnInit {
 
   products = [];
   loadingList = false;
-  loading: boolean = false;
+  loading = false;
   stores = [];
   isSuperadmin: boolean;
   selectedStore: String = '';
@@ -33,14 +33,14 @@ export class ProductOrderingComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private categoryService: CategoryService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) { }
 
   loadParams() {
     return {
       count: 50,
       page: 0,
-      lang: localStorage.getItem('lang')
+      lang: localStorage.getItem('lang'),
     };
   }
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class ProductOrderingComponent implements OnInit {
   }
 
   searchCategory() {
-    this.getCategory()
+    this.getCategory();
   }
   onSelectCategory(event) {
     this.categoryTemp.map((item) => {
@@ -61,9 +61,8 @@ export class ProductOrderingComponent implements OnInit {
 
         this.productService.getProductOrderById(item.id).subscribe(res => {
           if (res.products.length == 0) {
-            this.data = []
-          }
-          else {
+            this.data = [];
+          } else {
             res.products.map((item) => {
               this.data.push({
                 id: item.id,
@@ -71,14 +70,14 @@ export class ProductOrderingComponent implements OnInit {
                 sku: item.sku,
                 quantity: item.quantity,
                 price: item.price,
-                creationDate: item.creationDate
-              })
-            })
+                creationDate: item.creationDate,
+              });
+            });
           }
 
-        })
+        });
       }
-    })
+    });
 
 
   }
@@ -96,23 +95,23 @@ export class ProductOrderingComponent implements OnInit {
             sku: item.sku,
             quantity: item.quantity,
             price: item.price,
-            creationDate: item.creationDate
-          })
-        })
+            creationDate: item.creationDate,
+          });
+        });
       });
   }
   getCategory() {
     this.categoryService.getListOfCategories(this.params)
       .subscribe(categories => {
-        console.log(categories)
-        let tempValue = [];
+        console.log(categories);
+        const tempValue = [];
         categories.categories.forEach((value) => {
           tempValue.push(value.code);
-          this.categoryTemp.push({ 'id': value.id, 'name': value.description.name.toLowerCase() })
-        })
-        this.categoryData = tempValue
+          this.categoryTemp.push({ id: value.id, name: value.description.name.toLowerCase() });
+        });
+        this.categoryData = tempValue;
       });
-    console.log("data::", this.categoryTemp);
+    console.log('data::', this.categoryTemp);
 
   }
 

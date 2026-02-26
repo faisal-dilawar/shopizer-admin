@@ -8,7 +8,7 @@ describe('OptionsValuesListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OptionsValuesListComponent ]
+      declarations: [ OptionsValuesListComponent ],
     })
     .compileComponents();
   }));

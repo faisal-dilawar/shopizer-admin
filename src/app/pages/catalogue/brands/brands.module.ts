@@ -16,7 +16,7 @@ import { CustomModule } from '../../custom-component/custom.module';
     BrandCreationComponent,
     BrandFormComponent,
     BrandDetailsComponent,
-    BrandsListComponent
+    BrandsListComponent,
   ],
   imports: [
     BrandsRoutingModule,
@@ -25,8 +25,8 @@ import { CustomModule } from '../../custom-component/custom.module';
 
     NgxSummernoteModule,
     NbDialogModule.forChild(),
-    CustomModule
-  ]
+    CustomModule,
+  ],
 })
 export class BrandsModule {
 }

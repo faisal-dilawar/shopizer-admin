@@ -28,12 +28,12 @@ const routes: Routes = [
         component: GroupsListComponent,
       },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ProductsGroupsRoutingModule {
 }

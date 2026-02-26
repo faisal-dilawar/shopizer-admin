@@ -7,11 +7,11 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   imports: [
     PagesRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     PagesComponent,
-  ]
+  ],
 })
 export class PagesModule {
 }

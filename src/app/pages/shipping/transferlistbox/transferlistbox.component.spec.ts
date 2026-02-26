@@ -8,7 +8,7 @@ describe('TransferlistboxComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TransferlistboxComponent ]
+      declarations: [ TransferlistboxComponent ],
     })
     .compileComponents();
   }));

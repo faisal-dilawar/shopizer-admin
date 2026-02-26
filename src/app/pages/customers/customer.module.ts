@@ -6,15 +6,15 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { CustomModule } from '../custom-component/custom.module';
 @NgModule({
   declarations: [
-    ...routedComponents
+    ...routedComponents,
   ],
   imports: [
     CustomersRoutingModule,
     SharedModule,
     NbDialogModule.forChild(),
     MalihuScrollbarModule.forRoot(),
-    CustomModule
+    CustomModule,
   ],
-  exports: []
+  exports: [],
 })
 export class CustomersModule { }

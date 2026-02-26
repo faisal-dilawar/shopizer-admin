@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SecurityService {
 
   constructor() { }
 
-  isSuperAdmin(): boolean { 
+  isSuperAdmin(): boolean {
     return (JSON.parse(localStorage.getItem('roles'))).isSuperadmin;
   }
 

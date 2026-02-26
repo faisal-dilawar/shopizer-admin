@@ -8,14 +8,14 @@ import { CustomModule } from '../custom-component/custom.module';
 
 @NgModule({
   declarations: [
-    CatalogueComponent
+    CatalogueComponent,
   ],
   imports: [
     CatalogueRoutingModule,
     NbDialogModule.forChild(),
     SharedModule,
-    CustomModule
-  ]
+    CustomModule,
+  ],
 })
 export class CatalogueModule {
 }

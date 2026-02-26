@@ -6,7 +6,7 @@ import { error } from '@angular/compiler/src/util';
 @Component({
   selector: 'ngx-shipping-methods',
   templateUrl: './methods.component.html',
-  styleUrls: ['./methods.component.scss']
+  styleUrls: ['./methods.component.scss'],
 })
 export class ShippingMethodsComponent implements OnInit {
   @ViewChild('item', { static: false }) accordion;
@@ -18,9 +18,9 @@ export class ShippingMethodsComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
-    this.getMethodsList()
+    this.getMethodsList();
   }
 
   ngOnInit() {

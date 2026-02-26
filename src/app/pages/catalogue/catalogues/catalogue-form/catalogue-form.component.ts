@@ -13,12 +13,12 @@ import { Description } from '../../../shared/models/description';
 @Component({
   selector: 'ngx-catalogue-form',
   templateUrl: './catalogue-form.component.html',
-  styleUrls: ['./catalogue-form.component.scss']
+  styleUrls: ['./catalogue-form.component.scss'],
 })
 export class CatalogueFormComponent implements OnInit {
   @ViewChild('tree', { static: false }) tree;
   form: FormGroup;
-  loader: boolean = false;
+  loader = false;
   isCodeUnique = true;
   nodes = [];
   category = [];
@@ -32,7 +32,7 @@ export class CatalogueFormComponent implements OnInit {
     animateSpeed: 30,
     animateAcceleration: 1.2,
     //displayField: 'description.name'
-  }
+  };
 
   constructor(
     //https://github.com/khan4019/tree-grid-directive
@@ -61,15 +61,15 @@ export class CatalogueFormComponent implements OnInit {
   }
 
   filterEntry() {
-    let productsArray = [];
-    let categoryArray = [];
+    const productsArray = [];
+    const categoryArray = [];
     if (this.nodes.length > 0) {
-      this.nodes.forEach(function (entry) {
+      this.nodes.forEach(function(entry) {
         console.log(JSON.stringify(entry));
         //if(entry.category != null) {
         //  categoryArray.push(entry.category)
         //}
-      })
+      });
     }
 
     //console.log('ProductsArray => ' + JSON.stringify(productsArray));
@@ -85,7 +85,7 @@ export class CatalogueFormComponent implements OnInit {
   private createForm() {
     this.form = this.fb.group({
       code: ['', [Validators.required, Validators.pattern(validators.alphanumeric)]],
-      visible: [false]
+      visible: [false],
     });
   }
 

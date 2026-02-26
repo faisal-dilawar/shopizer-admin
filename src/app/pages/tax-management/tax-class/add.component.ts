@@ -13,24 +13,24 @@ export class TaxClassAddComponent implements OnInit {
   tax = {
     id: '',
     code: '',
-    name: ''
-  }
-  loadingList: boolean = false;
-  codeExits: boolean = false;
-  isUpdated: boolean = false;
+    name: '',
+  };
+  loadingList = false;
+  codeExits = false;
+  isUpdated = false;
   taxClassID: any;
-  isUpdate: boolean = false;
+  isUpdate = false;
   constructor(
     // private sharedService: SharedService,
     private toastr: ToastrService,
     private router: Router,
-    private taxService: TaxService
+    private taxService: TaxService,
   ) {
 
   }
   ngOnInit() {
     if (localStorage.getItem('classId')) {
-      this.taxClassID = localStorage.getItem('classId')
+      this.taxClassID = localStorage.getItem('classId');
       this.getTaxClassDetail();
       this.isUpdate = true;
     }
@@ -40,7 +40,7 @@ export class TaxClassAddComponent implements OnInit {
     this.taxService.getTaxClassesDetails(this.taxClassID)
       .subscribe(data => {
         this.loadingList = false;
-        console.log(data)
+        console.log(data);
         this.tax = data;
       }, error => {
         this.loadingList = false;
@@ -49,7 +49,7 @@ export class TaxClassAddComponent implements OnInit {
   focusOutFunction() {
     this.taxService.getUniqueTax(this.tax.code)
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
         this.codeExits = data.exists;
       }, error => {
         // this.source.load([]);
@@ -72,14 +72,14 @@ export class TaxClassAddComponent implements OnInit {
   save() {
     this.loadingList = true;
 
-    let param = {
+    const param = {
       code: this.tax.code,
-      name: this.tax.name
-    }
+      name: this.tax.name,
+    };
     this.taxService.addTaxClasses(param)
       .subscribe(res => {
         this.loadingList = false;
-        this.toastr.success("Tax classes has been added successfully");
+        this.toastr.success('Tax classes has been added successfully');
         this.router.navigate(['pages/tax-management/classes-list']);
       }, error => {
         this.loadingList = false;
@@ -89,18 +89,18 @@ export class TaxClassAddComponent implements OnInit {
   update() {
     this.loadingList = true;
 
-    let param = {
+    const param = {
       code: this.tax.code,
-      name: this.tax.name
-    }
+      name: this.tax.name,
+    };
     this.taxService.updateTaxClasses(this.tax.id, param)
       .subscribe(res => {
         this.loadingList = false;
-        this.toastr.success("Tax classes has been updated successfully");
+        this.toastr.success('Tax classes has been updated successfully');
         this.router.navigate(['pages/tax-management/classes-list']);
       }, error => {
         this.loadingList = false;
-        this.toastr.success("Tax classes has been updated fail");
+        this.toastr.success('Tax classes has been updated fail');
       });
   }
   goBack() {

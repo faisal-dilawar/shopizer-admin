@@ -33,13 +33,13 @@ const routes: Routes = [
         // canActivate: [SuperadminGuard]
       },
     ],
-  }
+  },
 ];
 
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class CategoriesRoutingModule {
 }

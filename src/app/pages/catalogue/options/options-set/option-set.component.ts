@@ -12,7 +12,7 @@ import { error } from '@angular/compiler/src/util';
 @Component({
   selector: 'ngx-option-set',
   templateUrl: './option-set.component.html',
-  styleUrls: ['./option-set.component.scss']
+  styleUrls: ['./option-set.component.scss'],
 })
 export class OptionSetComponent implements OnInit {
   isCodeExist = false;
@@ -22,7 +22,7 @@ export class OptionSetComponent implements OnInit {
   isValidOption = true;
 
   defaultParam = {
-  }
+  };
 
   option = {
     id: '',
@@ -30,9 +30,9 @@ export class OptionSetComponent implements OnInit {
     option: '',
     optionValues: [],
     productTypes: [],
-    readOnly: false
-  }
-  loading: boolean = false;
+    readOnly: false,
+  };
+  loading = false;
   form: FormGroup;
   productOption: Array<any> = [];
   productOptionValue: Array<any> = [];
@@ -48,24 +48,24 @@ export class OptionSetComponent implements OnInit {
     private toastr: ToastrService,
     private activatedRoute: ActivatedRoute,
   ) {
-    this.getOption()
+    this.getOption();
   }
 
   loadDefaultParam() {
     this.defaultParam = {
-      "lang":this.storageService.getLanguage,
-      "store":this.storageService.getMerchant 
-    }
+      lang:this.storageService.getLanguage,
+      store:this.storageService.getMerchant,
+    };
   }
   ngOnInit() {
     this.loadDefaultParam();
     this.createForm();
     const optionId = this.activatedRoute.snapshot.paramMap.get('optionId');
     if (optionId) {
-      let param = {
+      const param = {
         lang: this.storageService.getLanguage(),
-        store: this.storageService.getMerchant()
-      }
+        store: this.storageService.getMerchant(),
+      };
       this.optionService.getOptionSetById(optionId, param)
         .subscribe((res) => {
 
@@ -75,16 +75,16 @@ export class OptionSetComponent implements OnInit {
           this.option.code = res.code;
           this.option.option = res.option.id;
           this.option.readOnly = res.readOnly;
-          let value = []
-          let types = []
+          const value = [];
+          const types = [];
           if(res.values) {
             res.values.map((optionValue) => {
-              value.push(optionValue.id)
+              value.push(optionValue.id);
             });
           }
           if(res.productTypes) {
             res.productTypes.map((productType) => {
-              types.push(productType.id)
+              types.push(productType.id);
             });
           }
           this.option.optionValues = value;
@@ -95,12 +95,12 @@ export class OptionSetComponent implements OnInit {
           this.loading = false;
         });
 
-        
+
     }
     this.translate.onLangChange.subscribe((lang) => {
       this.getOption();
     });
-    
+
   }
 
   private adjustForm() {
@@ -108,7 +108,7 @@ export class OptionSetComponent implements OnInit {
       readOnly: this.option.readOnly,
       code: this.option.code,
       option: this.option.option,
-      optionValues: this.option.optionValues
+      optionValues: this.option.optionValues,
     });
 
     if (this.option.id) {
@@ -123,23 +123,21 @@ export class OptionSetComponent implements OnInit {
       code: [{ value: '', disabled: false }, [Validators.required, Validators.pattern(validators.alphanumeric)]],
       option: ['',[Validators.required]],
       optionValues: this.fb.array([]),
-      productTypes: this.fb.array([])
+      productTypes: this.fb.array([]),
     });
   }
- 
+
 
   getOption() {
-    this.productOption = []
-    this.loading = true
+    this.productOption = [];
+    this.loading = true;
     this.optionService.getListOfOptions({})
       .subscribe((res) => {
         res.options.map((value) => {
-          const description = value.descriptions.find(el => {
-            return el.language === this.storageService.getLanguage();
-          });
+          const description = value.descriptions.find(el => el.language === this.storageService.getLanguage());
           const name = description && description.name ? description.name : '';
-          this.productOption.push({ id: value.id, code: value.code, name: name })
-        })
+          this.productOption.push({ id: value.id, code: value.code, name });
+        });
       }, error => {
         //TODO error
         this.loading = false;
@@ -149,17 +147,15 @@ export class OptionSetComponent implements OnInit {
     this.loading = false;
   }
   getOptionValue() {
-    this.productOptionValue = []
+    this.productOptionValue = [];
     this.optionValuesService.getListOfOptionValues({})
       .subscribe(res => {
         // console.log(res);
         res.optionValues.map((value) => {
-          const description = value.descriptions.find(el => {
-            return el.language === this.storageService.getLanguage();
-          });
+          const description = value.descriptions.find(el => el.language === this.storageService.getLanguage());
           const name = description && description.name ? description.name : '';
-          this.productOptionValue.push({ id: value.id, code: value.code, name: name })
-        })
+          this.productOptionValue.push({ id: value.id, code: value.code, name });
+        });
       }, error => {
         //TODO error
         this.loading = false;
@@ -175,7 +171,7 @@ export class OptionSetComponent implements OnInit {
         //this.productTypes = [...res];
         res.list.map((value) => {
           this.productTypes.push({ id: value.id, code: value.code});
-        })
+        });
     }, error => {
       //TODO error
       this.loading = false;
@@ -212,7 +208,7 @@ export class OptionSetComponent implements OnInit {
     this.isValidCode = true;
     this.isValidOption = true;
 
-    let optionObj = this.form.value;
+    const optionObj = this.form.value;
     optionObj.optionValues = this.option.optionValues;
     optionObj.productTypes = this.option.productTypes;
 
@@ -230,7 +226,7 @@ export class OptionSetComponent implements OnInit {
     }
 
     if (this.option.id) {
-      
+
       this.optionService.updateSetOption(this.option.id, optionObj)
         .subscribe((res) => {
           this.toastr.success(this.translate.instant('OPTION.SET_OPTION_UPDATED'));
@@ -238,9 +234,8 @@ export class OptionSetComponent implements OnInit {
         }, error => {
           this.loading = false;
         });
-     
-    }
-    else {
+
+    } else {
       this.optionService.createSetOption(optionObj)
         .subscribe((res) => {
           this.toastr.success(this.translate.instant('OPTION.SET_OPTION_CREATED'));

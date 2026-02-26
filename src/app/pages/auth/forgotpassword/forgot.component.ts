@@ -9,24 +9,24 @@ import { Location, PlatformLocation } from '@angular/common';
 @Component({
   selector: 'ngx-forgot',
   templateUrl: './forgot.component.html',
-  styleUrls: ['./forgot.component.scss']
+  styleUrls: ['./forgot.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
-  isSubmitted: boolean = false;
-  loadingList: boolean = false;
+  isSubmitted = false;
+  loadingList = false;
   user = {
     email: '',
-    url: ''
-  }
+    url: '',
+  };
   constructor(
     private authService: AuthService,
     private router: Router,
     // private toastr: ToastrService,
     private translate: TranslateService,
     private location: Location,
-    private platformLocation: PlatformLocation
+    private platformLocation: PlatformLocation,
   ) {
   }
 
@@ -44,7 +44,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.errorMessage = '';
     this.successMessage = '';
     this.isSubmitted = true;
-    this.user.url = (this.platformLocation as any).location.origin + this.location.prepareExternalUrl('/')
+    this.user.url = (this.platformLocation as any).location.origin + this.location.prepareExternalUrl('/');
     this.authService.forgot(this.user.email, this.user.url)
       .subscribe(res => {
         this.loadingList = false;

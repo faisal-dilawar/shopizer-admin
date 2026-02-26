@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
 import { CrudService } from '../../shared/services/crud.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaymentService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
   getPaymentModules(): Observable<any> {

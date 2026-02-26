@@ -8,7 +8,7 @@ describe('OptionValueImageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OptionValueImageComponent ]
+      declarations: [ OptionValueImageComponent ],
     })
     .compileComponents();
   }));

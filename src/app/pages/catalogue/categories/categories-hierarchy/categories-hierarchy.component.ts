@@ -7,16 +7,16 @@ import { StorageService } from '../../../shared/services/storage.service';
 @Component({
   selector: 'ngx-categories-hierarchy',
   templateUrl: './categories-hierarchy.component.html',
-  styleUrls: ['./categories-hierarchy.component.scss']
+  styleUrls: ['./categories-hierarchy.component.scss'],
 })
 export class CategoriesHierarchyComponent implements OnInit {
   @ViewChild('tree', { static: false }) tree;
   nodes = [];
   options = {
-    allowDrag: true
-  }
+    allowDrag: true,
+  };
   loader = false;
-  loading: boolean = false;
+  loading = false;
   params = this.loadParams();
 
   constructor(
@@ -31,7 +31,7 @@ export class CategoriesHierarchyComponent implements OnInit {
     return {
       lang: this.storageService.getLanguage(),
       store: this.storageService.getMerchant(),
-      page: 0
+      page: 0,
     };
   }
 
@@ -47,7 +47,7 @@ export class CategoriesHierarchyComponent implements OnInit {
         res.categories.forEach((el) => {
           this.transformList(el);
         });
-        this.nodes = res.categories
+        this.nodes = res.categories;
         this.loader = false;
       });
   }
@@ -67,7 +67,7 @@ export class CategoriesHierarchyComponent implements OnInit {
     //console.log(event);
     // const someNode = this.tree.treeModel.getNodeById(event.to.parent.id);
     // someNode.expand();
-    var parentId = event.to.parent.id;
+    let parentId = event.to.parent.id;
 
     if (event.to.parent.name === undefined) {
       parentId = -1;

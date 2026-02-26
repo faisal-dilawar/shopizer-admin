@@ -4,14 +4,14 @@ import { NbDialogRef } from '@nebular/theme';
 @Component({
   selector: 'ngx-image-browser',
   templateUrl: './image-browser.component.html',
-  styleUrls: ['./image-browser.component.scss']
+  styleUrls: ['./image-browser.component.scss'],
 })
 export class ImageBrowserComponent implements OnInit {
   uploadedFiles: any[] = [];
   loadingList = false;
   constructor(
     private crudService: CrudService,
-    protected ref: NbDialogRef<ImageBrowserComponent>
+    protected ref: NbDialogRef<ImageBrowserComponent>,
   ) {
   }
 

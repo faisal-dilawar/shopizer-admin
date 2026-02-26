@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   loading = false;
   user = {
     email: '',
-    password: ''
-  }
+    password: '',
+  };
   isRemember: Boolean = false;
   constructor(
     private fb: FormBuilder,
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private tokenService: TokenService,
     private userService: UserService,
     private toastr: ToastrService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
   }
 
@@ -40,13 +40,13 @@ export class LoginComponent implements OnInit {
     document.getElementsByTagName('body')[0].className += ' nb-theme-corporate';
     this.form = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
     if (localStorage.getItem('isRemember') === 'true') {
       this.isRemember = true;
-      let loginEmail = localStorage.getItem('loginEmail')
+      const loginEmail = localStorage.getItem('loginEmail');
       this.form.patchValue({
-        username: loginEmail
+        username: loginEmail,
       });
 
     }
@@ -59,8 +59,7 @@ export class LoginComponent implements OnInit {
   showPassword() {
     if (this.showPass == 0) {
       this.showPass = 1;
-    }
-    else {
+    } else {
       this.showPass = 0;
     }
   }
@@ -93,9 +92,9 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('merchant', user.merchant);
             delay(1000);
             if (this.isRemember) {
-              localStorage.setItem('loginEmail', formData.username)
+              localStorage.setItem('loginEmail', formData.username);
             } else {
-              localStorage.setItem('loginEmail', '')
+              localStorage.setItem('loginEmail', '');
             }
             this.router.navigate(['pages']);
             this.loading = false;
@@ -116,9 +115,9 @@ export class LoginComponent implements OnInit {
     //console.log(e.target.checked)
     this.isRemember = e.target.checked;
     if (e.target.checked) {
-      localStorage.setItem('isRemember', 'true')
+      localStorage.setItem('isRemember', 'true');
     } else {
-      localStorage.setItem('isRemember', 'false')
+      localStorage.setItem('isRemember', 'false');
     }
   }
 

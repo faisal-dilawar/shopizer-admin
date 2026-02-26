@@ -14,13 +14,13 @@ import { listenerCount } from 'process';
 @Component({
   selector: 'ngx-brands-list',
   templateUrl: './brands-list.component.html',
-  styleUrls: ['./brands-list.component.scss']
+  styleUrls: ['./brands-list.component.scss'],
 })
 export class BrandsListComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   loadingList = false;
   settings = {};
-  searchValue: string = '';
+  searchValue = '';
   // paginator
   perPage = 25;
   currentPage = 1;
@@ -31,7 +31,7 @@ export class BrandsListComponent implements OnInit {
     lang: this.storageService.getLanguage(),
     store: this.storageService.getMerchant(),
     count: this.perPage,
-    page: 0
+    page: 0,
   };
 
   constructor(
@@ -65,7 +65,7 @@ export class BrandsListComponent implements OnInit {
     this.setSettings();
   }
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getList();
   }
   setSettings() {
@@ -79,7 +79,7 @@ export class BrandsListComponent implements OnInit {
         sort: true,
         custom: [
           { name: 'details', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-edit"></i>') },
-          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') }
+          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') },
         ],
       },
       pager: { display: false },
@@ -96,7 +96,7 @@ export class BrandsListComponent implements OnInit {
             if (description) {
               return description.name;
             }
-          }
+          },
         },
         code: {
           title: this.translate.instant('COMMON.CODE'),

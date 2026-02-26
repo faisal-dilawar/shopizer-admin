@@ -5,13 +5,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorService {
 
   constructor(
     private toastrService: ToastrService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
   ) {
   }
 

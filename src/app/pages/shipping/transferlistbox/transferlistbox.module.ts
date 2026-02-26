@@ -10,6 +10,6 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [TransferlistboxComponent, FilterlistboxComponent, KeywordsearchPipe],
   exports: [TransferlistboxComponent],
   imports: [CommonModule, SharedModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TransferBoxModule { }

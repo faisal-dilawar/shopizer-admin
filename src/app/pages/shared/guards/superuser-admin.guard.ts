@@ -4,12 +4,12 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SuperuserAdminGuard implements CanActivate {
 
   constructor(
-    private router: Router
+    private router: Router,
   ) {
   }
 

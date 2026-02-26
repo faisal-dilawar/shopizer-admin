@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'ngx-retailer-stores',
   templateUrl: './retailer-stores.component.html',
-  styleUrls: ['./retailer-stores.component.scss']
+  styleUrls: ['./retailer-stores.component.scss'],
 })
 export class RetailerStoresComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
@@ -23,7 +23,7 @@ export class RetailerStoresComponent implements OnInit {
   // server params
   params = {
     length: this.perPage,
-    start: 0
+    start: 0,
   };
 
   settings = {};
@@ -43,7 +43,7 @@ export class RetailerStoresComponent implements OnInit {
     const startFrom = (this.currentPage - 1) * this.perPage;
     this.params.start = startFrom;
     this.loadingList = true;
-    
+
     //this.storeService.getListOfMerchantStores({count: 10000}).subscribe(res => {
     this.storeService.getListOfMerchantStoreNames('').subscribe(res => {
       this.totalCount = res.totalPages;
@@ -86,7 +86,7 @@ export class RetailerStoresComponent implements OnInit {
         email: {
           title: this.translate.instant('COMMON.EMAIL_ADDRESS'),
           type: 'string',
-        }
+        },
       },
     };
   }

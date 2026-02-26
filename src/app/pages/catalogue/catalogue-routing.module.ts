@@ -11,39 +11,39 @@ const routes: Routes = [{
     {
       path: 'categories',
       canActivate: [MarketplaceGuard],
-      loadChildren: 'app/pages/catalogue/categories/categories.module#CategoriesModule'
+      loadChildren: 'app/pages/catalogue/categories/categories.module#CategoriesModule',
     },
     {
       path: 'products',
-      loadChildren: 'app/pages/catalogue/products/products.module#ProductsModule'
+      loadChildren: 'app/pages/catalogue/products/products.module#ProductsModule',
     },
     {
       path: 'brands',
-      loadChildren: 'app/pages/catalogue/brands/brands.module#BrandsModule'
+      loadChildren: 'app/pages/catalogue/brands/brands.module#BrandsModule',
     },
     {
       path: 'catalogues',
-      loadChildren: 'app/pages/catalogue/catalogues/catalogues.module#CataloguesModule'
+      loadChildren: 'app/pages/catalogue/catalogues/catalogues.module#CataloguesModule',
     },
     {
       path: 'products-groups',
-      loadChildren: 'app/pages/catalogue/products-groups/products-groups.module#ProductsGroupsModule'
+      loadChildren: 'app/pages/catalogue/products-groups/products-groups.module#ProductsGroupsModule',
     },
     {
       path: 'options',
-      loadChildren: 'app/pages/catalogue/options/options.module#OptionsModule'
+      loadChildren: 'app/pages/catalogue/options/options.module#OptionsModule',
     },
     {
       path: 'types',
-      loadChildren: 'app/pages/catalogue/types/types.module#TypesModule'
+      loadChildren: 'app/pages/catalogue/types/types.module#TypesModule',
     },
-  ]
+  ],
 }];
 
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class CatalogueRoutingModule {
 }

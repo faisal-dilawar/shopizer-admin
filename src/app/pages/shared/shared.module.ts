@@ -21,7 +21,7 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
 import { ValidateNumberDirective } from './validation/validate-number.directive';
 import { PasswordPromptComponent } from './components/password-prompt/password-prompt';
 import { FilePickerModule } from 'ngx-awesome-uploader';
-import { DragDropModule } from "@angular/cdk/drag-drop";
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -47,7 +47,7 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     TranslateModule,
     TreeTableModule,
     FilePickerModule,
-    DragDropModule
+    DragDropModule,
   ],
   exports: [
     Ng2SmartTableModule,
@@ -68,7 +68,7 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     DropdownModule,
     AutoCompleteModule,
     MultiSelectModule,
-    ValidateNumberDirective
+    ValidateNumberDirective,
     // EqualValidator
   ],
   providers: [CurrencyPipe],

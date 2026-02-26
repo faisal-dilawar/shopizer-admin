@@ -7,14 +7,14 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Store } from '../models/store';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StoreService {
 
 
   constructor(
     private crudService: CrudService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {
   }
 
@@ -33,7 +33,7 @@ export class StoreService {
 
   checkIfStoreExist(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v1/private/store/unique`, params);
   }
@@ -55,7 +55,7 @@ export class StoreService {
   getPageContent(pageCode: string, storeCode: string): Observable<any> {
     const params = {
       lang: '_all',
-      store: storeCode
+      store: storeCode,
     };
     return this.crudService.getWithEmpty(`/v1/private/content/any/${pageCode}`, params);
   }
@@ -64,7 +64,7 @@ export class StoreService {
     return this.crudService.put(`/v1/private/content/${id}`, content);
   }
 
-  createPageContent(content: any, storeCode: string) : Observable<any> {
+  createPageContent(content: any, storeCode: string): Observable<any> {
 
     return this.crudService.postWithStoreParam(`/v1/private/content`, content, storeCode);
   }

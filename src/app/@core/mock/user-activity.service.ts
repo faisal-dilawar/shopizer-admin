@@ -28,9 +28,7 @@ export class UserActivityService extends UserActivityData {
   }
 
   private getDataWeek(): UserActive[] {
-    return this.periods.getWeeks().map((week) => {
-      return this.generateUserActivityRandomData(week);
-    });
+    return this.periods.getWeeks().map((week) => this.generateUserActivityRandomData(week));
   }
 
   private getDataMonth(): UserActive[] {
@@ -46,9 +44,7 @@ export class UserActivityService extends UserActivityData {
   }
 
   private getDataYear(): UserActive[] {
-    return this.periods.getYears().map((year) => {
-      return this.generateUserActivityRandomData(year);
-    });
+    return this.periods.getYears().map((year) => this.generateUserActivityRandomData(year));
   }
 
   getUserActivityData(period: string): Observable<UserActive[]> {

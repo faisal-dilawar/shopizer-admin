@@ -16,7 +16,7 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'ngx-store-form',
   templateUrl: './store-form.component.html',
-  styleUrls: ['./store-form.component.scss']
+  styleUrls: ['./store-form.component.scss'],
 })
 export class StoreFormComponent implements OnInit {
   @Input() title: string;
@@ -43,7 +43,7 @@ export class StoreFormComponent implements OnInit {
     administrative_area_level_2: 'short_name',
     country: 'short_name',
     postal_code: 'short_name',
-    sublocality_level_1: 'long_name'
+    sublocality_level_1: 'long_name',
   };
   loading = false;
   showRemoveButton = true;
@@ -64,14 +64,14 @@ export class StoreFormComponent implements OnInit {
       id: '0',
       title: 'Store branding',
       key: 'COMPONENTS.STORE_BRANDING',
-      link: 'store-branding'
+      link: 'store-branding',
     },
     {
       id: '1',
       title: 'Store details',
       key: 'COMPONENTS.STORE_DETAILS',
-      link: 'store'
-    }
+      link: 'store',
+    },
   ];
   constructor(
     private fb: FormBuilder,
@@ -85,7 +85,7 @@ export class StoreFormComponent implements OnInit {
     private toastr: ToastrService,
     private translate: TranslateService,
     private activatedRoute: ActivatedRoute,
-    private securityService: SecurityService
+    private securityService: SecurityService,
   ) {
     this.establishmentType = window.location.hash.indexOf('retailer') !== -1 ? 'RETAILER' : 'STORE';
     this.merchant = localStorage.getItem('merchant');
@@ -202,7 +202,7 @@ export class StoreFormComponent implements OnInit {
         });
       });
     });
-    **/
+     **/
   }
 
   private createForm() {
@@ -217,7 +217,7 @@ export class StoreFormComponent implements OnInit {
         country: ['', [Validators.required]],
         address: ['', [Validators.required]],
         postalCode: ['', [Validators.required]],
-        city: ['', [Validators.required]]
+        city: ['', [Validators.required]],
       }),
       supportedLanguages: [[], [Validators.required]],
       defaultLanguage: ['', [Validators.required]],
@@ -446,7 +446,7 @@ export class StoreFormComponent implements OnInit {
   }
 
   addSupportedLanguage(languageCode) {
-    let newLanguages = this.form.value.supportedLanguages ? [...this.form.value.supportedLanguages] : [];
+    const newLanguages = this.form.value.supportedLanguages ? [...this.form.value.supportedLanguages] : [];
     // check if element is exist in array
     const index = newLanguages.indexOf(languageCode);
     const selectedIndex = this.supportedLanguagesSelected.indexOf(languageCode);
@@ -458,7 +458,7 @@ export class StoreFormComponent implements OnInit {
       this.supportedLanguagesSelected.push(languageCode);
     }
 
-    this.form.patchValue({ 'supportedLanguages': this.supportedLanguagesSelected }); // rewrite form
+    this.form.patchValue({ supportedLanguages: this.supportedLanguagesSelected }); // rewrite form
 
   }
 
@@ -474,8 +474,9 @@ export class StoreFormComponent implements OnInit {
   }
 
   userHasSupportedLanguage(language) {
-    if (!this.store || !this.store.supportedLanguages)
-      return false;
+    if (!this.store || !this.store.supportedLanguages) {
+return false;
+}
     return this.store.supportedLanguages.find((l: any) => l.code === language.code);
   }
 
@@ -485,7 +486,7 @@ export class StoreFormComponent implements OnInit {
       this.form.controls['retailerStore'].enable();
     } else {
       this.isRetailer = true;
-      this.form.controls['retailerStore'].disable()
+      this.form.controls['retailerStore'].disable();
     }
     //event ? this.form.controls['retailerStore'].disable() : this.form.controls['retailerStore'].enable();
   }
@@ -503,7 +504,7 @@ export class StoreFormComponent implements OnInit {
       || (this.roles.isSuperadmin && this.establishmentType === 'STORE')) && this.store.code !== 'DEFAULT';
   }
   onClickRoute(link) {
-    this.router.navigate(['pages/store-management/' + link + "/", this.store.code]);
+    this.router.navigate(['pages/store-management/' + link + '/', this.store.code]);
   }
   goToBack() {
     this.router.navigate(['pages/store-management/stores-list']);

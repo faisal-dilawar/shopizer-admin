@@ -30,7 +30,7 @@ import { NbDialogModule } from '@nebular/theme';
     StoreDetailInfoComponent,
     RetailerComponent,
     RetailerListComponent,
-    RetailerStoresComponent
+    RetailerStoresComponent,
   ],
   imports: [
     StoreManagementRoutingModule,
@@ -45,12 +45,12 @@ import { NbDialogModule } from '@nebular/theme';
       libraries: ['places'],
       language: 'en'
     }),
-    **/
+     **/
 
     SharedModule,
     NbDialogModule.forChild(),
-    NgxSummernoteModule
-  ]
+    NgxSummernoteModule,
+  ],
 })
 export class StoreManagementModule {
 }

@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RetailAdminGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
   ) {
   }
 

@@ -6,7 +6,7 @@ import { StorageService } from '../shared/services/storage.service';
 @Component({
   selector: 'ngx-store-management',
   templateUrl: './store-management.component.html',
-  styleUrls: ['./store-management.component.scss']
+  styleUrls: ['./store-management.component.scss'],
 })
 export class StoreManagementComponent implements OnInit, DoCheck {
   path = 'Store';
@@ -31,12 +31,12 @@ export class StoreManagementComponent implements OnInit, DoCheck {
       link: 'store'
     }
   ];
-  **/
+   **/
 
 
   constructor(
     private translate: TranslateService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {
     //this.sidemenuValue = this.storageService.getMerchant();
     //this.translateArray(this.sidemenuLinks);
@@ -55,7 +55,7 @@ export class StoreManagementComponent implements OnInit, DoCheck {
       el.title = this.translate.instant(el.key);
     });
   }
-  */
+   */
 
   ngDoCheck() {
     this.showSide = window.location.hash.indexOf('stores-list') === -1 &&

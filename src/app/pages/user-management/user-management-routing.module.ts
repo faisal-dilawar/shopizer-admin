@@ -42,12 +42,12 @@ const routes: Routes = [
         component: UserDetailsComponent,
       },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class UserManagementRoutingModule {
 }

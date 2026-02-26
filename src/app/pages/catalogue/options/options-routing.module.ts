@@ -42,31 +42,31 @@ const routes: Routes = [
       },
       {
         path: 'options-set-list',
-        component: OptionsSetListComponent
+        component: OptionsSetListComponent,
       },
       {
         path: 'option-set',
-        component: OptionSetComponent
+        component: OptionSetComponent,
       },
       {
         path: 'option-set/:optionId',
-        component: OptionSetComponent
+        component: OptionSetComponent,
       },
       {
         path: 'variations/list',
-        component: VariationsListComponent
+        component: VariationsListComponent,
       },
       {
         path: 'variations/add',
-        component: AddVariationsComponent
-      }
+        component: AddVariationsComponent,
+      },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 
 export class OptionsRoutingModule { }

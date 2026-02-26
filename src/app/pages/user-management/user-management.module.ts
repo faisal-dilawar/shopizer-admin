@@ -29,7 +29,7 @@ import { CustomModule } from '../custom-component/custom.module';
     UserManagementRoutingModule,
     NbDialogModule.forChild(),
     SharedModule,
-    CustomModule
+    CustomModule,
   ],
   entryComponents: [ButtonRenderUserComponent],
 })

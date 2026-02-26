@@ -13,7 +13,7 @@ import { CustomModule } from '../../custom-component/custom.module';
     CommonModule,
     TypesRoutingModule,
     SharedModule,
-    CustomModule
-  ]
+    CustomModule,
+  ],
 })
 export class TypesModule { }

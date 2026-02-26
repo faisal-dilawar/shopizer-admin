@@ -2,22 +2,22 @@ import {
   HttpRequest,
   HttpClient,
   HttpEvent,
-  HttpEventType
-} from "@angular/common/http";
-import { catchError, map } from "rxjs/operators";
-import { Observable, of } from "rxjs";
+  HttpEventType,
+} from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import {
   FilePickerAdapter,
   UploadResponse,
   UploadStatus,
-  FilePreviewModel
-} from "ngx-awesome-uploader";
+  FilePreviewModel,
+} from 'ngx-awesome-uploader';
 
 export class ImageUploadingAdapter extends FilePickerAdapter {
 
   //add entity api
   //remove api - what is the id
-  addImage: string
+  addImage: string;
 
   constructor(
     private http: HttpClient, addImageUrl: string) {
@@ -29,10 +29,10 @@ export class ImageUploadingAdapter extends FilePickerAdapter {
     //must parent class
     console.log('UPLOAD ADAPT ' + this.addImage);
     const form = new FormData();
-    form.append("file", fileItem.file);
+    form.append('file', fileItem.file);
     const api = this.addImage;
-    console.log(api, '-----------')
-    const req = new HttpRequest("POST", api, form, { reportProgress: true });
+    console.log(api, '-----------');
+    const req = new HttpRequest('POST', api, form, { reportProgress: true });
     return this.http.request(req).pipe(
       map((res: HttpEvent<any>) => {
         console.log(JSON.stringify(res));
@@ -40,7 +40,7 @@ export class ImageUploadingAdapter extends FilePickerAdapter {
           const responseFromBackend = res.body;
           return {
             body: responseFromBackend,
-            status: UploadStatus.UPLOADED
+            status: UploadStatus.UPLOADED,
           };
         } else if (res.type === HttpEventType.UploadProgress) {
           /** Compute and show the % done: */
@@ -48,14 +48,14 @@ export class ImageUploadingAdapter extends FilePickerAdapter {
             res.loaded) / res.total);
           return {
             status: UploadStatus.IN_PROGRESS,
-            progress: uploadProgress
+            progress: uploadProgress,
           };
         }
       }),
       catchError(er => {
         console.log(JSON.stringify(er));
         return of({ status: UploadStatus.ERROR, body: er });
-      })
+      }),
     );
   }
   public removeFile(fileItem: FilePreviewModel): Observable<any> {

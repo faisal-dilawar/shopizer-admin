@@ -8,7 +8,7 @@ describe('GroupsListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupsListComponent ]
+      declarations: [ GroupsListComponent ],
     })
     .compileComponents();
   }));

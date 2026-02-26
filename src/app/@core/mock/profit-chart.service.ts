@@ -66,9 +66,7 @@ export class ProfitChartService extends ProfitChartData {
   }
 
   private getRandomData(nPoints: number): number[] {
-    return Array.from(Array(nPoints)).map(() => {
-      return Math.round(Math.random() * 500);
-    });
+    return Array.from(Array(nPoints)).map(() => Math.round(Math.random() * 500));
   }
 
   getProfitChartData(period: string): ProfitChart {

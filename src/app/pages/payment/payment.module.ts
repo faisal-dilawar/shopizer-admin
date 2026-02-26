@@ -13,7 +13,7 @@ import { ConfigureComponent } from './configure-form/configure.component';
   declarations: [
     PaymentComponent,
     PaymentMethodsComponent,
-    ConfigureComponent
+    ConfigureComponent,
   ],
   entryComponents: [
 
@@ -24,7 +24,7 @@ import { ConfigureComponent } from './configure-form/configure.component';
     CustomModule,
     NbDialogModule.forChild(),
     MalihuScrollbarModule.forRoot(),
-    NgxSummernoteModule
-  ]
+    NgxSummernoteModule,
+  ],
 })
 export class PaymentModule { }

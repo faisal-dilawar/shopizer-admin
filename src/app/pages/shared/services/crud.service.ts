@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Country } from '../models/country';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CrudService {
   url = environment.apiUrl;
@@ -15,7 +15,7 @@ export class CrudService {
 
   constructor(private http: HttpClient) { }
 
-  getShipping(path, params?: { [param: string]: string | string[]; }): Observable<any> {
+  getShipping(path, params?: { [param: string]: string | string[] }): Observable<any> {
     return this.http.get(`${this.shippingUrl}${path}`, { responseType: 'json', params });
   }
   postShipping(path, body: any | null, options?: any): Observable<any> {
@@ -35,8 +35,8 @@ export class CrudService {
     return `${this.url}`;
   }
 
-  getWithEmpty(path, params?: { [param: string]: string | string[]; }): Observable<any> {
-    return this.http.get(`${this.url}${path}`, { responseType: 'json', params }).pipe(catchError(error => of(error)))
+  getWithEmpty(path, params?: { [param: string]: string | string[] }): Observable<any> {
+    return this.http.get(`${this.url}${path}`, { responseType: 'json', params }).pipe(catchError(error => of(error)));
   }
 
   post(path, body: any | null, options?: any): Observable<any> {
@@ -63,7 +63,7 @@ export class CrudService {
   }
 
   listCountriesByLanguage(lang: string): Observable<Country[]> {
-    let countryUrl = this.url + `/v1/country?lang=` + lang;
+    const countryUrl = this.url + `/v1/country?lang=` + lang;
 
     return this.http.get<Country[]>(countryUrl);
     //.publishReplay(1) // this tells Rx to cache the latest emitted value

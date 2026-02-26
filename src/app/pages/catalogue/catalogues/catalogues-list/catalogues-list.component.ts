@@ -13,7 +13,7 @@ import { ShowcaseDialogComponent } from '../../../shared/components/showcase-dia
 @Component({
   selector: 'ngx-catalogues-list',
   templateUrl: './catalogues-list.component.html',
-  styleUrls: ['./catalogues-list.component.scss']
+  styleUrls: ['./catalogues-list.component.scss'],
 })
 export class CataloguesListComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
@@ -31,7 +31,7 @@ export class CataloguesListComponent implements OnInit {
     store: this.storageService.getMerchant(),
     lang: this.storageService.getLanguage(),
     count: this.perPage,
-    page: 0
+    page: 0,
   };
 
   constructor(
@@ -62,7 +62,7 @@ export class CataloguesListComponent implements OnInit {
     this.catalogService.getListOfCatalogues(this.params)
       .subscribe(res => {
         this.totalCount = res.recordsTotal;
-        console.log(res)
+        console.log(res);
         this.source.load(res.items);
         this.loadingList = false;
       });
@@ -70,7 +70,7 @@ export class CataloguesListComponent implements OnInit {
   }
 
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -89,7 +89,7 @@ export class CataloguesListComponent implements OnInit {
         sort: true,
         custom: [
           { name: 'edit', title: '<i class="nb-edit"></i>' },
-          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') }
+          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') },
         ],
       },
       pager: { display: false },
@@ -109,18 +109,18 @@ export class CataloguesListComponent implements OnInit {
             if (store) {
               return store.code;
             }
-          }
+          },
         },
         creationDate: {
           title: this.translate.instant('COMMON.CREATION_DATE'),
           type: 'string',
-        }
+        },
       },
     };
   }
 
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getList();
   }
 
@@ -157,8 +157,8 @@ export class CataloguesListComponent implements OnInit {
         this.onEdit(event);
         break;
       case 'remove':
-        this.deleteRecord(event)
-        break
+        this.deleteRecord(event);
+        break;
     }
   }
   onEdit(event) {

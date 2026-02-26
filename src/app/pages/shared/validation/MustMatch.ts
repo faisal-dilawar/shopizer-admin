@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
-        debugger
+        debugger;
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
 
@@ -18,5 +18,5 @@ export function MustMatch(controlName: string, matchingControlName: string) {
         } else {
             matchingControl.setErrors(null);
         }
-    }
+    };
 }

@@ -8,7 +8,7 @@ describe('BrandDetailsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BrandDetailsComponent ]
+      declarations: [ BrandDetailsComponent ],
     })
     .compileComponents();
   }));

@@ -13,13 +13,13 @@ import { ProductService } from '../../products/services/product.service';
 @Component({
   selector: 'ngx-product-group-form',
   templateUrl: './product-group-form.component.html',
-  styleUrls: ['./product-group-form.component.scss']
+  styleUrls: ['./product-group-form.component.scss'],
 })
 export class ProductGroupFormComponent implements OnInit {
   form: FormGroup;
   isCodeUnique = true;
   uniqueCode: string;
-  loading: boolean = false;
+  loading = false;
   selectedItems = [];
   dropdownSettings = {};
   perPage = 50;
@@ -48,7 +48,7 @@ export class ProductGroupFormComponent implements OnInit {
       // unSelectAllText: 'UnSelect All',
       itemsShowLimit: 7,
       allowSearchFilter: true,
-      allowRemoteDataSearch: true
+      allowRemoteDataSearch: true,
 
     };
   }
@@ -57,14 +57,14 @@ export class ProductGroupFormComponent implements OnInit {
       store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
 
   loadItemsParams() {
     return {
       store: this.storageService.getMerchant(),
-      lang: this.storageService.getLanguage()
+      lang: this.storageService.getLanguage(),
     };
   }
 
@@ -75,9 +75,9 @@ export class ProductGroupFormComponent implements OnInit {
   getProductList() {
     this.productService.getListOfProducts(this.params)
       .subscribe(res => {
-        let temp = []
+        const temp = [];
         res.products.map((value) => {
-          temp.push({ 'id': value.id, 'name': value.description.name })
+          temp.push({ id: value.id, name: value.description.name });
         });
         this.products = temp;
       });
@@ -85,13 +85,13 @@ export class ProductGroupFormComponent implements OnInit {
   getProductByCode() {
     this.productGroupsService.getProductsByGroup(this.uniqueCode, this.itemsParams)
       .subscribe(res => {
-        let temp = []
+        const temp = [];
         res.products.map((value) => {
-          temp.push({ 'id': value.id, 'name': value.description.name })
+          temp.push({ id: value.id, name: value.description.name });
         });
         this.selectedItems = temp;
 
-        this.getProductList()
+        this.getProductList();
         this.createForm();
 
         this.fillForm();
@@ -100,7 +100,7 @@ export class ProductGroupFormComponent implements OnInit {
 
   onFilterChange(e) {
     if (e.length > 3) {
-      this.params["name"] = e;
+      this.params['name'] = e;
       this.getProductList();
     }
     if (e === '') {
@@ -117,11 +117,11 @@ export class ProductGroupFormComponent implements OnInit {
     this.form = this.fb.group({
       code: ['', [Validators.required, Validators.pattern(validators.alphanumericwithhyphen)]],
       active: [true],
-      product: [this.selectedItems]
+      product: [this.selectedItems],
     });
   }
   private fillForm() {
-    let data = JSON.parse(localStorage.getItem('groupData'));
+    const data = JSON.parse(localStorage.getItem('groupData'));
     this.form.patchValue({
       code: data.code,
       active: data.active,
@@ -152,11 +152,11 @@ export class ProductGroupFormComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    this.addProductToGroup(item.id, this.uniqueCode)
+    this.addProductToGroup(item.id, this.uniqueCode);
     // this.loading = true;
   }
   onItemDeSelect(item: any) {
-    this.removeProductFromGroup(item.id, this.uniqueCode)
+    this.removeProductFromGroup(item.id, this.uniqueCode);
   }
   addProductToGroup(productId, groupCode) {
     this.loading = true;

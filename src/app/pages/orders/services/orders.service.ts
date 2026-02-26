@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
 import { CrudService } from '../../shared/services/crud.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
 
@@ -26,16 +26,16 @@ export class OrdersService {
     return this.crudService.get('/v1/private/orders/' + orderID);
   }
   getCountry(): Observable<any> {
-    return this.crudService.get('/v1/country')
+    return this.crudService.get('/v1/country');
   }
   getBillingZone(value): Observable<any> {
-    return this.crudService.get('/v1/zones?code=' + value)
+    return this.crudService.get('/v1/zones?code=' + value);
   }
   getShippingZone(value): Observable<any> {
-    return this.crudService.get('/v1/zones?code=' + value)
+    return this.crudService.get('/v1/zones?code=' + value);
   }
   getHistory(orderID): Observable<any> {
-    return this.crudService.get('/v1/private/orders/' + orderID + '/history')
+    return this.crudService.get('/v1/private/orders/' + orderID + '/history');
   }
   addHistory(orderID, param): Observable<any> {
     return this.crudService.post('/v1/private/orders/' + orderID + '/history', param);

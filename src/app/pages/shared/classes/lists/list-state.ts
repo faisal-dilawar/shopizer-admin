@@ -2,12 +2,12 @@ export class ListState {
     constructor(
         fChange: boolean,
         fReseatable: boolean,
-        fString: string
-      ) { 
+        fString: string,
+      ) {
 
         this.filterChange = fChange,
         this.filterResetable = fReseatable,
-        this.filterString = fString
+        this.filterString = fString;
 
       }
 

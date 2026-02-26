@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 // import { ConfigService } from '../../shared/services/config.service';
 import { ToastrService } from 'ngx-toastr';
 // import { TaxService } from '../services/tax.service';
-let canadapost = require('../services/canadapost.json');
-let upsData = require('../services/ups.json');
-let shiprocketData = require('../services/shiprocket.json');
-let customRulesData = require('../services/customrules.json');
-let storePickUpData = require('../services/storepickup.json');
-let weightBased = require('../services/weightbased.json');
+const canadapost = require('../services/canadapost.json');
+const upsData = require('../services/ups.json');
+const shiprocketData = require('../services/shiprocket.json');
+const customRulesData = require('../services/customrules.json');
+const storePickUpData = require('../services/storepickup.json');
+const weightBased = require('../services/weightbased.json');
 import { SharedService } from '../services/shared.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class ShippingConfigureComponent implements OnInit {
 
   active = '';
   formData: Array<any> = [];
-  loadingList: boolean = false;
+  loadingList = false;
   shippingType: any;
   shippingData: any;
   editorConfig = {
@@ -34,53 +34,47 @@ export class ShippingConfigureComponent implements OnInit {
       ['fontsize', ['fontname', 'fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
       ['insert', ['table', 'picture', 'link', 'video']],
-      ['customButtons', ['testBtn']]
+      ['customButtons', ['testBtn']],
     ],
     // buttons: {
     //   'testBtn': this.customButton.bind(this)
     // },
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times'],
   };
   constructor(
     private toastr: ToastrService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private sharedService: SharedService
+    private sharedService: SharedService,
   ) {
 
   }
   ngOnInit() {
-    let type = this.activatedRoute.snapshot.paramMap.get('id');
+    const type = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(type);
     if (type == 'canadapost') {
       this.formData = canadapost;
-      this.shippingType = "Canada Post";
-    }
-    else if (type == 'ups') {
+      this.shippingType = 'Canada Post';
+    } else if (type == 'ups') {
       this.formData = upsData;
-      this.shippingType = "UPS";
-    }
-    else if (type == 'shiprocket') {
+      this.shippingType = 'UPS';
+    } else if (type == 'shiprocket') {
       this.formData = shiprocketData;
-      this.shippingType = "ShipRocket";
-    }
-    else if (type == 'weightBased') {
+      this.shippingType = 'ShipRocket';
+    } else if (type == 'weightBased') {
       this.formData = weightBased;
-      this.shippingType = 'Weight Based Shipping Price'
-    }
-    else if (type == 'customQuotesRules') {
+      this.shippingType = 'Weight Based Shipping Price';
+    } else if (type == 'customQuotesRules') {
       this.formData = customRulesData;
-      this.shippingType = 'Custom shipping'
-    }
-    else if (type == 'priceByDistance') {
+      this.shippingType = 'Custom shipping';
+    } else if (type == 'priceByDistance') {
       this.formData = customRulesData;
-      this.shippingType = 'Price by distance'
-    }
-    else if (type == 'storePickUp') {
+      this.shippingType = 'Price by distance';
+    } else if (type == 'storePickUp') {
       this.formData = storePickUpData;
-      this.shippingType = 'Store Pick Up'
+      this.shippingType = 'Store Pick Up';
     }
-    this.getShippingConfigureDetails(type)
+    this.getShippingConfigureDetails(type);
   }
   getShippingConfigureDetails(type) {
     this.loadingList = true;
@@ -101,66 +95,63 @@ export class ShippingConfigureComponent implements OnInit {
 
       if (value.type == 'radio') {
         // console.log(Array.isArray(this.shippingData[value.objectKey][value.name]))
-        this.formData[i].value = this.shippingData[value.objectKey][value.name][0]
+        this.formData[i].value = this.shippingData[value.objectKey][value.name][0];
       } else if (value.type == 'groupcheckbox') {
         if (value.objectKey == '') {
 
         } else {
           this.shippingData[value.objectKey][value.name].map((option) => {
-            let a = value.optionData.findIndex((a) => a.value === option)
+            const a = value.optionData.findIndex((a) => a.value === option);
             // console.log(a)
             value.optionData[a].checked = true;
-          })
+          });
 
         }
       } else {
-        this.formData[i].value = value.objectKey == '' ? this.shippingData[value.name] : this.shippingData[value.objectKey][value.name]
+        this.formData[i].value = value.objectKey == '' ? this.shippingData[value.name] : this.shippingData[value.objectKey][value.name];
       }
     });
   }
   save() {
     // console.log(this.formData)
-    let type = this.activatedRoute.snapshot.paramMap.get('id');
-    let param: any = {};
+    const type = this.activatedRoute.snapshot.paramMap.get('id');
+    const param: any = {};
     this.formData.map((value) => {
       // console.log(value.value)
-      if (value.objectKey === "integrationOptions") {
+      if (value.objectKey === 'integrationOptions') {
         if (value.type == 'radio') {
-          param[value.name] = value.value
+          param[value.name] = value.value;
         } else {
-          let a = value.optionData.filter((a) => { return a.checked === true }).map(function (obj) {
+          const a = value.optionData.filter((a) => a.checked === true).map(function(obj) {
             return obj.value;
           });
-          param[value.name] = a
+          param[value.name] = a;
         }
       } else {
-        param[value.name] = value.value
+        param[value.name] = value.value;
       }
     });
     // console.log(param)
     let body: any = {};
-    if (type == "canadapost") {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'account': param.account, 'apikey': param.apikey, 'password': param.password, 'username': param.username }, 'integrationOptions': { 'services-domestic': param['services-domestic'], 'services-intl': param['services-intl'], 'services-usa': param['services-usa'] } }
+    if (type == 'canadapost') {
+      body = { code: type, active: param.active, defaultSelected: param.defaultSelected, integrationKeys: { account: param.account, apikey: param.apikey, password: param.password, username: param.username }, integrationOptions: { 'services-domestic': param['services-domestic'], 'services-intl': param['services-intl'], 'services-usa': param['services-usa'] } };
     } else if (type == 'ups') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'accessKey': param.accessKey, 'password': param.password, 'userId': param.userId }, 'integrationOptions': { 'packages': [param['packages']], 'selectservice': [param['selectservice']] } }
+      body = { code: type, active: param.active, defaultSelected: param.defaultSelected, integrationKeys: { accessKey: param.accessKey, password: param.password, userId: param.userId }, integrationOptions: { packages: [param['packages']], selectservice: [param['selectservice']] } };
     }  else if (type == 'shiprocket') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {'password': param.password, 'userId': param.userId } }
+      body = { code: type, active: param.active, defaultSelected: param.defaultSelected, integrationKeys: {password: param.password, userId: param.userId } };
     } else if (type == 'weightBased') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {}, 'integrationOptions': {} }
+      body = { code: type, active: param.active, defaultSelected: param.defaultSelected, integrationKeys: {}, integrationOptions: {} };
+    } else if (type == 'customQuotesRules') {
+      body = { code: type, active: param.active, defaultSelected: param.defaultSelected, integrationKeys: {}, integrationOptions: {} };
+    } else if (type == 'priceByDistance') {
+      body = { code: type, active: param.active, defaultSelected: param.defaultSelected, integrationKeys: {}, integrationOptions: {} };
+    } else if (type == 'storePickUp') {
+      body = { code: type, active: param.active, defaultSelected: param.defaultSelected, integrationKeys: { note: param.note, price: param.price }, integrationOptions: {} };
     }
-    else if (type == 'customQuotesRules') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {}, 'integrationOptions': {} }
-    }
-    else if (type == 'priceByDistance') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {}, 'integrationOptions': {} }
-    }
-    else if (type == 'storePickUp') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'note': param.note, 'price': param.price }, 'integrationOptions': {} }
-    }
-    this.saveShippingData(body)
+    this.saveShippingData(body);
   }
   saveShippingData(body) {
-    console.log(body)
+    console.log(body);
     this.loadingList = true;
     this.sharedService.saveShippingMethods(body)
       .subscribe(data => {

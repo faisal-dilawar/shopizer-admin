@@ -20,16 +20,16 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     GroupsListComponent,
     ProductGroupFormComponent,
 
-    ActiveButtonComponent
+    ActiveButtonComponent,
   ],
   imports: [
     ProductsGroupsRoutingModule,
     SharedModule,
     NgxSummernoteModule,
     CustomModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
   ],
-  entryComponents: [ActiveButtonComponent]
+  entryComponents: [ActiveButtonComponent],
 })
 export class ProductsGroupsModule {
 }

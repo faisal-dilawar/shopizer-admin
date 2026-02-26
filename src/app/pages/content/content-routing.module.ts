@@ -52,7 +52,7 @@ const routes: Routes = [{
     {
       path: 'promotion',
       component: PromotionComponent,
-    }
+    },
   ],
 }];
 
@@ -71,5 +71,5 @@ export const routedComponents = [
   ImagesComponent,
   UploadComponent,
   PromotionComponent,
-  FilesComponent
+  FilesComponent,
 ];

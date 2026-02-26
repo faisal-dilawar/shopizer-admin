@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'ngx-user-management',
   templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.scss']
+  styleUrls: ['./user-management.component.scss'],
 })
 export class UserManagementComponent implements OnInit, DoCheck {
 
@@ -15,18 +15,18 @@ export class UserManagementComponent implements OnInit, DoCheck {
     {
       title: 'COMPONENTS.MY_PROFILE',
       key: 'COMPONENTS.MY_PROFILE',
-      link: 'profile'
+      link: 'profile',
     },
     {
       title: 'COMPONENTS.CHANGE_PASSWORD',
       key: 'COMPONENTS.CHANGE_PASSWORD',
-      link: 'change-password'
-    }
+      link: 'change-password',
+    },
   ];
   showSide = false;
 
   constructor(
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     this.translateArray(this.sidemenuLinks);
     this.translate.onLangChange.subscribe((event) => {

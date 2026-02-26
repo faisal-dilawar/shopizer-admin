@@ -12,16 +12,16 @@ import { Location } from '@angular/common';
 @Component({
     selector: 'ngx-product-to-category',
     templateUrl: './product-to-category.component.html',
-    styleUrls: ['./product-to-category.component.scss']
+    styleUrls: ['./product-to-category.component.scss'],
 })
 export class ProductToCategoryComponent implements OnInit {
 
-    id : any;
+    id: any;
     loaded = false;
     loading = false;
 
-    perPage: number = 50;//ideally display all category
-    currentPage: number = 1;
+    perPage = 50;//ideally display all category
+    currentPage = 1;
 
     dropdownList = [];
     categories = [];
@@ -37,7 +37,7 @@ export class ProductToCategoryComponent implements OnInit {
         private storageService: StorageService,
         private productService: ProductService,
         private location: Location,
-        private router: Router
+        private router: Router,
     ) {
         this.dropdownSettings = {
             singleSelection: false,
@@ -48,7 +48,7 @@ export class ProductToCategoryComponent implements OnInit {
             // unSelectAllText: 'UnSelect All',
             itemsShowLimit: 10,
             allowSearchFilter: true,
-            allowRemoteDataSearch: true
+            allowRemoteDataSearch: true,
 
         };
     }
@@ -56,7 +56,7 @@ export class ProductToCategoryComponent implements OnInit {
         return {
             count: this.perPage,
             page: 0,
-            lang: localStorage.getItem('lang')
+            lang: localStorage.getItem('lang'),
         };
     }
     ngOnInit() {
@@ -65,25 +65,25 @@ export class ProductToCategoryComponent implements OnInit {
         this.load();
 
         //specify add image url to image component
-        let el = document.getElementById('tabs');
+        const el = document.getElementById('tabs');
         el.scrollIntoView();
     }
 
     private load() {
         this.loading = true;
 
-        const p$ = this.categoryService.getCategoryByProductId(this.id)
-        const c$ = this.categoryService.getListOfCategories(this.params)
+        const p$ = this.categoryService.getCategoryByProductId(this.id);
+        const c$ = this.categoryService.getListOfCategories(this.params);
 
         forkJoin([p$, c$])
             .subscribe(([p$, c$]) => {
                 p$.categories.forEach((data) => {
-                    this.selectedItems.push({ 'id': data.id, 'name': data.code })
+                    this.selectedItems.push({ id: data.id, name: data.code });
                 });
                 c$.categories.forEach((value) => {
                     this.getChildren(value);
-    
-                })
+
+                });
                 this.loading = false;
         });
 
@@ -94,33 +94,33 @@ export class ProductToCategoryComponent implements OnInit {
     getChildren(node) {
 
         if (node.children && node.children.length !== 0) {
-            this.categories.push({ 'id': node.id, 'name': node.description.name })
+            this.categories.push({ id: node.id, name: node.description.name });
             node.children.forEach((el) => {
                 this.getChildren(el);
             });
         } else {
-            this.categories.push({ 'id': node.id, 'name': node.description.name })
+            this.categories.push({ id: node.id, name: node.description.name });
         }
     }
 
     onFilterChange(e) {
         //console.log(e);
         if (e.length > 2) {
-            this.params["name"] = e;
+            this.params['name'] = e;
             this.categoryService.filterCategory(this.params).subscribe(res => {
             }, error => {
 
-            }
-        )
+            },
+        );
             // this.getList();
         }
     }
 
     onItemSelect(item: any) {
-        this.addProductToCategory(this.id, item.id)
+        this.addProductToCategory(this.id, item.id);
     }
     onItemDeSelect(item: any) {
-        this.removeProductFromCategory(this.id, item.id)
+        this.removeProductFromCategory(this.id, item.id);
     }
     addProductToCategory(productId, groupCode) {
         this.productService.addProductToCategory(productId, groupCode)

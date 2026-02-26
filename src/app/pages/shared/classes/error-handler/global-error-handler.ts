@@ -9,7 +9,7 @@ export class GlobalErrorHandler implements ErrorHandler {
   constructor(
     private injector: Injector,
     private authService: AuthService,
-    private zone: NgZone
+    private zone: NgZone,
   ) { }
 
   handleError(error: Error) {
@@ -43,7 +43,7 @@ export class GlobalErrorHandler implements ErrorHandler {
         }
       }
     } else {
-      // Handle Client Error (Angular Error, ReferenceError...)     
+      // Handle Client Error (Angular Error, ReferenceError...)
     }
 
 

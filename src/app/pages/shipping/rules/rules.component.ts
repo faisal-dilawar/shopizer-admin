@@ -9,14 +9,14 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
     selector: 'ngx-rules',
     templateUrl: './rules.component.html',
-    styleUrls: ['./rules.component.scss']
+    styleUrls: ['./rules.component.scss'],
 })
 export class RulesComponent implements OnInit {
     query = {
         condition: 'and',
         rules: [
 
-        ]
+        ],
     };
     stores = [];
     codeExits: boolean;
@@ -31,28 +31,28 @@ export class RulesComponent implements OnInit {
         order: 0,
         store: '',
         selected_result: '',
-    }
+    };
     actionsData: Array<any> = [];
     selectedActionsData: Array<any> = [];
     config: QueryBuilderConfig;
 
-    rules_time: boolean = false;
-    loadingList: boolean = false
+    rules_time = false;
+    loadingList = false;
     shippingResult: Array<any> = [];
     resultData: Array<any> = [];
     selectedResult: any;
-    title: any = 'Add Rules'
-    buttonText: any = 'Submit'
+    title: any = 'Add Rules';
+    buttonText: any = 'Submit';
     constructor(
         private sharedService: SharedService,
         private storeService: StoreService,
         public router: Router,
-        private toastr: ToastrService
+        private toastr: ToastrService,
     ) {
         this.getStoreList();
         //this.getShippingCondition()
-        this.getRulesCriterias()
-        this.getRulesActions()
+        this.getRulesCriterias();
+        this.getRulesActions();
 
     }
     ngOnInit() {
@@ -63,27 +63,27 @@ export class RulesComponent implements OnInit {
                 .subscribe(rulesData => {
 
                     // let rulesData = JSON.parse(localStorage.getItem('rulesCode'))
-                    console.log(rulesData)
-                    this.title = 'Update Rules'
-                    this.buttonText = 'Update'
-                    let j = this.stores.find(x => x.code === rulesData.store);
-                    this.rules = rulesData
+                    console.log(rulesData);
+                    this.title = 'Update Rules';
+                    this.buttonText = 'Update';
+                    const j = this.stores.find(x => x.code === rulesData.store);
+                    this.rules = rulesData;
                     setTimeout(() => {
-                        console.log(rulesData.store)
-                        this.rules.store = rulesData.store
+                        console.log(rulesData.store);
+                        this.rules.store = rulesData.store;
                     }, 3000);
 
-                    this.rules.endDate = rulesData.endDate && new Date(rulesData.endDate)
-                    this.rules.startDate = rulesData.startDate && new Date(rulesData.startDate)
+                    this.rules.endDate = rulesData.endDate && new Date(rulesData.endDate);
+                    this.rules.startDate = rulesData.startDate && new Date(rulesData.startDate);
                     this.query = rulesData.ruleSets[0];
 
                     // console.log(this.actionsData);\
-                    let array1 = this.actionsData
-                    var array3 = array1.filter(function (obj) {
+                    const array1 = this.actionsData;
+                    const array3 = array1.filter(function(obj) {
                         return rulesData.actions.find((a) => {
                             if (a.value) {
-                                obj.value = a.value
-                                return a.code === obj.code
+                                obj.value = a.value;
+                                return a.code === obj.code;
                             }
                         });
                     });
@@ -96,7 +96,7 @@ export class RulesComponent implements OnInit {
         }
     }
     getStoreList() {
-        this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+        this.storeService.getListOfMerchantStoreNames({ store: '' })
             .subscribe(res => {
                 // console.log(res);
                 res.forEach((store) => {
@@ -115,18 +115,18 @@ export class RulesComponent implements OnInit {
             });
     }
     getRulesCriterias() {
-        let fields = {}
+        const fields = {};
         this.sharedService.getRulesCriterias()
             .subscribe(data => {
                 // console.log(data)
                 data.map((value) => {
                     fields[value.code] = {
-                        "name": value.name,
+                        name: value.name,
                         // "type": value.options.length > 0 ? 'category' : value.format == 'DECIMAL' || value.format == 'NUMERIC' ? 'number' : value.format.toLowerCase(),
-                        "type": value.criteriaType == 'text' ? 'string' : 'string',
-                        "operators": value.operators,
-                        "options": []
-                    }
+                        type: value.criteriaType == 'text' ? 'string' : 'string',
+                        operators: value.operators,
+                        options: [],
+                    };
                     // value.options.map((opt) => {
                     //     fields[value.code].options.push({ name: opt.name, value: opt.value })
                     // })
@@ -140,48 +140,48 @@ export class RulesComponent implements OnInit {
         this.sharedService.getRulesActions()
             .subscribe(data => {
                 // console.log(data);
-                this.actionsData = data
+                this.actionsData = data;
             });
     }
     goToback() {
         this.router.navigate(['/pages/shipping/rules']);
     }
     onAddActions(actions) {
-        console.log('onAddActions')
-        console.log(actions)
-        actions.value = ''
-        this.selectedActionsData.push(actions)
+        console.log('onAddActions');
+        console.log(actions);
+        actions.value = '';
+        this.selectedActionsData.push(actions);
     }
     onDeleteIcon(index) {
         this.selectedActionsData.splice(index, 1);
     }
     onSubmit() {
         this.loadingList = true;
-        console.log(this.query)
-        let actions = [];
+        console.log(this.query);
+        const actions = [];
         this.actionsData.map((value) => {
-            actions.push({ code: value.code, value: value.value })
+            actions.push({ code: value.code, value: value.value });
         });
-        let querys = { condition: this.query.condition, rules: [] };
+        const querys = { condition: this.query.condition, rules: [] };
         this.query.rules.map((q) => {
             if (typeof q.value === 'string' || q.value instanceof String) {
-                querys.rules.push({ field: q.field, operator: q.operator, value: [q.value] })
+                querys.rules.push({ field: q.field, operator: q.operator, value: [q.value] });
             } else {
-                querys.rules.push({ field: q.field, operator: q.operator, value: q.value })
+                querys.rules.push({ field: q.field, operator: q.operator, value: q.value });
             }
         });
-        let param = {
-            "name": this.rules.name,
-            "code": this.rules.code,
-            "store": this.rules.store,
-            "enabled": this.rules.enabled,
-            "startDate": moment(this.rules.startDate).utc(),
-            "endDate": moment(this.rules.endDate).utc(),
-            "actions": actions,
-            "ruleSets": [
-                querys
-            ]
-        }
+        const param = {
+            name: this.rules.name,
+            code: this.rules.code,
+            store: this.rules.store,
+            enabled: this.rules.enabled,
+            startDate: moment(this.rules.startDate).utc(),
+            endDate: moment(this.rules.endDate).utc(),
+            actions,
+            ruleSets: [
+                querys,
+            ],
+        };
         console.log(param);
         if (this.buttonText === 'Submit') {
             this.sharedService.createShippingRules(param)
@@ -189,7 +189,7 @@ export class RulesComponent implements OnInit {
                     console.log(data);
                     this.loadingList = false;
                     this.toastr.success('Rules has been added successfully');
-                    this.goToback()
+                    this.goToback();
                 }, error => {
                     this.toastr.error('Rules has been added fail.');
                     this.loadingList = false;
@@ -200,7 +200,7 @@ export class RulesComponent implements OnInit {
                     console.log(data);
                     this.loadingList = false;
                     this.toastr.success('Rules has been updated successfully');
-                    this.goToback()
+                    this.goToback();
                 }, error => {
                     this.toastr.error('Rules has been updated fail.');
                     this.loadingList = false;
@@ -266,6 +266,6 @@ export class RulesComponent implements OnInit {
     // }
     onClickConfigure() {
         // console.log(this.selected_result);
-        this.selectedResult = this.rules.selected_result
+        this.selectedResult = this.rules.selected_result;
     }
 }

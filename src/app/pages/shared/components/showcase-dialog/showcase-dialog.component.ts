@@ -13,7 +13,7 @@ export class ShowcaseDialogComponent {
   @Input() text: string;
   @Input() actionText: string = this.translate.instant('COMMON.REMOVE_GEN_QUESTION');
 
-  constructor(protected ref: NbDialogRef<ShowcaseDialogComponent>, private translate: TranslateService,) {}
+  constructor(protected ref: NbDialogRef<ShowcaseDialogComponent>, private translate: TranslateService) {}
 
 
   dismiss() {

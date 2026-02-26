@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
   tokenKey = 'token';
@@ -16,7 +16,7 @@ export class TokenService {
     localStorage.setItem(this.tokenKey, token);
   }
 
-  destroyToken () {
+  destroyToken() {
     localStorage.removeItem(this.tokenKey);
   }
 

@@ -4,12 +4,12 @@ import { CrudService } from '../../../shared/services/crud.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BrandService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
 
@@ -23,7 +23,7 @@ export class BrandService {
 
   getBrandById(id): Observable<any> {
     const params = {
-      lang: '_all'
+      lang: '_all',
     };
     return this.crudService.get(`/v1/manufacturers/${id}`, params);
   }
@@ -38,7 +38,7 @@ export class BrandService {
 
   checkCategoryCode(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v1/private/manufacturer/unique`, params);
   }

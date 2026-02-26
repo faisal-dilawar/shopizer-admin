@@ -8,7 +8,7 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'ngx-products-groups-list',
   templateUrl: './products-groups-list.component.html',
-  styleUrls: ['./products-groups-list.component.scss']
+  styleUrls: ['./products-groups-list.component.scss'],
 })
 export class ProductsGroupsListComponent implements OnInit {
   availableList = [];
@@ -16,21 +16,21 @@ export class ProductsGroupsListComponent implements OnInit {
   groups = [];
   selectedGroup;
   itemsParams = this.loadItemsParams();
-  loading: boolean = false;
+  loading = false;
   constructor(
     private productService: ProductService,
     private productGroupsService: ProductGroupsService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {
     const params = {
       store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: -1,
-      start: 0
+      start: 0,
     };
-    
+
     forkJoin(
-      this.productService.getListOfProducts(params), 
+      this.productService.getListOfProducts(params),
       this.productGroupsService.getListOfProductGroups({ store: this.storageService.getMerchant() }))
       .subscribe(([products, groups]) => {
         this.availableList = [...products.products];
@@ -41,7 +41,7 @@ export class ProductsGroupsListComponent implements OnInit {
   loadItemsParams() {
     return {
       store: this.storageService.getMerchant(),
-      lang: this.storageService.getLanguage()
+      lang: this.storageService.getLanguage(),
     };
   }
 

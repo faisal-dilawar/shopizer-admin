@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
 import { CrudService } from '../../shared/services/crud.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaxService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
-  // Tax Classes Services 
+  // Tax Classes Services
   getTaxClass(params): Observable<any> {
 
     return this.crudService.get('/v1/private/tax/class', params);
@@ -36,10 +36,10 @@ export class TaxService {
   }
   // Country & State
   getCountry(): Observable<any> {
-    return this.crudService.get('/v1/country')
+    return this.crudService.get('/v1/country');
   }
   getBillingZone(value): Observable<any> {
-    return this.crudService.get('/v1/zones?code=' + value)
+    return this.crudService.get('/v1/zones?code=' + value);
   }
   // Tax Rate Services
 

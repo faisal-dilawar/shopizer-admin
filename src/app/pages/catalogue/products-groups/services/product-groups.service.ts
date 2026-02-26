@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 // import { StorageService } from '../../../shared/services/storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductGroupsService {
   constructor(

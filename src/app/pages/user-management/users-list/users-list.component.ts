@@ -10,7 +10,7 @@ import { StorageService } from '../../shared/services/storage.service';
 import { SecurityService } from '../../shared/services/security.service';
 import { StoreService } from '../../store-management/services/store.service';
 import { ToastrService } from 'ngx-toastr';
-import { ButtonRenderUserComponent } from './button-render-user.component'
+import { ButtonRenderUserComponent } from './button-render-user.component';
 import { ShowcaseDialogComponent } from '../../shared/components/showcase-dialog/showcase-dialog.component';
 import { ListingService } from '../../shared/services/listing.service';
 
@@ -18,7 +18,7 @@ import { ListingService } from '../../shared/services/listing.service';
 @Component({
   selector: 'ngx-users-list',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+  styleUrls: ['./users-list.component.scss'],
 })
 export class UsersListComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
@@ -46,9 +46,9 @@ export class UsersListComponent implements OnInit {
     private securityService: SecurityService,
     private dialogService: NbDialogService,
     private storeService: StoreService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {
-    this.listingService = new ListingService()
+    this.listingService = new ListingService();
     this.getList();
   }
 
@@ -66,7 +66,7 @@ export class UsersListComponent implements OnInit {
 
     /**
      * Rules
-     * 
+     *
      * Can't remove superadmin
      * Can't remove self
      */
@@ -138,7 +138,7 @@ export class UsersListComponent implements OnInit {
     if (this.securityService.isAnAdmin()) {
       customs = [
         { name: 'details', title: '<i class="nb-edit"></i>' },
-      ]
+      ];
     }
     this.settings = {
 
@@ -150,7 +150,7 @@ export class UsersListComponent implements OnInit {
         delete: false,
         position: 'right',
         sort: true,
-        custom: customs
+        custom: customs,
       },
 
       pager: { display: false },
@@ -176,7 +176,7 @@ export class UsersListComponent implements OnInit {
           type: 'custom',
           renderComponent: ButtonRenderUserComponent,
           defaultValue: false,
-        }
+        },
       },
     };
   }
@@ -197,15 +197,15 @@ export class UsersListComponent implements OnInit {
             context: {
               title: '',
               text: '',
-              actionText: this.translate.instant('USER_FORM.CANT_DELETE_YOUR_PROFILE')
-            }
-          })
+              actionText: this.translate.instant('USER_FORM.CANT_DELETE_YOUR_PROFILE'),
+            },
+          });
         } else {
           this.dialogService.open(ShowcaseDialogComponent, {
             context: {
               title: '',
-              text: event.data.name + ' ? '
-            }
+              text: event.data.name + ' ? ',
+            },
           })
             .onClose.subscribe(res => {
               if (res) {

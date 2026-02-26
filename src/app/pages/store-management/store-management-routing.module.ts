@@ -21,55 +21,55 @@ const routes: Routes = [
       {
         path: 'store',
         component: StoreDetailsComponent,
-        canActivate: [SuperuserAdminRetailStoreGuard]
+        canActivate: [SuperuserAdminRetailStoreGuard],
       },
       {
         path: 'create-store',
         component: StoreCreationComponent,
-        canActivate: [SuperuserAdminRetailGuard]
+        canActivate: [SuperuserAdminRetailGuard],
       },
       {
         path: 'stores-list',
         component: StoresListComponent,
-        canActivate: [SuperuserAdminGuard]
+        canActivate: [SuperuserAdminGuard],
       },
       {
         path: 'store-landing/:code',
         component: StoreLandingPageComponent,
-        canActivate: [SuperuserAdminRetailStoreGuard]
+        canActivate: [SuperuserAdminRetailStoreGuard],
       },
       {
         path: 'store/:code',
         component: StoreDetailInfoComponent,
-        canActivate: [SuperuserAdminRetailStoreGuard]
+        canActivate: [SuperuserAdminRetailStoreGuard],
       },
       {
         path: 'store-branding/:code',
         component: StoreBrandingComponent,
-        canActivate: [SuperuserAdminRetailStoreGuard]
+        canActivate: [SuperuserAdminRetailStoreGuard],
       },
       {
         path: 'retailer',
         component: RetailerComponent,
-        canActivate: [SuperuserAdminRetailGuard]
+        canActivate: [SuperuserAdminRetailGuard],
       },
       {
         path: 'retailer-list',
         component: RetailerListComponent,
-        canActivate: [SuperuserAdminGuard]
+        canActivate: [SuperuserAdminGuard],
       },
       {
         path: 'retailer-stores',
         component: RetailerStoresComponent,
-        canActivate: [SuperuserAdminRetailGuard]
+        canActivate: [SuperuserAdminRetailGuard],
       },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class StoreManagementRoutingModule {
 }

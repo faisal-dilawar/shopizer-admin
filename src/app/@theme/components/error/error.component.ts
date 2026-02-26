@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-error',
   templateUrl: './error.component.html',
-  styleUrls: ['./error.component.scss']
+  styleUrls: ['./error.component.scss'],
 })
 export class ErrorComponent implements OnInit {
 

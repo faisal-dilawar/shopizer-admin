@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-store-detail-info',
   templateUrl: './store-detail-info.component.html',
-  styleUrls: ['./store-detail-info.component.scss']
+  styleUrls: ['./store-detail-info.component.scss'],
 })
 export class StoreDetailInfoComponent implements OnInit {
   store;
@@ -17,20 +17,20 @@ export class StoreDetailInfoComponent implements OnInit {
       id: '0',
       title: 'Store branding',
       key: 'COMPONENTS.STORE_BRANDING',
-      link: 'store-branding'
+      link: 'store-branding',
     },
     {
       id: '1',
       title: 'Store home page',
       key: 'COMPONENTS.STORE_LANDING',
-      link: 'store-landing'
+      link: 'store-landing',
     },
     {
       id: '2',
       title: 'Store details',
       key: 'COMPONENTS.STORE_DETAILS',
-      link: 'store'
-    }
+      link: 'store',
+    },
   ];
 
   constructor(
@@ -51,7 +51,7 @@ export class StoreDetailInfoComponent implements OnInit {
   }
 
   route(link) {
-    this.router.navigate(['pages/store-management/' + link + "/", this.store.code]);
+    this.router.navigate(['pages/store-management/' + link + '/', this.store.code]);
   }
 
 }

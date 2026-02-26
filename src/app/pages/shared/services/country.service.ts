@@ -1,7 +1,7 @@
 import 'rxjs/Rx';
 import { map } from 'rxjs/operators';// This is where I import map operator
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs/Rx"
+import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 // import { Http, Response } from "@angular/http"
 import { CrudService } from './crud.service';
@@ -9,7 +9,7 @@ import { Country } from '../models/country';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CountryService {
 
@@ -17,7 +17,7 @@ export class CountryService {
 
   constructor(
     private crudService: CrudService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
   }
 
@@ -37,7 +37,7 @@ export class CountryService {
         country.zones
       )))
     );
-    **/
+     **/
     // let countryUrl = this.url + `/v1/country?lang=` + lang;
 
     // return this.http.get(countryUrl)
@@ -60,6 +60,6 @@ export class CountryService {
       .map(countries => countries.find(country => country.code == code));
     return d
   }
-  **/
+   **/
 
 }

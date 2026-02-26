@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { SecurityService } from '../../shared/services/security.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MarketplaceGuard implements CanActivate {
 
@@ -16,7 +16,7 @@ export class MarketplaceGuard implements CanActivate {
   constructor(
     private router: Router,
     private storageService: StorageService,
-    private securityService: SecurityService
+    private securityService: SecurityService,
   ) {
   }
 
@@ -36,4 +36,5 @@ export class MarketplaceGuard implements CanActivate {
 
     this.router.navigate(['home']);
 
-  }}
+  }
+}

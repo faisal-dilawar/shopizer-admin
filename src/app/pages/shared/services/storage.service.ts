@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
 
@@ -45,11 +45,11 @@ export class StorageService {
     return localStorage.getItem('defaultCountry');
   }
 
-  getLanguage () {
+  getLanguage() {
     return localStorage.getItem('lang') || environment.client.language.default;
   }
 
-  getUserRoles () {
+  getUserRoles() {
     return JSON.parse(localStorage.getItem('roles'));
   }
 

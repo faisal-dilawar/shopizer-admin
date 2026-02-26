@@ -12,17 +12,17 @@ import { validators } from '../../../shared/validation/validators';
 @Component({
   selector: 'ngx-option',
   templateUrl: './option.component.html',
-  styleUrls: ['./option.component.scss']
+  styleUrls: ['./option.component.scss'],
 })
 export class OptionComponent implements OnInit {
   form: FormGroup;
   loader = false;
-  loadingInfo: boolean = false;
+  loadingInfo = false;
   option = new Option();
   languages = [];
   defaultLanguage = localStorage.getItem('lang');
   types = [
-    'select', 'radio', 'checkbox', 'text'
+    'select', 'radio', 'checkbox', 'text',
   ];
   isCodeUnique = true;
 
@@ -42,9 +42,9 @@ export class OptionComponent implements OnInit {
   ngOnInit() {
     this.loader = true;
     const optionId = this.activatedRoute.snapshot.paramMap.get('optionId');
-    
+
     this.createForm();
-    
+
     this.configService.getListOfSupportedLanguages(localStorage.getItem('merchant'))
        .subscribe(res => {
         this.languages = [...res];
@@ -58,7 +58,7 @@ export class OptionComponent implements OnInit {
         } else {
           this.loader=false;
         }
-        
+
     });
   }
 
@@ -79,7 +79,7 @@ export class OptionComponent implements OnInit {
       code: ['', [Validators.required, Validators.pattern(validators.alphanumeric)]],
       type: ['', [Validators.required]],
       selectedLanguage: [this.defaultLanguage, [Validators.required]],
-      descriptions: this.fb.array([])
+      descriptions: this.fb.array([]),
     });
   }
 
@@ -90,8 +90,8 @@ export class OptionComponent implements OnInit {
       control.push(
         this.fb.group({
           language: [lang.code, []],
-           name: ['', []]
-        })
+           name: ['', []],
+        }),
       );
     });
   }
@@ -100,7 +100,7 @@ export class OptionComponent implements OnInit {
     this.form.patchValue({
       code: this.option.code,
       type: this.option.type,
-      selectedLanguage: this.defaultLanguage
+      selectedLanguage: this.defaultLanguage,
     });
     this.fillFormArray();
   }

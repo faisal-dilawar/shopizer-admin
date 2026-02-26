@@ -15,11 +15,11 @@ import { MatchPassword } from '../shared/validation/match-password';
     ForgotPasswordComponent,
     RegisterComponent,
     // ResetPasswordComponent,
-    MatchPassword
+    MatchPassword,
   ],
   imports: [
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
   ],
 })
 export class AuthModule { }

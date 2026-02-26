@@ -11,19 +11,19 @@ import { ErrorService } from '../../shared/services/error.service';
 @Component({
   selector: 'ngx-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
   source: any = new LocalDataSource();
   settings = {};
-  search_text: string = '';
+  search_text = '';
   loadingList = false;
   perPage = 10;
   currentPage = 1;
   totalCount;
   stores: Array<any> = [];
   selectedStore: String = '';
-  searchValue: string = '';
+  searchValue = '';
   params = this.loadParams();
   constructor(
     private customersService: CustomersService,
@@ -32,9 +32,9 @@ export class ListComponent implements OnInit {
     private storageService: StorageService,
     private storeService: StoreService,
     private translate: TranslateService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
   ) {
-    this.getStoreList()
+    this.getStoreList();
     this.selectedStore = this.storageService.getMerchant();
 
     this.translate.onLangChange.subscribe((lang) => {
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
     this.getCustomers();
   }
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -59,7 +59,7 @@ export class ListComponent implements OnInit {
       store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
   getCustomers() {
@@ -88,31 +88,31 @@ export class ListComponent implements OnInit {
         custom: [
           {
             name: 'edit',
-            title: '<i class="nb-edit"></i>'
+            title: '<i class="nb-edit"></i>',
           },
           {
             name: 'delete',
-            title: '<i class="nb-trash"></i>'
-          }
-        ]
+            title: '<i class="nb-trash"></i>',
+          },
+        ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
           title: this.translate.instant('COMMON.ID'),
           type: 'number',
-          filter: false
+          filter: false,
         },
         storeCode: {
           title: this.translate.instant('STORE.MERCHANT_STORE'),
-          type: 'string'
+          type: 'string',
         },
         firstName: {
           title: this.translate.instant('ORDER_FORM.FIRST_NAME'),
           type: 'string',
-          filter: false
+          filter: false,
         },
         lastName: {
           title: this.translate.instant('ORDER_FORM.LAST_NAME'),
@@ -120,8 +120,8 @@ export class ListComponent implements OnInit {
         },
         emailAddress: {
           title: this.translate.instant('USER_FORM.EMAIL_ADDRESS'),
-          type: 'string'
-        }
+          type: 'string',
+        },
       },
     };
   }
@@ -149,7 +149,7 @@ export class ListComponent implements OnInit {
         break;
       }
     }
-    this.getCustomers()
+    this.getCustomers();
   }
   onSearch(query: string = '') {
 
@@ -158,7 +158,7 @@ export class ListComponent implements OnInit {
       return;
     }
 
-    this.params["name"] = query;
+    this.params['name'] = query;
     this.getCustomers();
     this.searchValue = query;
 
@@ -173,7 +173,7 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/pages/customer/add']);
   }
   onSelectStore(e) {
-    this.params["store"] = e.value;
+    this.params['store'] = e.value;
     this.getCustomers();
   }
 
@@ -200,7 +200,7 @@ export class ListComponent implements OnInit {
     console.log('DELETE');
     localStorage.setItem('customerid', null);
     //TODO dialog
-    
+
     this.customersService.deleteCustomer(event.data.id,localStorage.getItem('merchant'))
     .subscribe(data => {
       this.loadingList = false;

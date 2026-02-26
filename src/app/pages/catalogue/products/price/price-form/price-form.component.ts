@@ -15,12 +15,12 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'ngx-price-form',
   templateUrl: './price-form.component.html',
-  styleUrls: ['./price-form.component.scss']
+  styleUrls: ['./price-form.component.scss'],
 })
 export class PriceFormComponent implements OnInit {
   price;
   priceId;
-  id : any;
+  id: any;
   form: FormGroup;
   loader = false;
   languages = [];
@@ -36,14 +36,14 @@ export class PriceFormComponent implements OnInit {
       ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
       ['fontsize', ['fontname', 'fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']]
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
     ],
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times'],
   };
   inventory;
   params = {
     productId: '',
-    inventoryId: ''
+    inventoryId: '',
   };
 
   constructor(
@@ -55,7 +55,7 @@ export class PriceFormComponent implements OnInit {
     private translate: TranslateService,
     private productService: ProductService,
     private configService: ConfigService,
-    private inventoryService: InventoryService
+    private inventoryService: InventoryService,
   ) {
   }
 
@@ -89,7 +89,7 @@ export class PriceFormComponent implements OnInit {
     if (value !== '') {
       this.form.controls.productAttributePrice.setValue(
         formatMoney(value.replace(/,/g, '')),
-        { emitEvent: false }
+        { emitEvent: false },
       );
     }
   }
@@ -118,7 +118,7 @@ export class PriceFormComponent implements OnInit {
           title: [''],
           keyWords: [''],
           metaDescription: [''],
-        })
+        }),
       );
     });
   }
@@ -164,7 +164,7 @@ export class PriceFormComponent implements OnInit {
 
   changeName(event, index) {
     (<FormArray>this.form.get('descriptions')).at(index).patchValue({
-      friendlyUrl: slugify(event)
+      friendlyUrl: slugify(event),
     });
   }
 
@@ -174,7 +174,7 @@ export class PriceFormComponent implements OnInit {
     // save important values for filling empty field in result object
     const tmpObj = {
       name: '',
-      friendlyUrl: ''
+      friendlyUrl: '',
     };
     priceObject.descriptions.forEach((el) => {
       if (tmpObj.name === '' && el.name !== '') {

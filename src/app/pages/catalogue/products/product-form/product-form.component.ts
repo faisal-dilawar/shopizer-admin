@@ -18,8 +18,8 @@ import { StorageService } from '../../../shared/services/storage.service';
 import { Image } from '../../../shared/models/image';
 import { ImageBrowserComponent } from '../../../../@theme/components/image-browser/image-browser.component';
 //import { threadId } from 'worker_threads';
-declare var jquery: any;
-declare var $: any;
+declare let jquery: any;
+declare let $: any;
 
 export interface TabItem {
   label: string;
@@ -30,7 +30,7 @@ export interface TabItem {
 @Component({
   selector: 'ngx-product-form',
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss']
+  styleUrls: ['./product-form.component.scss'],
 })
 export class ProductFormComponent implements OnInit {
   @Input() product: any;
@@ -63,7 +63,7 @@ export class ProductFormComponent implements OnInit {
       title: this.translate.instant('COMPONENTS.PRODUCT_TO_CATEGORY'),
       route: 'category',
       fragment: 'tabs',
-  
+
     },
     {
       title: this.translate.instant('COMPONENTS.OPTIONS_CONFIG'),
@@ -89,7 +89,7 @@ export class ProductFormComponent implements OnInit {
       title: this.translate.instant('COMPONENTS.PRODUCTS_DISCOUNT'),
       route: 'discount',
       fragment: 'tab1',
-    }
+    },
    ];
 
 
@@ -106,12 +106,12 @@ export class ProductFormComponent implements OnInit {
       ['fontsize', ['fontname', 'fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
       ['insert', ['table', 'link', 'video', 'hr']],
-      ['customButtons', ['testBtn']]
+      ['customButtons', ['testBtn']],
     ],
     buttons: {
-      'testBtn': this.customButton.bind(this)
+      testBtn: this.customButton.bind(this),
     },
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times'],
   };
   isCodeUnique = true;
   uploadData = new FormData();
@@ -127,7 +127,7 @@ export class ProductFormComponent implements OnInit {
     private translate: TranslateService,
     private typeService: TypesService,
     private dialogService: NbDialogService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {
   }
 
@@ -202,7 +202,7 @@ export class ProductFormComponent implements OnInit {
         weight: [''],
         height: [''],
         width: [''],
-        length: ['']
+        length: [''],
       }),
       // placementOrder: [0, [Validators.required]],  // ???
       // taxClass: [0, [Validators.required]], // ???
@@ -224,7 +224,7 @@ export class ProductFormComponent implements OnInit {
           title: [''],
           keyWords: [''],
           metaDescription: [''],
-        })
+        }),
       );
     });
   }
@@ -244,7 +244,7 @@ export class ProductFormComponent implements OnInit {
         weight: this.product.productSpecifications.weight,
         height: this.product.productSpecifications.height,
         width: this.product.productSpecifications.width,
-        length: this.product.productSpecifications.length
+        length: this.product.productSpecifications.length,
       },
       sortOrder: this.product.sortOrder,
       // productShipeable: this.product.productShipeable,
@@ -331,7 +331,7 @@ export class ProductFormComponent implements OnInit {
 
   changeName(event, index) {
     (<FormArray>this.form.get('descriptions')).at(index).patchValue({
-      friendlyUrl: slugify(event)
+      friendlyUrl: slugify(event),
     });
   }
 
@@ -390,7 +390,7 @@ export class ProductFormComponent implements OnInit {
         this.isCodeUnique = !(res.exists && (this.product.sku !== event.target.value));
       });
   }
-  **/
+   **/
 
   // removeImages(array) {
   //   array.forEach((el) => {
@@ -415,7 +415,7 @@ export class ProductFormComponent implements OnInit {
       name: '',
       friendlyUrl: '',
       title: '',
-      language: ''
+      language: '',
     };
     productObject.descriptions.forEach((el) => {
       tmpObj.language = el.language;
@@ -500,7 +500,7 @@ export class ProductFormComponent implements OnInit {
     this.router.navigate(['pages/catalogue/products/' + this.product.id + '/' + link]);
   }
   goToback() {
-    this.router.navigate(['pages/catalogue/products/products-list'])
+    this.router.navigate(['pages/catalogue/products/products-list']);
   }
   public findInvalidControls() {
     const invalid = [];
@@ -511,7 +511,7 @@ export class ProductFormComponent implements OnInit {
       }
     }
     if (invalid.length > 0) {
-      this.toastr.error(this.translate.instant('COMMON.FILL_REQUIRED_FIELDS') + " [" + invalid + " ]");
+      this.toastr.error(this.translate.instant('COMMON.FILL_REQUIRED_FIELDS') + ' [' + invalid + ' ]');
     }
     return invalid;
   }
@@ -526,10 +526,10 @@ export class ProductFormComponent implements OnInit {
       tooltip: 'Gallery',
       container: '.note-editor',
       className: 'note-btn',
-      click: function () {
+      click() {
         //console.log(me);
         me.dialogService.open(ImageBrowserComponent, {}).onClose.subscribe(name => name && context.invoke('editor.pasteHTML', '<img src="' + name + '">'));
-      }
+      },
     });
     return button.render();
   }

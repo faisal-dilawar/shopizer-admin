@@ -4,7 +4,7 @@ import { OrdersChart, OrdersChartData } from '../data/orders-chart';
 
 /**
  * This is simulation of orders data
- * 
+ *
  * Orders vs shopping carts
  */
 @Injectable()
@@ -37,10 +37,10 @@ export class OrdersChartService extends OrdersChartData {
     return {
       //current week
       /**
-       * 
+       *
        * Get points
        * 7 days * (6 captures / day = every 4 hours)
-       * 
+       *
        */
       chartLabel: this.getDataLabels(42, this.period.getWeeks()),
       linesData: [

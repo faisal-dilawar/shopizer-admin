@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 @Component({
   selector: 'ngx-option-value-image',
   templateUrl: './option-value-image.component.html',
-  styleUrls: ['./option-value-image.component.scss']
+  styleUrls: ['./option-value-image.component.scss'],
 })
 export class OptionValueImageComponent implements OnInit, OnChanges {
   @Input() imageUrl;
@@ -29,7 +29,7 @@ export class OptionValueImageComponent implements OnInit, OnChanges {
       this.image = {
         name: event.target.files[0].name,
         url: fileReader.result as string,
-        file: event.target.files[0]
+        file: event.target.files[0],
       };
       this.imageChanged.emit({ type: 'add', data: event.target.files[0] });
     };

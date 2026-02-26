@@ -9,12 +9,12 @@ import { AuthService } from '../../auth/services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  isRefreshingToken: boolean = false;
+  isRefreshingToken = false;
   tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(
     private tokenService: TokenService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
   }
 
@@ -42,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private addTokenToRequest(request: HttpRequest<any>, token: string): HttpRequest<any> {
     const headers = {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     };
     return request.clone({ setHeaders: headers });
   }
@@ -62,12 +62,10 @@ export class AuthInterceptor implements HttpInterceptor {
             this.tokenService.saveToken(res.token);
             return next.handle(this.addTokenToRequest(request, tokenObj));
           }),
-          catchError(err => {
-            return from(<any>this.authService.logout());
-          }),
+          catchError(err => from(<any>this.authService.logout())),
           finalize(() => {
             this.isRefreshingToken = false;
-          })
+          }),
         );
     } else {
       this.isRefreshingToken = false;
@@ -75,9 +73,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return this.tokenSubject
         .pipe(filter(token => token != null),
           take(1),
-          switchMap(token => {
-            return next.handle(this.addTokenToRequest(request, token));
-          }));
+          switchMap(token => next.handle(this.addTokenToRequest(request, token))));
     }
   }
 

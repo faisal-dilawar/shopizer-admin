@@ -8,7 +8,7 @@ describe('PricesListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PricesListComponent ]
+      declarations: [ PricesListComponent ],
     })
     .compileComponents();
   }));

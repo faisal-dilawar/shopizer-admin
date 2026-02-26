@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
     selector: 'ngx-store-autocomplete',
     templateUrl: './store-autocomplete.html',
-    styleUrls: ['./store-autocomplete.scss']
+    styleUrls: ['./store-autocomplete.scss'],
 })
 export class storeAutoCompleteComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class storeAutoCompleteComponent implements OnInit {
     searchStore() {
         this.storeService.getListOfStores({ code: 'DEFAULT' })
             .subscribe(res => {
-                let storeData = []
+                const storeData = [];
                 res.data.forEach((store) => {
                     storeData.push(store.code);
                 });

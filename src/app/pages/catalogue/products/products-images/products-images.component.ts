@@ -12,13 +12,13 @@ import { ImageBrowserComponent } from '../../../../@theme/components/image-brows
 @Component({
   selector: 'ngx-products-images',
   templateUrl: './products-images.component.html',
-  styleUrls: ['./products-images.component.css']
+  styleUrls: ['./products-images.component.css'],
 })
 export class ProductsImagesComponent implements OnInit {
 
   // product: any;
-  images : any;
-  id : any;
+  images: any;
+  id: any;
   loaded = false;
   loading = false;
 
@@ -36,7 +36,7 @@ export class ProductsImagesComponent implements OnInit {
     private productImageService: ProductImageService,
     private productService: ProductService,
     private location: Location,
-    private router: Router
+    private router: Router,
 
   ) {
 
@@ -50,7 +50,7 @@ export class ProductsImagesComponent implements OnInit {
     this.addImageUrlComponent = this.productImageService.addImageUrl(this.id);
     //this only happens when /images, not when default
     if(this.location.path().includes('images')) {
-      let el = document.getElementById('tabs');
+      const el = document.getElementById('tabs');
       el.scrollIntoView();
     }
   }

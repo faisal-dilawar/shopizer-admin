@@ -5,7 +5,7 @@ import { StorageService } from '../../../shared/services/storage.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
 
@@ -21,7 +21,7 @@ export class CategoryService {
 
   getCategoryById(id): Observable<any> {
     const params = {
-      lang: '_all'
+      lang: '_all',
     };
     return this.crudService.get(`/v1/category/${id}`, params);
   }
@@ -29,7 +29,7 @@ export class CategoryService {
   getCategoryByProductId(id): Observable<any> {
     const params = {
       store: this.storageService.getMerchant(),
-      lang: this.storageService.getLanguage()
+      lang: this.storageService.getLanguage(),
     };
     return this.crudService.get(`/v1/category/product/${id}`, params);
   }
@@ -52,7 +52,7 @@ export class CategoryService {
 
   checkCategoryCode(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v1/private/category/unique`, params);
   }

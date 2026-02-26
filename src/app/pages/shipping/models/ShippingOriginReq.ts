@@ -4,6 +4,6 @@ export class ShippingOriginReq {
         public city: string,
         public country: string,
         public stateProvince: string,
-        public postalCode: string
+        public postalCode: string,
     ) { }
 }

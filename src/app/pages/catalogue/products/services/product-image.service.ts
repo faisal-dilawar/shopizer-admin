@@ -4,12 +4,12 @@ import { CrudService } from '../../../shared/services/crud.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductImageService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
 

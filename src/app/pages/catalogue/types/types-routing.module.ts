@@ -26,11 +26,11 @@ const routes: Routes = [
         // canActivate: [StoreGuard]
       },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TypesRoutingModule { }

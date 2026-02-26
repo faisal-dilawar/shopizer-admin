@@ -6,7 +6,7 @@ import { User } from '../../shared/models/user';
 @Component({
   selector: 'ngx-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
   form: FormGroup;

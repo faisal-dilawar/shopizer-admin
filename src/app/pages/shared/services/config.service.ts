@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfigService {
   languages = [];
@@ -21,10 +21,10 @@ export class ConfigService {
 
   getListOfSupportedLanguages(store: string) {
     const params = {
-      'store': store
+      store,
     };
 
-    return this.crudService.get(`/v1/store/languages`, params)
+    return this.crudService.get(`/v1/store/languages`, params);
 
 
     /**
@@ -40,8 +40,8 @@ export class ConfigService {
         }
       });
     })
-    **/
-    
+     **/
+
 
    /**
     return this.crudService.get(`/v1/store/languages`, params)
@@ -58,8 +58,8 @@ export class ConfigService {
           });
         })
       );
- **/
-      
+    **/
+
 
     //console.log('Return langs ' + JSON.stringify(supportedLangs));
     //return supportedLangs;
@@ -85,10 +85,10 @@ export class ConfigService {
   }
 
   getListOfGlobalLanguages(): Language[] {
-      let langs:string[] = environment.client.language.array
-      let languages: Language[] = [];
+      const langs: string[] = environment.client.language.array;
+      const languages: Language[] = [];
       langs.forEach(lang => {
-        var l = new Language(0,lang,this.translate.instant('LANG.' + lang));
+        const l = new Language(0,lang,this.translate.instant('LANG.' + lang));
         languages.push(l);
       });
 
@@ -106,14 +106,14 @@ export class ConfigService {
 
   getListOfCountriesByLanguage(lang) {
     const params = {
-      'lang': lang,
+      lang,
     };
     return this.crudService.get(`/v1/country`, params);
   }
 
   getListOfZonesProvincesByCountry(countryCode) {
     const params = {
-      'code': countryCode,
+      code: countryCode,
     };
     return this.crudService.get(`/v1/zones`, params);
   }

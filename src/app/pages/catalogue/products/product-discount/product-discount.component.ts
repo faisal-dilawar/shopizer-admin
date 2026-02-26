@@ -10,26 +10,26 @@ import { ProductService } from '../services/product.service';
 @Component({
   selector: 'ngx-product-discount',
   templateUrl: './product-discount.component.html',
-  styleUrls: ['./product-discount.component.scss']
+  styleUrls: ['./product-discount.component.scss'],
 })
 export class ProductDiscountComponent implements OnInit {
   discountForm: FormGroup;
-  id : any;
+  id: any;
   loading: false;
 
   constructor(
     private dfb: FormBuilder,
-    private location: Location,   
+    private location: Location,
     private productService: ProductService,
     private router: Router,
     ) { }
 
   ngOnInit(): void {
-    
+
     this.id = this.productService.getProductIdRoute(this.router,this.location);
 
     //scroll down to discount tab
-    let el = document.getElementById('tabs');
+    const el = document.getElementById('tabs');
     el.scrollIntoView();
 
     //get product price
@@ -43,11 +43,11 @@ export class ProductDiscountComponent implements OnInit {
       endDate: [new Date()],
       discountedRadio: [null],
       percentageOffRadio: [null],
-      rebateRadio: [null]
-    })
+      rebateRadio: [null],
+    });
   }
 
-  save() { 
+  save() {
 
 
   }
@@ -56,27 +56,24 @@ export class ProductDiscountComponent implements OnInit {
     if (e == 1) {
       this.discountForm.controls['discountedPrice'].setValidators([Validators.required]);
       // this.discountForm.controls['discountedPrice'].setValue([Validators.pattern(validators.)]);
-    }
-    else {
-      this.discountForm.controls['discountedRadio'].updateValueAndValidity()
+    } else {
+      this.discountForm.controls['discountedRadio'].updateValueAndValidity();
       this.discountForm.controls['discountedPrice'].clearValidators();
     }
   }
   percentageSelected(e) {
     if (e == 2) {
       this.discountForm.controls['percentageOff'].setValidators([Validators.required]);
-    }
-    else {
-      this.discountForm.controls['percentageOffRadio'].updateValueAndValidity()
+    } else {
+      this.discountForm.controls['percentageOffRadio'].updateValueAndValidity();
       this.discountForm.controls['percentageOff'].clearValidators();
     }
   }
   rebateSelected(e) {
     if (e == 3) {
       this.discountForm.controls['rebatePrice'].setValidators([Validators.required]);
-    }
-    else {
-      this.discountForm.controls['rebateRadio'].updateValueAndValidity()
+    } else {
+      this.discountForm.controls['rebateRadio'].updateValueAndValidity();
       this.discountForm.controls['rebatePrice'].clearValidators();
     }
   }

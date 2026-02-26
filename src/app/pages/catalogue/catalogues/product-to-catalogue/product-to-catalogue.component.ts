@@ -10,7 +10,7 @@ import { CategoryService } from '../../categories/services/category.service';
 @Component({
   selector: 'ngx-product-to-catalogue',
   templateUrl: './product-to-catalogue.component.html',
-  styleUrls: ['./product-to-catalogue.component.scss']
+  styleUrls: ['./product-to-catalogue.component.scss'],
 })
 export class ProductToCatalogueComponent implements OnInit {
   availableList = [];
@@ -23,14 +23,14 @@ export class ProductToCatalogueComponent implements OnInit {
     private storageService: StorageService,
     private catalogService: CatalogService,
     private activatedRoute: ActivatedRoute,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
   ) {
     const id = this.activatedRoute.snapshot.paramMap.get('catalogId');
     const params = {
       store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: 100,
-      page: 0
+      page: 0,
     };
     forkJoin(this.productService.getListOfProducts(params), this.catalogService.getListOfCatalogues(params))
       .subscribe(([products, res]) => {

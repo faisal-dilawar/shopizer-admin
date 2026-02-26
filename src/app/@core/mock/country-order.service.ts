@@ -14,9 +14,7 @@ export class CountryOrderService extends CountryOrderData {
   ];
   private countriesCategoriesLength = this.countriesCategories.length;
   private generateRandomData(nPoints: number): number[] {
-    return Array.from(Array(nPoints)).map(() => {
-      return Math.round(Math.random() * 20);
-    });
+    return Array.from(Array(nPoints)).map(() => Math.round(Math.random() * 20));
   }
 
   getCountriesCategories(): Observable<string[]> {

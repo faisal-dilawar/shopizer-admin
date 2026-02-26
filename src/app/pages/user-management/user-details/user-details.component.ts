@@ -6,7 +6,7 @@ import { UserService } from '../../shared/services/user.service';
 @Component({
   selector: 'ngx-user-details',
   templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.scss']
+  styleUrls: ['./user-details.component.scss'],
 })
 export class UserDetailsComponent implements OnInit {
   user: any = {};
@@ -14,7 +14,7 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
   ) {
   }
 

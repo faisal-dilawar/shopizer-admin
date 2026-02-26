@@ -11,15 +11,15 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'ngx-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
-  shippingCountry: Array<any> = []
-  shippingStateData: Array<any> = []
-  billingStateData: Array<any> = []
-  billingCountry: Array<any> = []
-  groups: Array<any> = []
-  selectedGroups: Array<any> = []
+  shippingCountry: Array<any> = [];
+  shippingStateData: Array<any> = [];
+  billingStateData: Array<any> = [];
+  billingCountry: Array<any> = [];
+  groups: Array<any> = [];
+  selectedGroups: Array<any> = [];
   loading = false;
   languages = [];
   public scrollbarOptions = { axis: 'y', theme: 'minimal-dark' };
@@ -27,8 +27,8 @@ export class AddComponent implements OnInit {
     userName: '',
     language: '',
     emailAddress: '',
-    groups: []
-  }
+    groups: [],
+  };
   shipping = {
     firstName: '',
     lastName: '',
@@ -39,7 +39,7 @@ export class AddComponent implements OnInit {
     country: '',
     postalCode: '',
 
-  }
+  };
   billing = {
     firstName: '',
     lastName: '',
@@ -49,26 +49,26 @@ export class AddComponent implements OnInit {
     zone: '',
     country: '',
     postalCode: '',
-    phone: ''
-  }
+    phone: '',
+  };
   customerID: any;
   defaultCountry: any;
   //title: any = 'Create Customer'
-  buttonText: any = 'Save'
+  buttonText: any = 'Save';
   selectedItem = '1';
   sidemenuLinks = [
     {
       id: '0',
       title: 'Set credentials',
       key: 'FORGOT_PASSWORD.RESET',
-      link: 'customer/set-credentials'
+      link: 'customer/set-credentials',
     },
     {
       id: '1',
       title: 'Customer details',
       key: 'CUSTOMERS.DETAILS',
-      link: 'customer/add'
-    }
+      link: 'customer/add',
+    },
   ];
   constructor(
     private customersService: CustomersService,
@@ -76,7 +76,7 @@ export class AddComponent implements OnInit {
     private toastr: ToastrService,
     public router: Router,
     private dialogService: NbDialogService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
   ) {
 
       this.getCountry();
@@ -91,7 +91,7 @@ export class AddComponent implements OnInit {
       .subscribe(data => {
 
         this.loading = false;
-        this.onBillingChange(data.billing.country, 0)
+        this.onBillingChange(data.billing.country, 0);
 
 
         this.info.emailAddress = data.emailAddress;
@@ -100,7 +100,7 @@ export class AddComponent implements OnInit {
         this.info.groups = data.groups;
         this.billing = data.billing;
         if (data.delivery) {
-          this.onShippingChange(data.delivery.country, 0)
+          this.onShippingChange(data.delivery.country, 0);
           this.shipping = data.delivery;
         }
 
@@ -125,9 +125,9 @@ export class AddComponent implements OnInit {
   ngOnInit() {
 
     if (localStorage.getItem('customerid')) {
-      this.customerID = localStorage.getItem('customerid')
+      this.customerID = localStorage.getItem('customerid');
       this.getCustomerDetails();
-      this.buttonText = "Update"
+      this.buttonText = 'Update';
     }
   }
 
@@ -157,8 +157,8 @@ export class AddComponent implements OnInit {
     this.loading=true;
     this.customersService.getGroup()
       .subscribe(data => {
-        console.log("GROUPS " + JSON.stringify(data));
-        this.groups = data.filter(t => t.type === 'CUSTOMER')
+        console.log('GROUPS ' + JSON.stringify(data));
+        this.groups = data.filter(t => t.type === 'CUSTOMER');
         //this.groups = data;
 
         this.loading=false;
@@ -205,7 +205,7 @@ export class AddComponent implements OnInit {
     const index = this.selectedGroups.findIndex(el => el.id === group.id);
     // if exist
     if (index === -1) {
-      this.selectedGroups.push({ 'name': group.name })
+      this.selectedGroups.push({ name: group.name });
     } else {
       this.selectedGroups.splice(index, 1); // remove
     }
@@ -213,85 +213,85 @@ export class AddComponent implements OnInit {
   onAddCustomer() {
     if (this.buttonText == 'Save') {
       this.loading = true;
-      let param = {
-        "billing": {
-          "company": this.billing.company,
-          "address": this.billing.address,
-          "city": this.billing.city,
-          "postalCode": this.billing.postalCode,
-          "stateProvince": this.billing.zone,
-          "country": this.billing.country,
-          "zone": this.billing.zone,
-          "firstName": this.billing.firstName,
-          "lastName": this.billing.lastName,
-          "phone": this.billing.phone
+      const param = {
+        billing: {
+          company: this.billing.company,
+          address: this.billing.address,
+          city: this.billing.city,
+          postalCode: this.billing.postalCode,
+          stateProvince: this.billing.zone,
+          country: this.billing.country,
+          zone: this.billing.zone,
+          firstName: this.billing.firstName,
+          lastName: this.billing.lastName,
+          phone: this.billing.phone,
         },
-        "delivery": {
-          "company": this.shipping.company,
-          "address": this.shipping.address,
-          "city": this.shipping.city,
-          "postalCode": this.shipping.postalCode,
-          "stateProvince": this.shipping.zone,
-          "country": this.shipping.country,
-          "zone": this.shipping.zone,
-          "firstName": this.shipping.firstName,
-          "lastName": this.shipping.lastName
+        delivery: {
+          company: this.shipping.company,
+          address: this.shipping.address,
+          city: this.shipping.city,
+          postalCode: this.shipping.postalCode,
+          stateProvince: this.shipping.zone,
+          country: this.shipping.country,
+          zone: this.shipping.zone,
+          firstName: this.shipping.firstName,
+          lastName: this.shipping.lastName,
         },
-        "emailAddress": this.info.emailAddress,
-        "groups": this.selectedGroups,
-        "language": this.info.language,
-        "userName": this.info.userName,
+        emailAddress: this.info.emailAddress,
+        groups: this.selectedGroups,
+        language: this.info.language,
+        userName: this.info.userName,
 
-      }
+      };
       this.customersService.addCustomers(param)
         .subscribe(data => {
           // console.log(data);
           this.loading = false;
           this.errorService.success('COMMON.SUCCESS_ADDED');
-          this.goToback()
+          this.goToback();
         }, error => {
           this.loading = false;
           this.errorService.error('COMMON.SYSTEM_ERROR',error);
         });
     } else {
       this.loading = true;
-      let param = {
-        "id": this.customerID,
-        "billing": {
-          "company": this.billing.company,
-          "address": this.billing.address,
-          "city": this.billing.city,
-          "postalCode": this.billing.postalCode,
+      const param = {
+        id: this.customerID,
+        billing: {
+          company: this.billing.company,
+          address: this.billing.address,
+          city: this.billing.city,
+          postalCode: this.billing.postalCode,
           // "stateProvince": this.billing.stateProvince,
-          "country": this.billing.country,
-          "zone": this.billing.zone,
-          "firstName": this.billing.firstName,
-          "lastName": this.billing.lastName,
-          "phone": this.billing.phone
+          country: this.billing.country,
+          zone: this.billing.zone,
+          firstName: this.billing.firstName,
+          lastName: this.billing.lastName,
+          phone: this.billing.phone,
         },
-        "delivery": {
-          "company": this.shipping.company,
-          "address": this.shipping.address,
-          "city": this.shipping.city,
-          "postalCode": this.shipping.postalCode,
+        delivery: {
+          company: this.shipping.company,
+          address: this.shipping.address,
+          city: this.shipping.city,
+          postalCode: this.shipping.postalCode,
           // "stateProvince": this.shipping.stateProvince,
-          "country": this.shipping.country,
-          "zone": this.shipping.zone,
-          "firstName": this.shipping.firstName,
-          "lastName": this.shipping.lastName
+          country: this.shipping.country,
+          zone: this.shipping.zone,
+          firstName: this.shipping.firstName,
+          lastName: this.shipping.lastName,
         },
-        "emailAddress": this.info.emailAddress,
+        emailAddress: this.info.emailAddress,
         // "groups": this.selectedGroups,
         // "language": this.info.language,
         // "userName": this.info.userName,
 
-      }
+      };
       this.customersService.updateCustomers(param, this.customerID)
         .subscribe(data => {
           // console.log(data);
           this.loading = false;
           this.errorService.success('COMMON.SUCCESS_ADDED');
-          this.goToback()
+          this.goToback();
         }, error => {
           this.loading = false;
           this.errorService.error('COMMON.SYSTEM_ERROR',error);
@@ -301,7 +301,7 @@ export class AddComponent implements OnInit {
 
 
   showDialog(value) {
-    console.log(value)
+    console.log(value);
     if (value == 1) {
       /**
       this.dialogService.open(ShowcaseDialogComponent, {
@@ -315,7 +315,7 @@ export class AddComponent implements OnInit {
 
           }
         });
-        */
+       */
     } else {
       this.dialogService.open(PasswordPromptComponent)
         .onClose.subscribe(res => {

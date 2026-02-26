@@ -7,7 +7,7 @@ import { UrlTree, UrlSegment, UrlSegmentGroup, ActivatedRoute, Router, PRIMARY_O
 import {Location} from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
 
@@ -28,35 +28,35 @@ export class ProductService {
 
   updateProduct(id, product): Observable<any> {
     const params = {
-      store: this.storageService.getMerchant()
+      store: this.storageService.getMerchant(),
     };
     return this.crudService.put(`/v2/private/product/${id}`, product, { params });
   }
 
   getProductById(id): Observable<any> {
     const params = {
-      lang: '_all'
+      lang: '_all',
     };
     return this.crudService.get(`/v1/product/${id}`, params);
   }
 
   getProductDefinitionById(id): Observable<any> {
     const params = {
-      lang: '_all'
+      lang: '_all',
     };
     return this.crudService.get(`/v2/private/product/${id}`, params);
   }
 
   getProductDefinitionBySku(sku): Observable<any> {
     const params = {
-      lang: '_all'
+      lang: '_all',
     };
     return this.crudService.get(`/v2/product/${sku}`, params);
   }
 
   createProduct(product): Observable<any> {
     const params = {
-      store: this.storageService.getMerchant()
+      store: this.storageService.getMerchant(),
     };
     return this.crudService.post(`/v2/private/product`, product, { params });
   }
@@ -71,7 +71,7 @@ export class ProductService {
 
   checkProductSku(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v1/private/product/unique`, params);
   }
@@ -84,10 +84,10 @@ export class ProductService {
     return this.crudService.delete(`/v1/private/product/${productId}/category/${categoryId}`);
   }
   getProductByOrder(): Observable<any> {
-    return this.crudService.get(`/v1/product?count=200&lang=en&page=0`)
+    return this.crudService.get(`/v1/product?count=200&lang=en&page=0`);
   }
   getProductOrderById(id): Observable<any> {
-    return this.crudService.get(`/v1/product?category=${id}&count=200&lang=en&page=0`)
+    return this.crudService.get(`/v1/product?category=${id}&count=200&lang=en&page=0`);
   }
   getProductIdRoute(router: Router, location: Location) {
     const tree: UrlTree = router.parseUrl(location.path());

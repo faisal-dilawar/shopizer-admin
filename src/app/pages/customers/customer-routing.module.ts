@@ -26,7 +26,7 @@ const routes: Routes = [{
     {
       path: 'set-credentials',
       component: SetCredentialsComponent,
-    }
+    },
     // {
     //   path: 'option/list',
     //   component: OptionListComponent,
@@ -64,7 +64,7 @@ export const routedComponents = [
   CustomersComponent,
   ListComponent,
   AddComponent,
-  SetCredentialsComponent
+  SetCredentialsComponent,
   // OptionListComponent,
   // OptionsAddComponent,
   // ValueListComponent,

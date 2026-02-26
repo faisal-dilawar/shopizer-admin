@@ -7,7 +7,7 @@ import { CrudService } from '../../shared/services/crud.service';
 import { StorageService } from '../../shared/services/storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomersService {
 
@@ -25,22 +25,22 @@ export class CustomersService {
 
   deleteCustomer(customerID, store): Observable<any> {
     const params = {
-      store: store
+      store,
     };
     return this.crudService.delete('/v1/private/customer/' + customerID, params);
   }
 
   getGroup(): Observable<any> {
-    return this.crudService.get('/v1/sec/private/groups')
+    return this.crudService.get('/v1/sec/private/groups');
   }
   getCountry(): Observable<any> {
-    return this.crudService.get('/v1/country')
+    return this.crudService.get('/v1/country');
   }
   getBillingZone(value): Observable<any> {
-    return this.crudService.get('/v1/zones?code=' + value)
+    return this.crudService.get('/v1/zones?code=' + value);
   }
   getShippingZone(value): Observable<any> {
-    return this.crudService.get('/v1/zones?code=' + value)
+    return this.crudService.get('/v1/zones?code=' + value);
   }
   addCustomers(param): Observable<any> {
     return this.crudService.post('/v1/private/customer', param);
@@ -50,8 +50,8 @@ export class CustomersService {
   }
   setPassword(obj): Observable<any>  {
     const params = {
-      store: this.storageService.getMerchant()
+      store: this.storageService.getMerchant(),
     };
     return this.crudService.put('/v1/private/customer/password', obj, { params });
-  }            
+  }
 }

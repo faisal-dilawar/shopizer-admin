@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ListState } from '../classes/lists/list-state';
-  
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListingService {
-  
-  private state:ListState;
-   
+
+  private state: ListState;
+
   constructor() {
       this.state = new ListState(false, false, '');
   }
-  
-  filterDetect(originparams: any, source: any, loadList, resetList: () => void)
-  {
+
+  filterDetect(originparams: any, source: any, loadList, resetList: () => void) {
     if(source==null) {
         return;
     }
@@ -22,19 +21,19 @@ export class ListingService {
         return;
     }
 
-    var params = this.filter(source);
+    const params = this.filter(source);
 
     if(params === null) {
         return;
     }
 
-    var filterValues = '';
+    let filterValues = '';
 
     //if empty array and filer values reset list
     if (params.length != 0) {
-    
+
       console.log('Parameters are ' + JSON.stringify(params));
-      params.forEach(function (entry) {
+      params.forEach(function(entry) {
         //console.log('Field ' + entry.field);
         //console.log('Value ' + entry.value);
         originparams[entry.field] = entry.value;
@@ -54,7 +53,7 @@ export class ListingService {
         //console.log('Filter search ' + JSON.stringify(params));
         //callback
         loadList(originparams);
-        
+
         //reset filters
         this.state.filterChange = false;
         this.state.filterResetable = true;
@@ -79,17 +78,17 @@ export class ListingService {
   }
 
     /**
-   * 
-   * @param change returns parameters and values
-   */
+     *
+     * @param change returns parameters and values
+     */
   private filter(change) {
-    let filters = change.filter;
-    
+    const filters = change.filter;
+
     if(filters != null) {
-      let requestParam = null;
-      let params = [];
-      
-      var self = this;
+      const requestParam = null;
+      const params = [];
+
+      const self = this;
 
       if(filters.filters == null) {
           //console.log('Everything is null');
@@ -97,16 +96,16 @@ export class ListingService {
       }
       //console.log(JSON.stringify(filters));
 
-      filters.filters.forEach(function (filter) {
+      filters.filters.forEach(function(filter) {
 
         if(!self.isNullOrWhiteSpace(filter.search)) {
           //console.log('---> name ' + filter.field);
           //console.log('---> value ' + filter.search);
           params.push({
-            field: filter.field, 
-            value:  filter.search
+            field: filter.field,
+            value:  filter.search,
           });
-        } 
+        }
       });
 
      return params;
@@ -115,7 +114,7 @@ export class ListingService {
 
 
   private isNullOrWhiteSpace(value) {
-    return (!value || value.length === 0 || /^\s*$/.test(value)) 
+    return (!value || value.length === 0 || /^\s*$/.test(value));
   }
 
 }

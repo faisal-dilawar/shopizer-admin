@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'ngx-store-landing-page',
   templateUrl: './store-landing-page.component.html',
-  styleUrls: ['./store-landing-page.component.scss']
+  styleUrls: ['./store-landing-page.component.scss'],
 })
 export class StoreLandingPageComponent implements OnInit {
   form: FormGroup;
@@ -25,20 +25,20 @@ export class StoreLandingPageComponent implements OnInit {
       id: '0',
       title: 'Store branding',
       key: 'COMPONENTS.STORE_BRANDING',
-      link: 'store-branding'
+      link: 'store-branding',
     },
     {
       id: '1',
       title: 'Store home page',
       key: 'COMPONENTS.STORE_LANDING',
-      link: 'store-landing'
+      link: 'store-landing',
     },
     {
       id: '2',
       title: 'Store details',
       key: 'COMPONENTS.STORE_DETAILS',
-      link: 'store'
-    }
+      link: 'store',
+    },
   ];
   config = {
     placeholder: '',
@@ -51,9 +51,9 @@ export class StoreLandingPageComponent implements OnInit {
       ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
       ['fontsize', ['fontname', 'fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']]
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
     ],
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times'],
   };
   loading = false;
   page;
@@ -76,7 +76,7 @@ export class StoreLandingPageComponent implements OnInit {
 
     forkJoin(
       this.storeService.getPageContent('LANDING_PAGE', code),
-      this.storeService.getStore(code)
+      this.storeService.getStore(code),
     )
       .subscribe(([res, st]) => {
         if (!res.status) {//404 should not rais an error
@@ -90,7 +90,7 @@ export class StoreLandingPageComponent implements OnInit {
   }
 
   route(link) {
-    this.router.navigate(['pages/store-management/' + link + "/", this.store.code]);
+    this.router.navigate(['pages/store-management/' + link + '/', this.store.code]);
   }
 
   private createForm() {
@@ -114,7 +114,7 @@ export class StoreLandingPageComponent implements OnInit {
           id: '',
           keyWords: [''],
           description: [''],
-        })
+        }),
       );
     });
   }
@@ -131,7 +131,7 @@ export class StoreLandingPageComponent implements OnInit {
 
   fillFormArray() {
     this.form.patchValue({
-      id: this.page.id
+      id: this.page.id,
     });
     this.form.value.descriptions.forEach((desc, index) => {
       this.page.descriptions.forEach((description) => {

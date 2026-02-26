@@ -11,7 +11,7 @@ import { error } from '@angular/compiler/src/util';
 @Component({
   selector: 'ngx-order-list',
   templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.scss']
+  styleUrls: ['./order-list.component.scss'],
 })
 export class OrderListComponent implements OnInit {
   @ViewChild('item', { static: false }) accordion;
@@ -41,10 +41,10 @@ export class OrderListComponent implements OnInit {
   ) {
     this.isSuperAdmin = this.storageService.getUserRoles().isSuperadmin;
     this.getStoreList();
-    this.selectedStore = this.storageService.getMerchant()
+    this.selectedStore = this.storageService.getMerchant();
   }
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
 
         res.forEach((store) => {
@@ -71,20 +71,20 @@ export class OrderListComponent implements OnInit {
       this.timeoutHandler = setTimeout(() => {
         if (change.action == 'filter') {
           change.filter.filters.map((a) => {
-            if (a.field == "id") {
-              this.params["id"] = a.search;
-            } else if (a.field == "billingName") {
-              this.params["name"] = a.search;
-            } else if (a.field == "billingPhone") {
-              this.params["phone"] = a.search;
-            } else if (a.field == "billingEmail") {
-              this.params["email"] = a.search;
-            } else if (a.field == "orderStatus") {
-              this.params["status"] = a.search;
+            if (a.field == 'id') {
+              this.params['id'] = a.search;
+            } else if (a.field == 'billingName') {
+              this.params['name'] = a.search;
+            } else if (a.field == 'billingPhone') {
+              this.params['phone'] = a.search;
+            } else if (a.field == 'billingEmail') {
+              this.params['email'] = a.search;
+            } else if (a.field == 'orderStatus') {
+              this.params['status'] = a.search;
             }
           });
 
-          this.getOrderList()
+          this.getOrderList();
         }
       }, time);
 
@@ -95,7 +95,7 @@ export class OrderListComponent implements OnInit {
       store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
   getOrderList() {
@@ -119,7 +119,7 @@ export class OrderListComponent implements OnInit {
   }
 
   setSettings() {
-    var me = this;
+    const me = this;
     this.settings = {
       // mode: 'external',
       // hideSubHeader: false,
@@ -132,12 +132,12 @@ export class OrderListComponent implements OnInit {
         custom: [
           {
             name: 'view',
-            title: '<i class="nb-edit"></i>'
-          }
+            title: '<i class="nb-edit"></i>',
+          },
         ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
@@ -145,48 +145,46 @@ export class OrderListComponent implements OnInit {
           type: 'number',
           filterFunction(cell: any, search?: string): boolean {
             return true;
-          }
+          },
         },
         billingName: {
           title: this.translate.instant('ORDER.CUSTOMER_NAME'),
           type: 'string',
-          valuePrepareFunction: (customer, data) => {
+          valuePrepareFunction: (customer, data) =>
             // console.log(data);
-            return data.billing.firstName + ' ' + data.billing.lastName;
-          },
+             data.billing.firstName + ' ' + data.billing.lastName
+          ,
           filterFunction(cell: any, search?: string): boolean {
             return true;
-          }
+          },
         },
         billingPhone: {
           title: this.translate.instant('ORDER.CUSTOMER_PHONE'),
           type: 'string',
-          valuePrepareFunction: (customer, data) => {
+          valuePrepareFunction: (customer, data) =>
             // console.log(customer)
-            return data.billing.phone;
-          },
+             data.billing.phone
+          ,
           filterFunction(cell: any, search?: string): boolean {
             return true;
-          }
+          },
         },
         billingEmail: {
           title: this.translate.instant('ORDER.CUSTOMER_EMAIL'),
           type: 'string',
-          valuePrepareFunction: (customer, data) => {
+          valuePrepareFunction: (customer, data) =>
             // console.log(customer)
-            return data.billing.email;
-          },
+             data.billing.email
+          ,
           filterFunction(cell: any, search?: string): boolean {
             return true;
-          }
+          },
         },
         total: {
           title: this.translate.instant('ORDER.TOTAL'),
           type: 'string',
           filter: false,
-          valuePrepareFunction: (total, data) => {
-            return data.currencySymbol + total.value;
-          }
+          valuePrepareFunction: (total, data) => data.currencySymbol + total.value,
         },
         datePurchased: {
           title: this.translate.instant('ORDER.ORDER_DATE'),
@@ -214,10 +212,10 @@ export class OrderListComponent implements OnInit {
                 { value: 'DELIVERED', title: this.translate.instant('ORDER.DELIVERED') },
                 { value: 'REFUNDED', title: this.translate.instant('ORDER.REFUNDED') },
                 { value: 'CANCELED', title: this.translate.instant('ORDER.CANCELED') },
-              ]
-            }
-          }
-        }
+              ],
+            },
+          },
+        },
       },
 
     };
@@ -247,11 +245,11 @@ export class OrderListComponent implements OnInit {
         break;
       }
     }
-    this.getOrderList()
+    this.getOrderList();
   }
 
   onSelectStore(e) {
-    this.params["store"] = e.value;
+    this.params['store'] = e.value;
     this.getOrderList();
   }
 

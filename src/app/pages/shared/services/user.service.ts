@@ -5,7 +5,7 @@ import { roles } from '../models/access-roles';
 import { CrudService } from './crud.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 export class UserService {
@@ -23,7 +23,7 @@ export class UserService {
   };
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
 
@@ -90,21 +90,21 @@ export class UserService {
 
   createUser(user: any, store: any): Observable<any> {
     const params = {
-      'store': store
+      store,
     };
     return this.crudService.post(`/v1/private/user/`, user, { params });
   }
 
   updateUser(id: any, user: any, store: any): Observable<any> {
     const params = {
-      'store': store
+      store,
     };
     return this.crudService.put(`/v1/private/user/${id}`, user, { params });
   }
 
   deleteUser(id: any, store: any): Observable<any> {
     const params = {
-      'store': store
+      store,
     };
     return this.crudService.delete(`/v1/private/user/${id}`, { params });
   }

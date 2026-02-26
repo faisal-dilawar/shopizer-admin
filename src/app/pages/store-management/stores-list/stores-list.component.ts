@@ -15,7 +15,7 @@ import { ListingService } from '../../shared/services/listing.service';
 @Component({
   selector: 'ngx-stores-list',
   templateUrl: './stores-list.component.html',
-  styleUrls: ['./stores-list.component.scss']
+  styleUrls: ['./stores-list.component.scss'],
 })
 export class StoresListComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
@@ -29,7 +29,7 @@ export class StoresListComponent implements OnInit {
   totalCount;
   totalPages;
   merchant = '';
-  searchValue: string = '';
+  searchValue = '';
 
   params = this.loadParams();
 
@@ -44,7 +44,7 @@ export class StoresListComponent implements OnInit {
     private dialogService: NbDialogService,
     private translate: TranslateService,
     private securityService: SecurityService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
   ) {
     this.listingService = new ListingService();
   }
@@ -67,18 +67,18 @@ export class StoresListComponent implements OnInit {
     return {
       count: this.perPage,
       page: 0,
-      store: ''
+      store: '',
     };
   }
 
 
     /** callback methods for table list*/
-    private loadList(newParams:any) {
+    private loadList(newParams: any) {
       this.currentPage = 1; //back to page 1
       this.params = newParams;
       this.getList();
     }
-  
+
     private resetList() {
       this.currentPage = 1;//back to page 1
       this.params = this.loadParams();
@@ -110,8 +110,8 @@ export class StoresListComponent implements OnInit {
     if (this.securityService.isAnAdmin()) {
       customs = [
         { name: 'details', title: '<i class="nb-edit"></i>' },
-        { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') }
-      ]
+        { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') },
+      ];
     }
 
     this.settings = {
@@ -122,7 +122,7 @@ export class StoresListComponent implements OnInit {
         delete: false,
         position: 'right',
         sort: true,
-        custom: customs
+        custom: customs,
       },
       pager: { display: false },
       columns: {
@@ -148,7 +148,7 @@ export class StoresListComponent implements OnInit {
         email: {
           title: this.translate.instant('COMMON.EMAIL_ADDRESS'),
           type: 'string',
-        }
+        },
       },
     };
   }
@@ -171,15 +171,15 @@ export class StoresListComponent implements OnInit {
             context: {
               title: '',
               text: '',
-              actionText: this.translate.instant('USER_FORM.CANT_DELETE_YOUR_PROFILE')
-            }
-          })
+              actionText: this.translate.instant('USER_FORM.CANT_DELETE_YOUR_PROFILE'),
+            },
+          });
         } else {
           this.dialogService.open(ShowcaseDialogComponent, {
             context: {
               title: '',
-              text: event.data.name + ' ? '
-            }
+              text: event.data.name + ' ? ',
+            },
           })
           .onClose.subscribe(res => {
               if (res) {

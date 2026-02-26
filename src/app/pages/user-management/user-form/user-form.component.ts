@@ -15,7 +15,7 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'ngx-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
   form: FormGroup;
@@ -27,7 +27,9 @@ export class UserFormComponent implements OnInit {
     this._user = user;
   }
 
-  get user(): User { return this._user; }
+  get user(): User {
+ return this._user;
+}
 
   languages = [];
   groups = [];
@@ -57,7 +59,7 @@ export class UserFormComponent implements OnInit {
       title: 'COMPONENTS.CHANGE_PASSWORD',
       key: 'COMPONENTS.CHANGE_PASSWORD',
       link: '/pages/user-management/change-password',
-    }
+    },
   ];
 
   // user's roles
@@ -76,18 +78,18 @@ export class UserFormComponent implements OnInit {
    * Can't change self store even if super admin
    */
   rules = {
-    'ADMIN_RETAIL': {
+    ADMIN_RETAIL: {
       rules: [
         { key: 'ADMIN_STORE', checked: false, disabled: true },
-        { key: 'ADMIN_RETAIL', checked: false, disabled: false }
-      ]
+        { key: 'ADMIN_RETAIL', checked: false, disabled: false },
+      ],
     },
-    'ADMIN_STORE': {
+    ADMIN_STORE: {
       rules: [
         { key: 'ADMIN_STORE', checked: false, disabled: false },
-        { key: 'ADMIN_RETAIL', checked: false, disabled: true }
-      ]
-    }
+        { key: 'ADMIN_RETAIL', checked: false, disabled: true },
+      ],
+    },
   };
   isEmaillUnique = true;
   loader = false;
@@ -102,7 +104,7 @@ export class UserFormComponent implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     this.roles = JSON.parse(localStorage.getItem('roles'));
   }
@@ -110,7 +112,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
 
     //if not user self remove user
-    this._user && this._user.id === +this.userService.getUserId() ? this.canRemove = false : this.canRemove = true
+    this._user && this._user.id === +this.userService.getUserId() ? this.canRemove = false : this.canRemove = true;
     this.selfEdit = this._user && this._user.id === +this.userService.getUserId();
 
     //don't show remove when creating a new user
@@ -149,7 +151,7 @@ export class UserFormComponent implements OnInit {
     //const languages = this.configService.getMerchantListOfSupportedLanguages();
     const languages = this.configService.getListOfGlobalLanguages();
     const groups$ = this.configService.getListOfGroups();
-    const stores$ = this.storeService.getListOfMerchantStoreNames({ 'store': this.store });
+    const stores$ = this.storeService.getListOfMerchantStoreNames({ store: this.store });
     forkJoin([groups$, stores$]).subscribe(([groups, stores]) => {
       // fill languages
       this.languages = [...languages];
@@ -172,7 +174,7 @@ export class UserFormComponent implements OnInit {
       //console.log('List stores -> ' + JSON.stringify(this.stores));
 
       //from the list select current store
-      let uStore = this.stores.find(s => s.code === this.store);
+      const uStore = this.stores.find(s => s.code === this.store);
       //console.log('Selected store -> ' + uStore.code);
 
       //const uStore = this.stores.find((this.store) => store.code === this.form.value.store);
@@ -239,7 +241,7 @@ export class UserFormComponent implements OnInit {
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     const password = group.get('password').value;
     const confirmPassword = group.get('repeatPassword').value;
-    return password === confirmPassword ? null : { notSame: true }
+    return password === confirmPassword ? null : { notSame: true };
   }
   private createForm() {
     this.form = this.fb.group({
@@ -305,7 +307,7 @@ export class UserFormComponent implements OnInit {
 
   save() {
     this.loader = true;
-    var store = this.form.value.store;
+    let store = this.form.value.store;
     if (!store) {
       store = this.store;
     }
@@ -364,7 +366,7 @@ export class UserFormComponent implements OnInit {
   }
 
   remove() {
-    var store = this.user.merchant;
+    const store = this.user.merchant;
     this.userService.deleteUser(this._user.id, store)
       .subscribe(res => {
         this.toastr.success(this.translate.instant('USER_FORM.USER_REMOVED'));

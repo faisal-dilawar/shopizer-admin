@@ -8,7 +8,7 @@ describe('InventoryCreationComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InventoryCreationComponent ]
+      declarations: [ InventoryCreationComponent ],
     })
     .compileComponents();
   }));

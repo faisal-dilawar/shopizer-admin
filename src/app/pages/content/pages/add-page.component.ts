@@ -10,8 +10,8 @@ import { validators } from '../../shared/validation/validators';
 import { slugify } from '../../shared/utils/slugifying';
 
 import { TranslateService } from '@ngx-translate/core';
-declare var jquery: any;
-declare var $: any;
+declare let jquery: any;
+declare let $: any;
 
 @Component({
   selector: 'add-page',
@@ -32,7 +32,7 @@ export class AddPageComponent implements OnInit {
   // mainmenu: any = false;
   // code: string = '';
   // order: number = 0;
-  action: string = 'save';
+  action = 'save';
   // language: string = 'en';
   // description: Array<any> = []
   languages = [];
@@ -42,7 +42,7 @@ export class AddPageComponent implements OnInit {
   currentLanguage = localStorage.getItem('lang');
 
   isCodeExists = false;
-  message: string = '';
+  message = '';
   public scrollbarOptions = { axis: 'y', theme: 'minimal-dark' };
 
 
@@ -57,13 +57,13 @@ export class AddPageComponent implements OnInit {
       ['fontsize', ['fontname', 'fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'height']],
       ['insert', ['table', 'link', 'video']],
-      ['customButtons', ['testBtn']]
+      ['customButtons', ['testBtn']],
     ],
 
     buttons: {
-      'testBtn': this.customButton.bind(this)
+      testBtn: this.customButton.bind(this),
     },
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times'],
   };
   constructor(
     private crudService: CrudService,
@@ -73,7 +73,7 @@ export class AddPageComponent implements OnInit {
     private dialogService: NbDialogService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
 
   }
@@ -136,8 +136,8 @@ export class AddPageComponent implements OnInit {
           title: [''],
           metaDescription: [''],
           name: ['', [Validators.required]],
-          friendlyUrl: ['', [Validators.required]]
-        })
+          friendlyUrl: ['', [Validators.required]],
+        }),
       );
     });
   }
@@ -177,7 +177,7 @@ export class AddPageComponent implements OnInit {
 
   public findInvalidControls() {
     const invalid = [];
-    console.log(this.form.controls)
+    console.log(this.form.controls);
     const controls = this.form.controls;
     for (const name in controls) {
       // console.log(name)
@@ -186,7 +186,7 @@ export class AddPageComponent implements OnInit {
         invalid.push(name);
       }
     }
-    console.log(invalid)
+    console.log(invalid);
     if (invalid.length > 0) {
       this.toastr.error(this.translate.instant('COMMON.FILL_REQUIRED_FIELDS'));
     }
@@ -213,7 +213,7 @@ export class AddPageComponent implements OnInit {
   }
 
   focusOutFunction(event) {
-    console.log(event)
+    console.log(event);
     const code = event.target.value.trim();
     this.crudService.get('/v1/private/content/page/' + code + '/exists')
       .subscribe(res => {
@@ -222,7 +222,7 @@ export class AddPageComponent implements OnInit {
   }
   urlTitle(event, index) {
     (<FormArray>this.form.get('descriptions')).at(index).patchValue({
-      friendlyUrl: slugify(event)
+      friendlyUrl: slugify(event),
     });
   }
 
@@ -235,13 +235,13 @@ export class AddPageComponent implements OnInit {
     // this.loadingList = true;
 
     //manouver resulting object
-    var object = this.form.value;
+    const object = this.form.value;
 
     //remove un necessary
     delete object.selectedLanguage;
 
 
-    console.log(object)
+    console.log(object);
 
 
 
@@ -282,9 +282,9 @@ export class AddPageComponent implements OnInit {
       tooltip: 'Gallery',
       container: '.note-editor',
       className: 'note-btn',
-      click: function () {
+      click() {
         me.dialogService.open(ImageBrowserComponent, {}).onClose.subscribe(name => name && context.invoke('editor.pasteHTML', '<img src="' + name + '">'));
-      }
+      },
     });
     return button.render();
   }

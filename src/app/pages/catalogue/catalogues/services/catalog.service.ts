@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { CrudService } from '../../../shared/services/crud.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CatalogService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
 
@@ -35,7 +35,7 @@ export class CatalogService {
 
   checkCatalogCode(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v1/private/catalog/unique`, params);
   }

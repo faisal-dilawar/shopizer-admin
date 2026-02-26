@@ -42,14 +42,14 @@ export class ImagesComponent implements OnInit {
         deleteFile: '/v1/private/content/images/remove',
         createFolder: 'api/directory',//not supported
         renameFile: '/v1/private/content/images/rename',
-        searchFiles: 'api/search'//not supported
+        searchFiles: 'api/search',//not supported
       },
       options: {
         allowFolderDownload: DownloadModeEnum.DOWNLOAD_DISABLED,
-        showFilesInsideTree: true
-      }
+        showFilesInsideTree: true,
+      },
     };
-    this.tree = new TreeModel(treeConfig)
+    this.tree = new TreeModel(treeConfig);
 
 
   }
@@ -60,7 +60,7 @@ export class ImagesComponent implements OnInit {
     const token: string = this.tokenService.getToken();
 
     if (token) {
-      xhook.before(function (request) {
+      xhook.before(function(request) {
         request.headers['Authorization'] = 'Bearer ' + token;
       });
     }

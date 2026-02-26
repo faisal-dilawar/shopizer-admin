@@ -12,8 +12,8 @@ import { ConfigService } from '../../shared/services/config.service';
 import { forkJoin } from 'rxjs';
 import { Description } from '../../shared/models/description';
 
-declare var jquery: any;
-declare var $: any;
+declare let jquery: any;
+declare let $: any;
 @Component({
   selector: 'add-box',
   templateUrl: './add-box.component.html',
@@ -29,20 +29,20 @@ export class AddBoxComponent implements OnInit {
 
   uniqueCode: string;//identifier fromroute
   isCodeExists = false;
-  action: any = 'save'
+  action: any = 'save';
 
   //default selected lang
   defaultLanguage = localStorage.getItem('lang');
   //changed from seo section
   currentLanguage = localStorage.getItem('lang');
   uploadData = new FormData();
-  description: Array<any> = []
+  description: Array<any> = [];
   page = {
     visible: false,
     mainmenu: false,
     code: '',
     order: '',
-  }
+  };
   config = {
     placeholder: '',
     tabsize: 2,
@@ -54,12 +54,12 @@ export class AddBoxComponent implements OnInit {
       ['fontsize', ['fontname', 'fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'height']],
       ['insert', ['table', 'link', 'video']],
-      ['customButtons', ['testBtn']]
+      ['customButtons', ['testBtn']],
     ],
     buttons: {
-      'testBtn': this.customButton.bind(this)
+      testBtn: this.customButton.bind(this),
     },
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times'],
   };
   params = this.param();
   public scrollbarOptions = { axis: 'y', theme: 'minimal-dark' };
@@ -71,13 +71,13 @@ export class AddBoxComponent implements OnInit {
     private configService: ConfigService,
     private dialogService: NbDialogService,
     private activatedRoute: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) { }
 
   param() {
     return {
       store: localStorage.getItem('merchant'),
-      lang: "_all"
+      lang: '_all',
     };
   }
   ngOnInit() {
@@ -130,8 +130,8 @@ export class AddBoxComponent implements OnInit {
           description: [''],
           name: [''],
           title: [''],
-          id: 0
-        })
+          id: 0,
+        }),
       );
     });
   }
@@ -159,7 +159,7 @@ export class AddBoxComponent implements OnInit {
               language: description.language,
               description: description.description,
               name: description.name,
-              title: description.title
+              title: description.title,
             });
           }
         });
@@ -185,7 +185,7 @@ export class AddBoxComponent implements OnInit {
     this.loader = true;
 
     //manouver resulting object
-    var object = this.form.value;
+    const object = this.form.value;
 
     //remove un necessary
     delete object.selectedLanguage;
@@ -196,7 +196,7 @@ export class AddBoxComponent implements OnInit {
      */
     const tmpObj = {
       name: '',
-      friendlyUrl: ''
+      friendlyUrl: '',
     };
     object.descriptions.forEach((el) => {
       if (el.name === '') {
@@ -237,7 +237,7 @@ export class AddBoxComponent implements OnInit {
       this.toastr.error(this.translate.instant('COMMON.FILL_REQUIRED_FIELDS'));
       return;
     }
-    **/
+     **/
     //for debugging
     //console.log(JSON.stringify(categoryObject));
     //return;
@@ -316,9 +316,9 @@ export class AddBoxComponent implements OnInit {
       tooltip: 'Gallery',
       container: '.note-editor',
       className: 'note-btn',
-      click: function () {
+      click() {
         me.dialogService.open(ImageBrowserComponent, {}).onClose.subscribe(name => name && context.invoke('editor.pasteHTML', '<img src="' + name + '">'));
-      }
+      },
     });
     return button.render();
   }

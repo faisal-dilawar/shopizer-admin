@@ -11,7 +11,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../auth/services/auth.service';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GlobalHttpInterceptorService implements HttpInterceptor {
@@ -19,7 +19,7 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
     private toastr: ToastrService,
     private translate: TranslateService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {
   }
 
@@ -46,14 +46,15 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
           }
           if (error.status !== 404) {
             // this.toastr.error(errorMessage, this.translate.instant('COMMON.ERROR'));
-            if (error.status === 500)
-              this.router.navigate(['/pages/error-500']);
+            if (error.status === 500) {
+this.router.navigate(['/pages/error-500']);
+}
           }
         } else if (error.status === 401) {
           this.authService.logout();
         }
         return throwError(error);
-      })
+      }),
     );
   }
 }

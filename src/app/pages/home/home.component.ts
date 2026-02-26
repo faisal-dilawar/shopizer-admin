@@ -12,11 +12,11 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'ngx-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   loading = false;
-  loadingList: boolean = false;
+  loadingList = false;
   user = {
     userName: '',
     lastAccess: '',
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     postalCode: '',
     country: '',
     defaultLanguage: '',
-    phone: ''
+    phone: '',
   };
   canAccessToOrder: boolean;
   userId;
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    let lang = this.storageService.getLanguage()
+    const lang = this.storageService.getLanguage();
     this.loading = true;
     const store = localStorage.getItem('merchant');
     forkJoin([this.crudService.listCountriesByLanguage(lang), this.userService.getUserProfile(), this.userService.getMerchant(store)])

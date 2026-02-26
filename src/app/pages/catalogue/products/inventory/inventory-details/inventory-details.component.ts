@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'ngx-inventory-details',
   templateUrl: './inventory-details.component.html',
-  styleUrls: ['./inventory-details.component.scss']
+  styleUrls: ['./inventory-details.component.scss'],
 })
 export class InventoryDetailsComponent implements OnInit {
   inventory = {};

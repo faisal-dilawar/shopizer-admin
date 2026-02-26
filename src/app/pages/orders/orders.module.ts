@@ -18,12 +18,12 @@ import { CustomModule } from '../custom-component/custom.module';
     OrderDetailsComponent,
     OrderInvoiceComponent,
     OrderHistoryComponent,
-    OrderTransactionComponent
+    OrderTransactionComponent,
   ],
   entryComponents: [
     OrderInvoiceComponent,
     OrderHistoryComponent,
-    OrderTransactionComponent
+    OrderTransactionComponent,
   ],
   imports: [
     OrdersRoutingModule,
@@ -31,7 +31,7 @@ import { CustomModule } from '../custom-component/custom.module';
     SharedModule,
     NbDialogModule.forChild(),
     MalihuScrollbarModule.forRoot(),
-    CustomModule
-  ]
+    CustomModule,
+  ],
 })
 export class OrdersModule { }

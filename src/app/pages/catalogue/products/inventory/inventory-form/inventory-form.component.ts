@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'ngx-inventory-form',
   templateUrl: './inventory-form.component.html',
-  styleUrls: ['./inventory-form.component.scss']
+  styleUrls: ['./inventory-form.component.scss'],
 })
 export class InventoryFormComponent implements OnInit {
   @Input() inventory;
@@ -83,7 +83,7 @@ export class InventoryFormComponent implements OnInit {
         discountedPrice: [''],
         startDate: [new Date()],
         endDate: [new Date()],
-      })
+      }),
     });
   }
   // private createForm() {

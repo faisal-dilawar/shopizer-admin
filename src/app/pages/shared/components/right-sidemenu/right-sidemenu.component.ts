@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'ngx-right-sidemenu',
   templateUrl: './right-sidemenu.component.html',
-  styleUrls: ['./right-sidemenu.component.scss']
+  styleUrls: ['./right-sidemenu.component.scss'],
 })
 export class RightSidemenuComponent implements OnInit {
   @Input() title: string;

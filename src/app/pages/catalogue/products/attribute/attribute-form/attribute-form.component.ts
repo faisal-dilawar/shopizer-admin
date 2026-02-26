@@ -15,7 +15,7 @@ import { NbDialogRef } from '@nebular/theme';
 @Component({
   selector: 'ngx-attribute-form',
   templateUrl: './attribute-form.component.html',
-  styleUrls: ['./attribute-form.component.scss']
+  styleUrls: ['./attribute-form.component.scss'],
 })
 export class AttributeFormComponent implements OnInit {
   productId: any;
@@ -41,10 +41,10 @@ export class AttributeFormComponent implements OnInit {
     private toastr: ToastrService,
     private translate: TranslateService,
     private errorService: ErrorService,
-    protected ref: NbDialogRef<AttributeFormComponent>
+    protected ref: NbDialogRef<AttributeFormComponent>,
   ) {
     forkJoin([
-      this.optionService.getListOfOptions({}), 
+      this.optionService.getListOfOptions({}),
       this.optionValuesService.getListOfOptionValues({})])
       .subscribe(([optionRes, optionValueRes]) => {
         optionRes.options.forEach((option) => {
@@ -58,14 +58,14 @@ export class AttributeFormComponent implements OnInit {
       });
   };
 
-  
+
   params =  {
       store: this.storageService.getMerchant(),
-      lang: "_all",
+      lang: '_all',
       name: null,
       count: this.perPage,
       page: 0,
-  }
+  };
 
 
 
@@ -96,7 +96,7 @@ export class AttributeFormComponent implements OnInit {
       sortOrder: [0, [Validators.pattern(validators.number)]],
       attributeDefault: [false],
       requiredOption: [false],
-      productAttributeWeight: [0, [Validators.required]]
+      productAttributeWeight: [0, [Validators.required]],
     });
   }
 
@@ -105,20 +105,20 @@ export class AttributeFormComponent implements OnInit {
     if (value !== '') {
       this.form.controls.productAttributeUnformattedPrice.setValue(
         formatMoney(value.replace(/,/g, '')),
-        { emitEvent: false }
+        { emitEvent: false },
       );
     }
   }
 
   fillForm() {
-    let index = this.optionValues.findIndex((a) => a.value === this.attribute.optionValue.code);
+    const index = this.optionValues.findIndex((a) => a.value === this.attribute.optionValue.code);
     let value = null;
     if(this.attribute.optionValue != null) {
       value = this.attribute.optionValue.code;
     }
 
     this.form.patchValue({
-      
+
       option: this.attribute.option.code,
       attributeDisplayOnly: this.attribute.attributeDisplayOnly,
       optionValue: this.attribute.optionValue.code,
@@ -162,7 +162,7 @@ export class AttributeFormComponent implements OnInit {
         });
         this.loading = false;
       }
-     
+
     });
   }
 
@@ -175,19 +175,19 @@ export class AttributeFormComponent implements OnInit {
         //invalid selection, empty list
         //this.optionValues = new Array();
         this.form.controls['optionValue'].markAsTouched();
-        this.form.controls['optionValue'].setErrors({'invalid': true});
+        this.form.controls['optionValue'].setErrors({invalid: true});
         //this.loading = false;
         //this.optionValues.push({ value: '', label: '' });
-        
+
       } else {
         //this.optionValues = new Array();
         //this.loading = false;
         res.optionValues.forEach((optionValue) => {
           this.optionValues.push({ value: optionValue.code, label: optionValue.code });
         });
-        
+
       }
-      
+
     });
 
   }
@@ -204,22 +204,22 @@ export class AttributeFormComponent implements OnInit {
         .subscribe(res => {
           this.loading = false;
           // this.attribute = res;
-          this.errorService.success("PRODUCT_ATTRIBUTES.PRODUCT_ATTRIBUTES_UPDATED");
+          this.errorService.success('PRODUCT_ATTRIBUTES.PRODUCT_ATTRIBUTES_UPDATED');
           this.goToback();
         }, error => {
           this.loading = false;
-          this.errorService.error("ERROR.SYSTEM_ERROR_TEXT", 500);
+          this.errorService.error('ERROR.SYSTEM_ERROR_TEXT', 500);
         });;
     } else {
       this.productAttributesService.createAttribute(this.productId, this.form.value).subscribe(res => {
         this.loading = false;
         // this.attribute = res;
-        
+
         this.toastr.success(this.translate.instant('PRODUCT_ATTRIBUTES.PRODUCT_ATTRIBUTES_UPDATED'));
         this.goToback();
       }, error => {
         this.loading = false;
-        this.errorService.error("ERROR.SYSTEM_ERROR_TEXT", 500);
+        this.errorService.error('ERROR.SYSTEM_ERROR_TEXT', 500);
       });
     }
   }

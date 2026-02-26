@@ -24,12 +24,12 @@ const routes: Routes = [
         component: BrandDetailsComponent,
       },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class BrandsRoutingModule {
 }

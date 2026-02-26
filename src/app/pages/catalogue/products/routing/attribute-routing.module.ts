@@ -23,12 +23,12 @@ const routes: Routes = [
       //   component: AttributeFormComponent,
       // }
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 
 export class AttributeRoutingModule {

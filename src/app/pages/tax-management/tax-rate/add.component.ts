@@ -18,14 +18,14 @@ export class TaxRateAddComponent implements OnInit {
     rate: '',
     compound: '',
     priority: 0,
-    taxClass: ''
-  }
-  loadingList: boolean = false;
-  codeExits: boolean = false;
-  isUpdated: boolean = false;
+    taxClass: '',
+  };
+  loadingList = false;
+  codeExits = false;
+  isUpdated = false;
   taxRateID: any;
-  language: string = 'en'
-  isUpdate: boolean = false;
+  language = 'en';
+  isUpdate = false;
   countryData: Array<any> = [];
   stateData: Array<any> = [];
   taxClassData: Array<any> = [];
@@ -34,7 +34,7 @@ export class TaxRateAddComponent implements OnInit {
     private configService: ConfigService,
     private toastr: ToastrService,
     private router: Router,
-    private taxService: TaxService
+    private taxService: TaxService,
   ) {
     this.getCountry();
     this.getLanguages();
@@ -42,7 +42,7 @@ export class TaxRateAddComponent implements OnInit {
   getLanguages() {
     this.configService.getListOfSupportedLanguages(localStorage.getItem('merchant'))
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
         this.langData = data;
       }, error => {
 
@@ -66,7 +66,7 @@ export class TaxRateAddComponent implements OnInit {
   }
   ngOnInit() {
     if (localStorage.getItem('rateId')) {
-      this.taxRateID = localStorage.getItem('rateId')
+      this.taxRateID = localStorage.getItem('rateId');
       this.getTaxRateDetail();
 
       this.isUpdate = true;
@@ -89,11 +89,11 @@ export class TaxRateAddComponent implements OnInit {
     this.taxService.getTaxRateDetails(this.taxRateID, this.language)
       .subscribe(data => {
         this.loadingList = false;
-        console.log(data)
+        console.log(data);
 
         this.formValue = data;
-        this.formValue.name = data.description.name
-        this.onCountryChange(data.country)
+        this.formValue.name = data.description.name;
+        this.onCountryChange(data.country);
       }, error => {
         this.loadingList = false;
       });
@@ -111,22 +111,22 @@ export class TaxRateAddComponent implements OnInit {
   save() {
     this.loadingList = true;
     console.log(this.formValue);
-    let param = {
+    const param = {
       code: this.formValue.code,
       country: this.formValue.country,
       descriptions: [
-        { description: '', language: this.language, name: this.formValue.name }
+        { description: '', language: this.language, name: this.formValue.name },
       ],
       zone: this.formValue.zone,
       taxClass: this.formValue.taxClass,
       priority: this.formValue.priority,
-      rate: this.formValue.rate
+      rate: this.formValue.rate,
 
-    }
+    };
     this.taxService.addTaxRate(param)
       .subscribe(res => {
         this.loadingList = false;
-        this.toastr.success("Tax rate has been added successfully");
+        this.toastr.success('Tax rate has been added successfully');
         this.router.navigate(['pages/tax-management/rate-list']);
       }, error => {
         this.loadingList = false;
@@ -135,26 +135,26 @@ export class TaxRateAddComponent implements OnInit {
   }
   update() {
     this.loadingList = true;
-    console.log(this.formValue)
-    let param = {
+    console.log(this.formValue);
+    const param = {
       code: this.formValue.code,
       country: this.formValue.country,
       descriptions: [
-        { description: '', language: this.language, name: this.formValue.name }
+        { description: '', language: this.language, name: this.formValue.name },
       ],
       zone: this.formValue.zone,
       taxClass: this.formValue.taxClass,
       priority: this.formValue.priority,
-      rate: this.formValue.rate
-    }
+      rate: this.formValue.rate,
+    };
     this.taxService.updateTaxRate(this.taxRateID, param)
       .subscribe(res => {
         this.loadingList = false;
-        this.toastr.success("Tax rate has been updated successfully");
+        this.toastr.success('Tax rate has been updated successfully');
         this.router.navigate(['pages/tax-management/rate-list']);
       }, error => {
         this.loadingList = false;
-        this.toastr.success("Tax classes has been updated fail");
+        this.toastr.success('Tax classes has been updated fail');
       });
   }
   goBack() {

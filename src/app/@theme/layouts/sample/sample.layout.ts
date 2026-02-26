@@ -56,7 +56,7 @@ import { StateService } from '../../../@core/utils';
                    [end]="sidebar.id !== 'end'">
       </nb-sidebar>
     </nb-layout>
-  `
+  `,
 })
 export class SampleLayoutComponent implements OnDestroy {
 

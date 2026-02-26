@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    public configService: ConfigService
+    public configService: ConfigService,
   ) {
     this.configService.getListOfSystemSupportedLanguages();
     if (!localStorage.getItem('lang')) {

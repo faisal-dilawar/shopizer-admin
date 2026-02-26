@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [
     { title: 'HEADER.PROFILE', tag: 'profile' },
-    { title: 'HEADER.LOGOUT', tag: 'logout' }
+    { title: 'HEADER.LOGOUT', tag: 'logout' },
   ];
   localedMenu = [...this.userMenu];
 
@@ -49,8 +49,8 @@ export class HeaderComponent implements OnInit {
       }
       // language events
       if (el.tag === 'language') {
-        let lang = el.item.title
-        let langCode = this.langMap[el.item.title];
+        const lang = el.item.title;
+        const langCode = this.langMap[el.item.title];
         this.setLanguage(langCode);
       }
     });
@@ -77,18 +77,18 @@ export class HeaderComponent implements OnInit {
   }
 
   translateLang(key) {
-    let translated =  this.translate.instant("LANG." + key);
+    const translated =  this.translate.instant('LANG.' + key);
     return translated;
   }
 
-  getLanguageArray () {
+  getLanguageArray() {
     environment.client.language.array.forEach(lg => {
       this.langMap[this.translateLang(lg)] = lg;
       this.languages = [...this.languages, {title: this.translateLang(lg)}];
     });
   }
 
-  setLanguage (lang) {
+  setLanguage(lang) {
     localStorage.setItem('lang', lang);
     this.translate.setDefaultLang(lang);
     this.translate.use(lang);

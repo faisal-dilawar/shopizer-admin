@@ -32,9 +32,9 @@ export class ButtonRenderUserComponent {
         context: {
           title: '',
           text: '',
-          actionText : this.translate.instant('USER_FORM.CANT_UPDATE_YOUR_PROFILE')
-          }
-        })
+          actionText : this.translate.instant('USER_FORM.CANT_UPDATE_YOUR_PROFILE'),
+          },
+        });
     } else {
       this.userService.updateUserEnabled(this.rowData)
         .subscribe(res => {

@@ -12,7 +12,7 @@ import { SharedService } from '../services/shared.service';
 @Component({
   selector: 'ngx-origin',
   templateUrl: './origin.component.html',
-  styleUrls: ['./origin.component.scss']
+  styleUrls: ['./origin.component.scss'],
 })
 export class OriginComponent implements OnInit {
   shipOriginForm = {
@@ -20,10 +20,10 @@ export class OriginComponent implements OnInit {
     city: '',
     country: '',
     stateProvince: '',
-    postalCode: ''
-  }
+    postalCode: '',
+  };
   visible: any;
-  loadingList: boolean = false;
+  loadingList = false;
   countries = [];
   states = [];
   stores: Array<any> = [];
@@ -36,14 +36,14 @@ export class OriginComponent implements OnInit {
     private translate: TranslateService,
 
     private storeService: StoreService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {
     this.isSuperAdmin = this.storageService.getUserRoles().isSuperadmin;
-    this.selectedStore = this.storageService.getMerchant()
+    this.selectedStore = this.storageService.getMerchant();
   }
 
   ngOnInit() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -61,16 +61,16 @@ export class OriginComponent implements OnInit {
   onSubmit() {
     this.loadingList = true;
 
-    let param = {
+    const param = {
       address: this.shipOriginForm.address,
       city: this.shipOriginForm.city,
       postalCode: this.shipOriginForm.postalCode,
       country: this.shipOriginForm.country,
-      stateProvince: this.shipOriginForm.stateProvince
+      stateProvince: this.shipOriginForm.stateProvince,
     };
     this.sharedService.saveOrigin(this.selectedStore, param)
       .subscribe(res => {
-        localStorage.setItem('originActive', this.visible)
+        localStorage.setItem('originActive', this.visible);
         this.loadingList = false;
         this.toastr.success(this.translate.instant('SHIPPING.ORIGIN_UPDATE'));
       }, error => {
@@ -83,7 +83,7 @@ export class OriginComponent implements OnInit {
     this.sharedService.getCountries()
       .subscribe(data => {
         data.forEach((item) => {
-          this.countries.push({ 'code': item.id, 'label': item.name, 'countryCode': item.code })
+          this.countries.push({ code: item.id, label: item.name, countryCode: item.code });
         });
       }, error => {
       });
@@ -94,7 +94,7 @@ export class OriginComponent implements OnInit {
 
         if (data.length > 0) {
           data.forEach((item) => {
-            this.states.push({ 'code': item.id, 'label': item.name, 'stateCode': item.code })
+            this.states.push({ code: item.id, label: item.name, stateCode: item.code });
           });
           if (flag == 1) {
             this.shipOriginForm.stateProvince = data[0].code;
@@ -115,7 +115,7 @@ export class OriginComponent implements OnInit {
         this.loadingList = false;
         this.shipOriginForm = data;
         // console.log(localStorage.getItem('originActive'));
-        this.visible = localStorage.getItem('originActive') == 'true' ? true : false
+        this.visible = localStorage.getItem('originActive') == 'true' ? true : false;
         this.getCountry();
         this.getState(0);
       }, error => {
@@ -125,8 +125,8 @@ export class OriginComponent implements OnInit {
           city: '',
           country: '',
           stateProvince: '',
-          postalCode: ''
-        }
+          postalCode: '',
+        };
         this.getCountry();
         this.getState(0);
       });
@@ -134,7 +134,7 @@ export class OriginComponent implements OnInit {
   }
   onSelectStore(e) {
     this.selectedStore = e.value;
-    this.getShippingOrigin()
+    this.getShippingOrigin();
   }
 
 }

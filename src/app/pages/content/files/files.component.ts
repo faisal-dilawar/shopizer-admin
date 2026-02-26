@@ -14,7 +14,7 @@ import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 export class FilesComponent {
   name: string;
   copyText(val: string) {
-    let selBox = document.createElement('textarea');
+    const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
     selBox.style.top = '0';
@@ -74,7 +74,7 @@ export class FilesComponent {
     private _lightbox: Lightbox,
     private mScrollbarService: MalihuScrollbarService,
   ) {
-    this.getFiles()
+    this.getFiles();
   }
   // onClickAction(event) {
   //   switch (event.action) {
@@ -93,8 +93,8 @@ export class FilesComponent {
           const caption = this.data[i].name;
           // const thumb = this.uploadedFiles[i].path + this.uploadedFiles[i].name;
           const album = {
-            src: src,
-            caption: caption,
+            src,
+            caption,
             // thumb: thumb
           };
           this._albums.push(album);
@@ -109,22 +109,22 @@ export class FilesComponent {
   //   this.files = event.srcElement.files;
   // }
   handleUpload = (files: any) => {
-    console.log(files)
+    console.log(files);
     this.loadingList = true;
     files.addedFiles.forEach(element => {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = (e: any) => {
         this.data.push({
           name: element.name,
           contentType: 1,
-          path: e.target.result
+          path: e.target.result,
         });
-      }
+      };
       reader.readAsDataURL(element);
     });
-    for (var i = 0; i < files.addedFiles.length; i++) {
+    for (let i = 0; i < files.addedFiles.length; i++) {
 
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append('file', files.addedFiles[i]);
       this.crudService.post('/v1/private/file', formData)
         .subscribe(data => {
@@ -136,7 +136,7 @@ export class FilesComponent {
         });
     }
 
-  }
+  };
   // uploadFiles() {
   //   for (var i = 0; i < this.files.length; i++) {
   //     let formData = new FormData();
@@ -178,7 +178,7 @@ export class FilesComponent {
           this.loadingList = false;
         }
       });
-      **/
+     **/
   }
   ngAfterViewInit() {
     this.mScrollbarService.initScrollbar('.file_listing_scroll', { axis: 'y', theme: 'minimal-dark', scrollButtons: { enable: true } });

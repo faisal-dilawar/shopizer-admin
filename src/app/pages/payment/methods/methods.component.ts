@@ -9,7 +9,7 @@ import { error } from '@angular/compiler/src/util';
 @Component({
   selector: 'ngx-payment-methods',
   templateUrl: './methods.component.html',
-  styleUrls: ['./methods.component.scss']
+  styleUrls: ['./methods.component.scss'],
 })
 export class PaymentMethodsComponent implements OnInit {
   loadingList = false;
@@ -18,9 +18,9 @@ export class PaymentMethodsComponent implements OnInit {
     private paymentService: PaymentService,
     private router: Router,
     private translate: TranslateService,
-    private sanitizer:DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {
-    this.getPaymentMethodsList()
+    this.getPaymentMethodsList();
   }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class PaymentMethodsComponent implements OnInit {
   }
 
   transformImage(img){
-    let encoded = 'data:image/png;base64,'+ img
+    const encoded = 'data:image/png;base64,'+ img;
     return this.sanitizer.bypassSecurityTrustResourceUrl(encoded);
   }
 

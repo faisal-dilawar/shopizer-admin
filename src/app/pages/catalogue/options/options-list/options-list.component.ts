@@ -13,7 +13,7 @@ import { StoreService } from '../../../store-management/services/store.service';
 @Component({
   selector: 'ngx-options-list',
   templateUrl: './options-list.component.html',
-  styleUrls: ['./options-list.component.scss']
+  styleUrls: ['./options-list.component.scss'],
 })
 export class OptionsListComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
@@ -25,7 +25,7 @@ export class OptionsListComponent implements OnInit {
   perPage = 15;
   currentPage = 1;
   totalCount;
-  searchValue: string = '';
+  searchValue = '';
   stores: Array<any> = [];
   selectedStore: String = '';
   params = this.loadParams();
@@ -38,7 +38,7 @@ export class OptionsListComponent implements OnInit {
     private storageService: StorageService,
     private storeService: StoreService,
   ) {
-    this.getStoreList()
+    this.getStoreList();
   }
 
   ngOnInit() {
@@ -49,11 +49,11 @@ export class OptionsListComponent implements OnInit {
       store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -87,11 +87,11 @@ export class OptionsListComponent implements OnInit {
         sort: true,
         custom: [
           { name: 'edit', title: '<i class="nb-edit"></i>' },
-          { name: 'remove', title: '<i class="nb-trash"></i>' }
+          { name: 'remove', title: '<i class="nb-trash"></i>' },
         ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
@@ -118,16 +118,14 @@ export class OptionsListComponent implements OnInit {
             });
             const name = description && description.name ? description.name : '';
             return name;
-          }
+          },
         },
         type: {
-          title: "Type",
+          title: 'Type',
           type: 'string',
           filter: false,
-          valuePrepareFunction: (type) => {
-            return this.translate.instant('COMMON.' + type);
-          }
-        }
+          valuePrepareFunction: (type) => this.translate.instant('COMMON.' + type),
+        },
       },
     };
   }
@@ -175,9 +173,9 @@ export class OptionsListComponent implements OnInit {
     this.getList();
   }
   onSearch(value) {
-    this.params["name"] = value;
+    this.params['name'] = value;
     this.searchValue = value;
-    this.getList()
+    this.getList();
   }
   resetSearch() {
     this.params = this.loadParams();
@@ -185,7 +183,7 @@ export class OptionsListComponent implements OnInit {
     this.getList();
   }
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getList();
   }
   onClickAction(event) {
@@ -194,8 +192,8 @@ export class OptionsListComponent implements OnInit {
         this.onEdit(event);
         break;
       case 'remove':
-        this.deleteRecord(event)
-        break
+        this.deleteRecord(event);
+        break;
     }
   }
   onEdit(event) {

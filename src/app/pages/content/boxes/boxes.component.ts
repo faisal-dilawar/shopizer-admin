@@ -21,7 +21,7 @@ export class BoxesComponent {
   stores: Array<any> = [];
   loadingList = false;
   params = this.loadParams();
-  settings = {}
+  settings = {};
   // request params
 
   source: LocalDataSource = new LocalDataSource();
@@ -34,7 +34,7 @@ export class BoxesComponent {
     private storageService: StorageService,
     private translate: TranslateService,
     private toastr: ToastrService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
   ) {
     this.getStoreList();
     this.translate.onLangChange.subscribe((lang) => {
@@ -50,12 +50,12 @@ export class BoxesComponent {
       store: this.storageService.getMerchant(),
       lang: '_all',
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
 
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -68,7 +68,7 @@ export class BoxesComponent {
     this.crudService.get('/v1/private/content/boxes/', this.params)
       .subscribe(data => {
         this.source = data.items;
-        this.totalCount = data.recordsTotal * data.totalPages
+        this.totalCount = data.recordsTotal * data.totalPages;
       }, error => {
       });
     this.setSettings();
@@ -86,13 +86,13 @@ export class BoxesComponent {
         custom: [
           {
             name: 'edit',
-            title: '<i class="nb-edit"></i>'
+            title: '<i class="nb-edit"></i>',
           },
           {
             name: 'delete',
-            title: '<i class="nb-trash"></i>'
-          }
-        ]
+            title: '<i class="nb-trash"></i>',
+          },
+        ],
       },
       columns: {
         id: {
@@ -109,13 +109,13 @@ export class BoxesComponent {
           valuePrepareFunction: (cell, row) => {
             // console.log(row.descriptions)
             if (this.params.lang == '_all') {
-              return row.descriptions[0].name
+              return row.descriptions[0].name;
             } else {
-              let value = row.descriptions.find((a) => a.language == this.params.lang);
-              return value.name
+              const value = row.descriptions.find((a) => a.language == this.params.lang);
+              return value.name;
             }
-          }
-        }
+          },
+        },
       },
     };
 
@@ -146,10 +146,10 @@ export class BoxesComponent {
         break;
       }
     }
-    this.getBox()
+    this.getBox();
   }
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getBox();
   }
   onClickAction(event) {
@@ -167,7 +167,7 @@ export class BoxesComponent {
   onDelete(event) {
 
     this.dialogService.open(ShowcaseDialogComponent, {
-      context: 'Do you really want to remove this entity?'
+      context: 'Do you really want to remove this entity?',
       // context: {
       //   title: 'Are you sure!',
       //   body: 'Do you really want to remove this entity?'

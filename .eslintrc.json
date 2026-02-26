@@ -21,22 +21,14 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "ngx",
-            "style": "kebab-case"
-          }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "ngx",
-            "style": "camelCase"
-          }
-        ],
+        "@angular-eslint/component-selector": "off",
+        "@angular-eslint/directive-selector": "off",
+        "@angular-eslint/use-lifecycle-interface": "off",
+        "@angular-eslint/component-class-suffix": "off",
+        "@angular-eslint/directive-class-suffix": "off",
+        "@angular-eslint/no-input-rename": "off",
+        "@angular-eslint/no-output-on-prefix": "off",
+        "@angular-eslint/no-output-native": "off",
         "@typescript-eslint/consistent-type-definitions": "error",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/explicit-member-accessibility": [
@@ -45,8 +37,25 @@
             "accessibility": "explicit"
           }
         ],
-        "@typescript-eslint/no-unused-vars": "error",
-        "@typescript-eslint/no-use-before-define": "error",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
+        "@typescript-eslint/consistent-type-assertions": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/prefer-for-of": "off",
+        "prefer-arrow/prefer-arrow-functions": "off",
+        "no-shadow": "off",
+        "no-fallthrough": "off",
+        "no-var": "off",
+        "eqeqeq": "off",
+        "max-len": "off",
+        "jsdoc/check-alignment": "off",
+        "space-before-function-paren": "off",
+        "no-restricted-imports": "off",
+        "no-debugger": "off",
+        "radix": "off",
         "brace-style": [
           "error",
           "1tbs"

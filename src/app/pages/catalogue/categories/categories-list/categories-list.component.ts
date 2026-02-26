@@ -16,13 +16,13 @@ import { ListingService } from '../../../shared/services/listing.service';
 @Component({
   selector: 'ngx-categories-list',
   templateUrl: './categories-list.component.html',
-  styleUrls: ['./categories-list.component.scss']
+  styleUrls: ['./categories-list.component.scss'],
 })
 export class CategoriesListComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   listingService: ListingService;
   loadingList = false;
-  loading: boolean = false;
+  loading = false;
   categories = [];
   settings = {};
 
@@ -31,7 +31,7 @@ export class CategoriesListComponent implements OnInit {
   currentPage = 1; //start base
   totalCount;
   roles;
-  searchValue: string = '';
+  searchValue = '';
 
   // request params
   params = this.loadParams();
@@ -56,7 +56,7 @@ export class CategoriesListComponent implements OnInit {
       lang: this.storageService.getLanguage(),
       store: this.storageService.getMerchant(),
       count: this.perPage,
-      page: 1
+      page: 1,
     };
   }
 
@@ -66,7 +66,7 @@ export class CategoriesListComponent implements OnInit {
       this.params = newParams;
       this.fetchTableData();
     }
-  
+
     private resetList() {
       this.currentPage = 1;//back to page 1
       this.params = this.loadParams();
@@ -108,13 +108,13 @@ export class CategoriesListComponent implements OnInit {
   //specific to category
   getList() {
     this.categories = [];
-    this.fetchTableData()  
+    this.fetchTableData();
     this.setSettings();
   }
 
   fetchTableData(){
     this.loadingList = true;
-    var page = this.currentPage -1;
+    const page = this.currentPage -1;
     this.params.page = page;
     this.categoryService.getListOfCategories(this.params)
       .subscribe(categories => {
@@ -140,11 +140,11 @@ export class CategoriesListComponent implements OnInit {
         sort: true,
         custom: [
           { name: 'details', title: '<i class="nb-edit"></i>' },
-          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') }
+          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') },
         ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
@@ -160,7 +160,7 @@ export class CategoriesListComponent implements OnInit {
         name: {
           title: this.translate.instant('CATEGORY.CATEGORY_NAME'),
           type: 'string',
-          filter: true
+          filter: true,
         },
         code: {
           title: this.translate.instant('COMMON.CODE'),
@@ -171,9 +171,7 @@ export class CategoriesListComponent implements OnInit {
           title: this.translate.instant('CATEGORY.PARENT'),
           type: 'string',
           filter: false,
-          valuePrepareFunction: (parent) => {
-            return parent ? parent.code : 'root';
-          }
+          valuePrepareFunction: (parent) => parent ? parent.code : 'root',
         },
         visible: {
           filter: false,
@@ -249,7 +247,7 @@ export class CategoriesListComponent implements OnInit {
       return;
     }
 
-    this.params["name"] = query;
+    this.params['name'] = query;
     this.getList();
     this.searchValue = query;
 

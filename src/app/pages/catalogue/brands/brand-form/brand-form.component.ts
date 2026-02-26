@@ -12,7 +12,7 @@ import { slugify } from '../../../shared/utils/slugifying';
 @Component({
   selector: 'ngx-brand-form',
   templateUrl: './brand-form.component.html',
-  styleUrls: ['./brand-form.component.scss']
+  styleUrls: ['./brand-form.component.scss'],
 })
 export class BrandFormComponent implements OnInit {
   @Input() brand;
@@ -32,9 +32,9 @@ export class BrandFormComponent implements OnInit {
       ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
       ['fontsize', ['fontname', 'fontsize', 'color']],
       ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']]
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
     ],
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times'],
   };
   isCodeUnique = true;
 
@@ -85,7 +85,7 @@ export class BrandFormComponent implements OnInit {
           title: [''],
           keyWords: [''],
           metaDescription: [''],
-        })
+        }),
       );
     });
   }
@@ -143,7 +143,7 @@ export class BrandFormComponent implements OnInit {
 
   changeName(event, index) {
     (<FormArray>this.form.get('descriptions')).at(index).patchValue({
-      friendlyUrl: slugify(event)
+      friendlyUrl: slugify(event),
     });
   }
 
@@ -160,7 +160,7 @@ export class BrandFormComponent implements OnInit {
     // save important values for filling empty field in result object
     const tmpObj = {
       name: '',
-      friendlyUrl: ''
+      friendlyUrl: '',
     };
     brandObject.descriptions.forEach((el) => {
       if (tmpObj.name === '' && el.name !== '') {

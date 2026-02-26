@@ -24,12 +24,12 @@ import { AddVariationsComponent } from './variations/add-variations.component';
     OptionsSetListComponent,
     OptionSetComponent,
     VariationsListComponent,
-    AddVariationsComponent
+    AddVariationsComponent,
   ],
   imports: [
     OptionsRoutingModule,
     SharedModule,
-    CustomModule
-  ]
+    CustomModule,
+  ],
 })
 export class OptionsModule { }

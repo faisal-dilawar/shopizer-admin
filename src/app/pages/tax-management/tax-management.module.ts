@@ -16,7 +16,7 @@ import { CustomModule } from '../custom-component/custom.module';
     TaxClassListComponent,
     TaxClassAddComponent,
     TaxRateListComponent,
-    TaxRateAddComponent
+    TaxRateAddComponent,
   ],
   entryComponents: [
 
@@ -27,6 +27,6 @@ import { CustomModule } from '../custom-component/custom.module';
     CustomModule,
     NbDialogModule.forChild(),
     MalihuScrollbarModule.forRoot(),
-  ]
+  ],
 })
 export class TaxManagementModule { }

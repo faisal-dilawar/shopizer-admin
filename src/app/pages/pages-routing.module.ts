@@ -14,65 +14,65 @@ const routes: Routes = [{
   children: [
     {
       path: 'home',
-      loadChildren: 'app/pages/home/home.module#HomeModule'
+      loadChildren: 'app/pages/home/home.module#HomeModule',
     },
     {
       path: 'orders',
       // canActivate: [OrdersGuard],
-      loadChildren: 'app/pages/orders/orders.module#OrdersModule'
+      loadChildren: 'app/pages/orders/orders.module#OrdersModule',
     },
     {
       path: 'user-management',
-      loadChildren: 'app/pages/user-management/user-management.module#UserManagementModule'
+      loadChildren: 'app/pages/user-management/user-management.module#UserManagementModule',
     },
     {
       path: 'store-management',
-      loadChildren: 'app/pages/store-management/store-management.module#StoreManagementModule'
+      loadChildren: 'app/pages/store-management/store-management.module#StoreManagementModule',
     },
     {
       path: 'catalogue',
       canActivate: [SuperadminStoreRetailCatalogueGuard],
-      loadChildren: 'app/pages/catalogue/catalogue.module#CatalogueModule'
+      loadChildren: 'app/pages/catalogue/catalogue.module#CatalogueModule',
     },
     {
       path: 'content',
-      loadChildren: 'app/pages/content/content.module#ContentModule'
+      loadChildren: 'app/pages/content/content.module#ContentModule',
     },
     {
       path: 'shipping',
-      loadChildren: 'app/pages/shipping/shipping.module#ShippingModule'
+      loadChildren: 'app/pages/shipping/shipping.module#ShippingModule',
     },
     {
       path: 'payment',
-      loadChildren: 'app/pages/payment/payment.module#PaymentModule'
+      loadChildren: 'app/pages/payment/payment.module#PaymentModule',
     },
     {
       path: 'tax-management',
-      loadChildren: 'app/pages/tax-management/tax-management.module#TaxManagementModule'
+      loadChildren: 'app/pages/tax-management/tax-management.module#TaxManagementModule',
     },
     {
       path: 'customer',
-      loadChildren: 'app/pages/customers/customer.module#CustomersModule'
+      loadChildren: 'app/pages/customers/customer.module#CustomersModule',
     },
     {
       path: 'error-500',
-      component: FiveHundredComponent
+      component: FiveHundredComponent,
     },
     {
       path: '',
       redirectTo: 'home',
-      pathMatch: 'full'
+      pathMatch: 'full',
     },
     {
       path: '**',
-      component: NotFoundComponent
-    }
-  ]
+      component: NotFoundComponent,
+    },
+  ],
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PagesRoutingModule {
 }

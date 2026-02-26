@@ -25,11 +25,11 @@ export interface TreeNode {
 @Component({
   selector: 'ngx-product-attributes',
   templateUrl: './product-attributes.component.html',
-  styleUrls: ['./product-attributes.component.scss']
+  styleUrls: ['./product-attributes.component.scss'],
 })
 export class ProductAttributesComponent implements OnInit {
 
-  id : any;
+  id: any;
   loaded = false;
   loading = false;
   loadingList = false;
@@ -48,7 +48,7 @@ export class ProductAttributesComponent implements OnInit {
   totalCount;
 
   params = this.loadParams();
-  public input: string = '<input type="checkbox"></input>';
+  public input = '<input type="checkbox"></input>';
   constructor(
     private productAttributesService: ProductAttributesService,
     private productService: ProductService,
@@ -60,7 +60,7 @@ export class ProductAttributesComponent implements OnInit {
     private storageService: StorageService,
     private dialogService: NbDialogService,
     private router: Router,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
   ) {
     this.optionService.getListOfOptions({ count: 1000 })
       .subscribe(res => {
@@ -70,7 +70,7 @@ export class ProductAttributesComponent implements OnInit {
   loadParams() {
     return {
       store: this.storageService.getMerchant(),
-      lang: "_all",
+      lang: '_all',
       count: this.perPage,
       page: 0,
     };
@@ -83,7 +83,7 @@ export class ProductAttributesComponent implements OnInit {
     this.id = this.productService.getProductIdRoute(this.router,this.location);
 
     //specify add image url to image component
-    let el = document.getElementById('tabs');
+    const el = document.getElementById('tabs');
     el.scrollIntoView();
     this.getList();
 
@@ -103,14 +103,12 @@ export class ProductAttributesComponent implements OnInit {
 
 
   getList() {
-    var page = this.currentPage -1;
+    const page = this.currentPage -1;
     this.params.page = page;
     this.loading = true;
     this.productAttributesService.getListOfProductsAttributes(this.id, this.params)
       .subscribe(res => {
-        var tempArray = res.attributes.filter((value) => {
-          return value.attributeDisplayOnly === false;
-        });
+        const tempArray = res.attributes.filter((value) => value.attributeDisplayOnly === false);
         if (tempArray.length !== 0) {
           this.source.load(tempArray);
         } else {
@@ -133,36 +131,32 @@ export class ProductAttributesComponent implements OnInit {
         sort: true,
         custom: [
           { name: 'edit', title: '<i class="nb-edit"></i>' },
-          { name: 'remove', title: '<i class="nb-trash"></i>' }
+          { name: 'remove', title: '<i class="nb-trash"></i>' },
         ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
           title: this.translate.instant('COMMON.ID'),
           type: 'number',
           editable: false,
-          filter: false
+          filter: false,
         },
         option: {
           title: this.translate.instant('PRODUCT_ATTRIBUTES.OPTION_NAME'),
           type: 'string',
           editable: false,
           filter: false,
-          valuePrepareFunction: (name) => {
-            return name.code;
-          }
+          valuePrepareFunction: (name) => name.code,
         },
         optionValue: {
           title: this.translate.instant('PRODUCT_ATTRIBUTES.PRODUCT_OPTION'),
           type: 'string',
           editable: false,
           filter: false,
-          valuePrepareFunction: (name) => {
-            return name.code;
-          }
+          valuePrepareFunction: (name) => name.code,
         },
         /**
         attributeDisplayOnly: {
@@ -176,7 +170,7 @@ export class ProductAttributesComponent implements OnInit {
              type: 'checkbox'
            }
          },
-        **/
+         **/
        /**
         attributeDisplayOnly: {
           title: this.translate.instant('PRODUCT_ATTRIBUTES.DISPLAY_ONLY'),
@@ -189,15 +183,15 @@ export class ProductAttributesComponent implements OnInit {
           title: this.translate.instant('PRODUCT_ATTRIBUTES.PRICE'),
           type: 'string',
           editable: false,
-          filter: false
+          filter: false,
         },
         sortOrder: {
           title: this.translate.instant('COMMON.ORDER'),
           type: 'string',
           editable: false,
-          filter: false
-        }
-      }
+          filter: false,
+        },
+      },
     };
   }
 
@@ -235,10 +229,10 @@ export class ProductAttributesComponent implements OnInit {
         this.dialogService.open(AttributeFormComponent, {
           context: {
             productId: this.id,
-            attributeId: event.data.id
-          }
+            attributeId: event.data.id,
+          },
         }).onClose.subscribe(res => {
-          this.getList()
+          this.getList();
         });
         break;
       case 'remove':
@@ -250,10 +244,10 @@ export class ProductAttributesComponent implements OnInit {
   onClickAdd() {
     this.dialogService.open(AttributeFormComponent, {
       context: {
-        productId: this.id
-      }
+        productId: this.id,
+      },
     }).onClose.subscribe(res => {
-      this.getList()
+      this.getList();
     });
   }
   removeAttribute(id) {
@@ -275,5 +269,5 @@ export class ProductAttributesComponent implements OnInit {
   }
 
 
-  
+
 }

@@ -14,7 +14,7 @@ import { ListingService } from '../../../shared/services/listing.service';
 @Component({
   selector: 'ngx-types-list',
   templateUrl: './types-list.component.html',
-  styleUrls: ['./types-list.component.scss']
+  styleUrls: ['./types-list.component.scss'],
 })
 export class TypesListComponent implements OnInit {
 
@@ -47,7 +47,7 @@ export class TypesListComponent implements OnInit {
       store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
 
@@ -59,7 +59,7 @@ export class TypesListComponent implements OnInit {
   }
 
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -78,11 +78,11 @@ export class TypesListComponent implements OnInit {
         sort: true,
         custom: [
           { name: 'edit', title: '<i class="nb-edit"></i>' },
-          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') }
+          { name: 'remove', title: this._sanitizer.bypassSecurityTrustHtml('<i class="nb-trash"></i>') },
         ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
@@ -181,7 +181,7 @@ export class TypesListComponent implements OnInit {
 
 
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getList();
   }
 
@@ -192,8 +192,8 @@ export class TypesListComponent implements OnInit {
         this.onEdit(event);
         break;
       case 'remove':
-        this.deleteRecord(event)
-        break
+        this.deleteRecord(event);
+        break;
     }
   }
   onEdit(event) {

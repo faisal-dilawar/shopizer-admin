@@ -1,7 +1,7 @@
 import { Directive, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[ngxValidateNumber]'
+  selector: '[ngxValidateNumber]',
 })
 export class ValidateNumberDirective {
 

@@ -10,13 +10,15 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'ngx-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss']
+  styleUrls: ['./change-password.component.scss'],
 })
 export class ChangePasswordComponent implements OnInit {
-  
+
   private _user: User;
 
-  get user(): User { return this._user; }
+  get user(): User {
+ return this._user;
+}
   form: FormGroup;
   loader = false;
   //user: User;
@@ -36,7 +38,7 @@ export class ChangePasswordComponent implements OnInit {
       title: 'COMPONENTS.CHANGE_PASSWORD',
       key: 'COMPONENTS.CHANGE_PASSWORD',
       link: '/pages/user-management/change-password',
-    }
+    },
   ];
 
   constructor(
@@ -44,7 +46,7 @@ export class ChangePasswordComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     this.createForm();
   }
@@ -53,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
     this.userService.getUserProfile()
       .subscribe(user => {
         this._user = user;
-      }); 
+      });
   }
 
   private createForm() {
@@ -95,7 +97,7 @@ export class ChangePasswordComponent implements OnInit {
     this.loader = true;
     const passwords = {
       changePassword: this.form.value.newPassword,
-      password: this.form.value.password
+      password: this.form.value.password,
     };
     this.userService.updatePassword(this.userService.getUserId(), passwords)
       .subscribe(res => {

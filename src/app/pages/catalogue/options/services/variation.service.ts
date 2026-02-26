@@ -5,19 +5,19 @@ import { Observable } from 'rxjs';
 import { StorageService } from '../../../shared/services/storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VariationService {
 
   constructor(
     private crudService: CrudService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {
   }
 
   checkCode(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v2/private/product/variation/unique`, params);
   }

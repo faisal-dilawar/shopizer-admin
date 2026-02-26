@@ -65,5 +65,5 @@ export const routedComponents = [
   RulesComponent,
   RulesListComponent,
   ShippingMethodsComponent,
-  ShippingConfigureComponent
+  ShippingConfigureComponent,
 ];

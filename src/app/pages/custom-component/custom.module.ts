@@ -4,11 +4,11 @@ import { SharedModule } from '../shared/shared.module';
 import { storeAutoCompleteComponent } from './store-autocomplete/store-autocomplete';
 @NgModule({
   declarations: [
-    storeAutoCompleteComponent
+    storeAutoCompleteComponent,
   ],
   imports: [
-    SharedModule
+    SharedModule,
   ],
-  exports: [storeAutoCompleteComponent]
+  exports: [storeAutoCompleteComponent],
 })
 export class CustomModule { }

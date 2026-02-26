@@ -6,15 +6,15 @@ import { CategoryService } from '../services/category.service';
 @Component({
   selector: 'ngx-category-detail',
   templateUrl: './category-detail.component.html',
-  styleUrls: ['./category-detail.component.scss']
+  styleUrls: ['./category-detail.component.scss'],
 })
 export class CategoryDetailComponent implements OnInit {
   category: any = {};
   loadingInfo = false;
-  loading: boolean = false;
+  loading = false;
   constructor(
     private categoryService: CategoryService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
   }
 

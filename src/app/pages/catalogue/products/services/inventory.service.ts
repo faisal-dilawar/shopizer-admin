@@ -3,12 +3,12 @@ import { CrudService } from '../../../shared/services/crud.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InventoryService {
 
   constructor(
-    private crudService: CrudService
+    private crudService: CrudService,
   ) {
   }
 
@@ -16,13 +16,13 @@ export class InventoryService {
     return this.crudService.get(`/v1/private/product/${idProduct}/inventory`, params);
   }
 
-  createInventory (inventory): Observable<any> {
+  createInventory(inventory): Observable<any> {
     return this.crudService.post(`/v1/private/product/inventory`, inventory);
   }
 
   getInventoryById(id, idInventory): Observable<any> {
     const params = {
-      lang: '_all'
+      lang: '_all',
     };
     return this.crudService.get(`/v1/private/product/${id}/inventory/${idInventory}`, params);
   }

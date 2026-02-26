@@ -10,8 +10,8 @@ export class PasswordPromptComponent {
 
   constructor(protected ref: NbDialogRef<PasswordPromptComponent>) { }
   name = {
-    value: ''
-  }
+    value: '',
+  };
   cancel() {
     this.ref.close();
   }

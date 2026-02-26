@@ -8,7 +8,7 @@ describe('InventoryFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InventoryFormComponent ]
+      declarations: [ InventoryFormComponent ],
     })
     .compileComponents();
   }));

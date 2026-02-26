@@ -14,7 +14,7 @@ import { CustomModule } from '../../custom-component/custom.module';
     CataloguesComponent,
     CataloguesListComponent,
     CatalogueFormComponent,
-    ProductToCatalogueComponent
+    ProductToCatalogueComponent,
   ],
   imports: [
     CataloguesRoutingModule,
@@ -23,8 +23,8 @@ import { CustomModule } from '../../custom-component/custom.module';
 
     NgxSummernoteModule,
     NbDialogModule.forChild(),
-    CustomModule
-  ]
+    CustomModule,
+  ],
 })
 export class CataloguesModule {
 }

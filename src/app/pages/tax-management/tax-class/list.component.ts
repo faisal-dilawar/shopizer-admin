@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ngx-tax-class-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class TaxClassListComponent implements OnInit {
   @ViewChild('item', { static: false }) accordion;
@@ -28,7 +28,7 @@ export class TaxClassListComponent implements OnInit {
   currentPage = 1;
   totalCount;
   // roles;
-  searchValue: string = '';
+  searchValue = '';
   isSuperAdmin: boolean;
 
   params = this.loadParams();
@@ -41,14 +41,14 @@ export class TaxClassListComponent implements OnInit {
     private translate: TranslateService,
     private storageService: StorageService,
     private storeService: StoreService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {
     this.isSuperAdmin = this.storageService.getUserRoles().isSuperadmin;
     this.getStoreList();
-    this.selectedStore = this.storageService.getMerchant()
+    this.selectedStore = this.storageService.getMerchant();
   }
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
 
         res.forEach((store) => {
@@ -69,7 +69,7 @@ export class TaxClassListComponent implements OnInit {
       // store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
   getTaxClassList() {
@@ -93,7 +93,7 @@ export class TaxClassListComponent implements OnInit {
   }
 
   setSettings() {
-    var me = this;
+    const me = this;
     this.settings = {
       // mode: 'external',
       hideSubHeader: true,
@@ -106,34 +106,34 @@ export class TaxClassListComponent implements OnInit {
         custom: [
           {
             name: 'edit',
-            title: '<i class="nb-edit"></i>'
+            title: '<i class="nb-edit"></i>',
           },
           {
             name: 'delete',
-            title: '<i class="nb-trash"></i>'
-          }
-        ]
+            title: '<i class="nb-trash"></i>',
+          },
+        ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
           title: this.translate.instant('COMMON.ID'),
-          type: 'number'
+          type: 'number',
           // filterFunction(cell: any, search?: string): boolean {
           //   return true;
           // }
         },
         code: {
           title: this.translate.instant('COMMON.CODE'),
-          type: 'string'
+          type: 'string',
         },
         name: {
           title: this.translate.instant('COMMON.NAME'),
-          type: 'string'
-        }
-      }
+          type: 'string',
+        },
+      },
     };
 
   }
@@ -161,15 +161,15 @@ export class TaxClassListComponent implements OnInit {
         break;
       }
     }
-    this.getTaxClassList()
+    this.getTaxClassList();
   }
 
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getTaxClassList();
   }
   route(event) {
-    console.log(event)
+    console.log(event);
     switch (event.action) {
       case 'edit':
         this.editTaxClass(event);
@@ -191,7 +191,7 @@ export class TaxClassListComponent implements OnInit {
             .subscribe(result => {
               this.loadingList = false;
 
-              this.toastr.success("Tax class has been deleted successfully");
+              this.toastr.success('Tax class has been deleted successfully');
               this.getTaxClassList();
               event.confirm.resolve();
             });

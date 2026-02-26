@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 import { StorageService } from '../../../shared/services/storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OptionService {
 
   constructor(
     private crudService: CrudService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {
   }
 
@@ -33,14 +33,14 @@ export class OptionService {
 
   getOptionById(id): Observable<any> {
     const params = {
-      lang: '_all'
+      lang: '_all',
     };
     return this.crudService.get(`/v1/private/product/option/${id}`, params);
   }
 
   checkOptionCode(code): Observable<any> {
     const params = {
-      'code': code,
+      code,
     };
     return this.crudService.get(`/v1/private/product/option/unique`, params);
   }
@@ -49,7 +49,7 @@ export class OptionService {
   getListOfOptionsSet(): Observable<any> {
     const params = {
       store: this.storageService.getMerchant(),
-      lang: this.storageService.getLanguage()
+      lang: this.storageService.getLanguage(),
     };
     return this.crudService.get('/v1/private/product/property/set',params);
   }
@@ -57,7 +57,7 @@ export class OptionService {
   deleteOptionSet(id): Observable<any> {
     const reqparams = {
       store: this.storageService.getMerchant(),
-      lang: this.storageService.getLanguage()
+      lang: this.storageService.getLanguage(),
     };
     return this.crudService.delete(`/v1/private/product/property/set/${id}`, reqparams);
   }
@@ -65,11 +65,11 @@ export class OptionService {
   checkOptionSetCode(code): Observable<any> {
     return this.crudService.get('/v1/private/product/property/set/unique?code=' + code);
   }
-  
+
   createSetOption(req): Observable<any> {
     const reqparams = {
       store: this.storageService.getMerchant(),
-      lang: this.storageService.getLanguage()
+      lang: this.storageService.getLanguage(),
     };
     return this.crudService.post('/v1/private/product/property/set', req, reqparams);
   }
@@ -80,7 +80,7 @@ export class OptionService {
   updateSetOption(id, param): Observable<any> {
     const reqparams = {
       store: this.storageService.getMerchant(),
-      lang: this.storageService.getLanguage()
+      lang: this.storageService.getLanguage(),
     };
     return this.crudService.put(`/v1/private/product/property/set/${id}`, param, reqparams);
   }

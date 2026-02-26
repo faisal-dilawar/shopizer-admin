@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ngx-tax-rate-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class TaxRateListComponent implements OnInit {
   @ViewChild('item', { static: false }) accordion;
@@ -28,11 +28,11 @@ export class TaxRateListComponent implements OnInit {
   currentPage = 1;
   totalCount;
   // roles;
-  searchValue: string = '';
+  searchValue = '';
   isSuperAdmin: boolean;
 
   params = this.loadParams();
-  public input: string = '<input type="checkbox"></input>';
+  public input = '<input type="checkbox"></input>';
   constructor(
     private taxService: TaxService,
     private router: Router,
@@ -42,14 +42,14 @@ export class TaxRateListComponent implements OnInit {
     private storageService: StorageService,
     private storeService: StoreService,
     private toastr: ToastrService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
   ) {
     this.isSuperAdmin = this.storageService.getUserRoles().isSuperadmin;
     this.getStoreList();
-    this.selectedStore = this.storageService.getMerchant()
+    this.selectedStore = this.storageService.getMerchant();
   }
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -69,7 +69,7 @@ export class TaxRateListComponent implements OnInit {
       // store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
   getTaxRate() {
@@ -93,7 +93,7 @@ export class TaxRateListComponent implements OnInit {
   }
 
   setSettings() {
-    var me = this;
+    const me = this;
     this.settings = {
       // mode: 'external',
       hideSubHeader: true,
@@ -106,36 +106,36 @@ export class TaxRateListComponent implements OnInit {
         custom: [
           {
             name: 'edit',
-            title: '<i class="nb-edit"></i>'
+            title: '<i class="nb-edit"></i>',
           },
           {
             name: 'delete',
-            title: '<i class="nb-trash"></i>'
-          }
-        ]
+            title: '<i class="nb-trash"></i>',
+          },
+        ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
           title: this.translate.instant('COMMON.ID'),
-          type: 'number'
+          type: 'number',
           // filterFunction(cell: any, search?: string): boolean {
           //   return true;
           // }
         },
         country: {
           title: this.translate.instant('ORDER_FORM.COUNTRY'),
-          type: 'string'
+          type: 'string',
         },
         zone: {
           title: this.translate.instant('ORDER_FORM.STATE'),
-          type: 'string'
+          type: 'string',
         },
         code: {
           title: this.translate.instant('COMMON.CODE'),
-          type: 'string'
+          type: 'string',
         },
         description: {
           title: this.translate.instant('COMMON.NAME'),
@@ -144,27 +144,27 @@ export class TaxRateListComponent implements OnInit {
             if (description) {
               return description.name;
             }
-          }
+          },
         },
         rate: {
           title: this.translate.instant('TAX.TAX_RATE'),
-          type: 'string'
+          type: 'string',
         },
         priority: {
           title: this.translate.instant('TAX.ORDER'),
-          type: 'string'
+          type: 'string',
         },
         checkbox: {
           title: 'Compound',
           type: 'html',
-          valuePrepareFunction: (value) => { return this._sanitizer.bypassSecurityTrustHtml(this.input) },
-          filter: false
+          valuePrepareFunction: (value) => this._sanitizer.bypassSecurityTrustHtml(this.input),
+          filter: false,
         },
         taxClass: {
           title: this.translate.instant('TAX.TAX_CLASS_NAME'),
-          type: 'string'
-        }
-      }
+          type: 'string',
+        },
+      },
     };
 
   }
@@ -196,11 +196,11 @@ export class TaxRateListComponent implements OnInit {
   }
 
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getTaxRate();
   }
   route(event) {
-    console.log(event)
+    console.log(event);
     switch (event.action) {
       case 'edit':
         this.editTaxRate(event);
@@ -222,7 +222,7 @@ export class TaxRateListComponent implements OnInit {
             .subscribe(result => {
               this.loadingList = false;
 
-              this.toastr.success("Tax rate has been deleted successfully");
+              this.toastr.success('Tax rate has been deleted successfully');
               this.getTaxRate();
               event.confirm.resolve();
             });

@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent {
-  search_text: string = '';
+  search_text = '';
   stores: Array<any> = [];
   perPage = 10;
   currentPage = 1;
@@ -27,7 +27,7 @@ export class PageComponent {
     lang: this.storageService.getLanguage(),
     store: this.storageService.getMerchant(),
     count: this.perPage,
-    page: 0
+    page: 0,
   };
 
   source: any = new LocalDataSource();
@@ -41,20 +41,20 @@ export class PageComponent {
     private mScrollbarService: MalihuScrollbarService,
     private storeService: StoreService,
     private storageService: StorageService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
-    this.getStoreList()
+    this.getStoreList();
 
     this.translate.onLangChange.subscribe((lang) => {
       this.params.lang = this.storageService.getLanguage();
-      this.getPages()
+      this.getPages();
     });
   }
   ngOnInit() {
     this.getPages();
   }
   getStoreList() {
-    this.storeService.getListOfMerchantStoreNames({ 'store': '' })
+    this.storeService.getListOfMerchantStoreNames({ store: '' })
       .subscribe(res => {
         res.forEach((store) => {
           this.stores.push({ value: store.code, label: store.code });
@@ -69,7 +69,7 @@ export class PageComponent {
       .subscribe(data => {
         this.source = data.items;
         this.tempData = data.items;
-        this.totalCount = data.recordsTotal * data.totalPages
+        this.totalCount = data.recordsTotal * data.totalPages;
         this.loadingList = false;
       }, error => {
         this.loadingList = false;
@@ -89,13 +89,13 @@ export class PageComponent {
         custom: [
           {
             name: 'edit',
-            title: '<i class="nb-edit"></i>'
+            title: '<i class="nb-edit"></i>',
           },
           {
             name: 'delete',
-            title: '<i class="nb-trash"></i>'
-          }
-        ]
+            title: '<i class="nb-trash"></i>',
+          },
+        ],
       },
       columns: {
         id: {
@@ -112,11 +112,11 @@ export class PageComponent {
           valuePrepareFunction: (cell, row) => {
             // console.log(row.description.name)
             if (row.description) {
-              return row.description.name
+              return row.description.name;
             } else {
-              return ''
+              return '';
             }
-          }
+          },
         },
         friendlyUrl: {
           title: this.translate.instant('CONTENT.URL'),
@@ -124,12 +124,12 @@ export class PageComponent {
           valuePrepareFunction: (cell, row) => {
             // console.log(row.description.name)
             if (row.description) {
-              return row.description.friendlyUrl
+              return row.description.friendlyUrl;
             } else {
-              return ''
+              return '';
             }
-          }
-        }
+          },
+        },
 
       },
     };
@@ -165,7 +165,7 @@ export class PageComponent {
     this.router.navigate(['/pages/content/pages/add']);
   }
   onSelectStore(e) {
-    this.params["store"] = e;
+    this.params['store'] = e;
     this.getPages();
   }
   onClickAction(event) {
@@ -187,7 +187,7 @@ export class PageComponent {
     // console.log(event);
 
     this.dialogService.open(ShowcaseDialogComponent, {
-      context: 'Do you really want to remove this entity?'
+      context: 'Do you really want to remove this entity?',
       // context: {
       //   title: 'Are you sure!',
       //   body: 'Do you really want to remove this entity?'

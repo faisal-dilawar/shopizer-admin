@@ -17,7 +17,7 @@ import { ShowcaseDialogComponent } from '../../../../shared/components/showcase-
 @Component({
   selector: 'ngx-product-property',
   templateUrl: './product-property.component.html',
-  styleUrls: ['./product-property.component.scss']
+  styleUrls: ['./product-property.component.scss'],
 })
 export class ProductProperties implements OnInit {
   product: any = {};
@@ -25,7 +25,7 @@ export class ProductProperties implements OnInit {
   attributeId: any;
   attribute: any = {};
 
-  id : any;
+  id: any;
   loaded = false;
   loading = false;
   loadingList = false;
@@ -49,7 +49,7 @@ export class ProductProperties implements OnInit {
     private storageService: StorageService,
     private productService: ProductService,
     private dialogService: NbDialogService,
-    private router: Router
+    private router: Router,
 
   ) {
 
@@ -59,21 +59,21 @@ export class ProductProperties implements OnInit {
       // store: this.storageService.getMerchant(),
       lang: this.storageService.getLanguage(),
       count: this.perPage,
-      page: 0
+      page: 0,
     };
   }
   ngOnInit() {
 
     this.id = this.productService.getProductIdRoute(this.router,this.location);
 
-        
+
 
     //specify add image url to image component
-    let el = document.getElementById('tabs');
+    const el = document.getElementById('tabs');
     el.scrollIntoView();
     this.getList();
 
-    
+
     this.translate.onLangChange.subscribe((lang) => {
       this.params.lang = this.storageService.getLanguage();
       this.getList();
@@ -92,14 +92,12 @@ export class ProductProperties implements OnInit {
     this.loading=true;
 
     forkJoin([
-      this.productService.getProductById(this.id), 
+      this.productService.getProductById(this.id),
       this.productAttributesService.getListOfProductsAttributes(this.id, this.params)])
     .subscribe(([productRes, attrRes]) => {
 
 
-      var tempArray = attrRes.attributes.filter((value) => {
-        return value.attributeDisplayOnly === true;
-      });
+      const tempArray = attrRes.attributes.filter((value) => value.attributeDisplayOnly === true);
       if (tempArray.length !== 0) {
         this.source.load(tempArray);
       } else {
@@ -124,36 +122,32 @@ export class ProductProperties implements OnInit {
         sort: true,
         custom: [
           { name: 'edit', title: '<i class="nb-edit"></i>' },
-          { name: 'remove', title: '<i class="nb-trash"></i>' }
+          { name: 'remove', title: '<i class="nb-trash"></i>' },
         ],
       },
       pager: {
-        display: false
+        display: false,
       },
       columns: {
         id: {
           title: this.translate.instant('COMMON.ID'),
           type: 'number',
           editable: false,
-          filter: false
+          filter: false,
         },
         option: {
           title: this.translate.instant('PRODUCT_ATTRIBUTES.OPTION_NAME'),
           type: 'string',
           editable: false,
           filter: false,
-          valuePrepareFunction: (name) => {
-            return name.code;
-          }
+          valuePrepareFunction: (name) => name.code,
         },
         optionValue: {
           title: this.translate.instant('PRODUCT_ATTRIBUTES.PRODUCT_OPTION'),
           type: 'string',
           editable: false,
           filter: false,
-          valuePrepareFunction: (name) => {
-            return name.description.name;
-          }
+          valuePrepareFunction: (name) => name.description.name,
         },
         // productAttributePrice: {
         //   title: this.translate.instant('PRODUCT_ATTRIBUTES.PRICE'),
@@ -161,7 +155,7 @@ export class ProductProperties implements OnInit {
         //   editable: false,
         //   filter: false
         // }
-      }
+      },
     };
   }
   // paginator
@@ -198,10 +192,10 @@ export class ProductProperties implements OnInit {
     this.dialogService.open(ProductPropertyForm, {
       context: {
         productId: this.id,
-        productType: this.product.type.code
-      }
+        productType: this.product.type.code,
+      },
     }).onClose.subscribe(res => {
-      this.getList()
+      this.getList();
     });
   }
 
@@ -212,10 +206,10 @@ export class ProductProperties implements OnInit {
           context: {
             productId: this.id,
             attributeId: event.data.id,
-            productType: this.product.type.code
-          }
+            productType: this.product.type.code,
+          },
         }).onClose.subscribe(res => {
-          this.getList()
+          this.getList();
         });
         break;
       case 'remove':
