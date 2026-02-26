@@ -8,6 +8,7 @@ import { NbDialogService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { InventoryService } from '../../services/inventory.service';
 import { ShowcaseDialogComponent } from '../../../../shared/components/showcase-dialog/showcase-dialog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-prices-list',
@@ -39,8 +40,12 @@ export class PricesListComponent implements OnInit {
     private inventoryService: InventoryService,
     private _sanitizer: DomSanitizer,
     private router: Router,
+    private location: Location,
   ) {
     this.params.productId = this.activatedRoute.snapshot.paramMap.get('productId');
+    if (!this.params.productId) {
+      this.params.productId = this.productService.getProductIdRoute(this.router, this.location);
+    }
     this.params.inventoryId = this.activatedRoute.snapshot.paramMap.get('inventoryId');
   }
 

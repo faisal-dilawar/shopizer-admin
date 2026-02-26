@@ -133,13 +133,18 @@ export class OptionComponent implements OnInit {
       this.toastr.error(this.translate.instant('COMMON.CODE_EXISTS'));
       return;
     }
+
+    const formValue = { ...this.form.value };
+    // Filter out descriptions with empty names
+    formValue.descriptions = formValue.descriptions.filter(desc => desc.name && desc.name.trim() !== '');
+
     if (this.option.id) {
-      const optionObj = { ...this.form.value, id: this.option.id };
+      const optionObj = { ...formValue, id: this.option.id };
       this.optionService.updateOption(this.option.id, optionObj).subscribe(res => {
         this.toastr.success(this.translate.instant('OPTION.OPTION_UPDATED'));
       });
     } else {
-      this.optionService.createOption(this.form.value).subscribe(res => {
+      this.optionService.createOption(formValue).subscribe(res => {
         this.toastr.success(this.translate.instant('OPTION.OPTION_CREATED'));
         this.router.navigate(['pages/catalogue/options/options-list']);
       });

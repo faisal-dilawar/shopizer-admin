@@ -71,6 +71,16 @@ export class ProductFormComponent implements OnInit {
       fragment: 'tab1',
     },
     {
+      title: this.translate.instant('COMPONENTS.INVENTORY'),
+      route: 'inventory',
+      fragment: 'tab1',
+    },
+    {
+      title: this.translate.instant('COMPONENTS.PRICE'),
+      route: 'prices',
+      fragment: 'tab1',
+    },
+    {
       title: this.translate.instant('COMPONENTS.PRODUCTS_PROPERTIES'),
       route: 'properties',
       fragment: 'tab1',

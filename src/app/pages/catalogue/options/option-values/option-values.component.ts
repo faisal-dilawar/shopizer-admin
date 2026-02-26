@@ -134,8 +134,13 @@ export class OptionValuesComponent implements OnInit {
       this.toastr.error(this.translate.instant('COMMON.CODE_EXISTS'));
       return;
     }
+
+    const formValue = { ...this.form.value };
+    // Filter out descriptions with empty names
+    formValue.descriptions = formValue.descriptions.filter(desc => desc.name && desc.name.trim() !== '');
+
     if (this.optionValue.id) {
-      const optionObj = { ...this.form.value, id: this.optionValue.id };
+      const optionObj = { ...formValue, id: this.optionValue.id };
       this.optionValuesService.updateOptionValue(this.optionValue.id, optionObj).subscribe(res => {
         if (this.uploadImage.get('file')) {
           this.optionValueImageService.createImage(this.optionValue.id, this.uploadImage).subscribe(r => {
@@ -148,12 +153,12 @@ export class OptionValuesComponent implements OnInit {
         }
       });
     } else {
-      this.optionValuesService.createOptionValue(this.form.value).subscribe(res => {
-        if(this.uploadImage.has('file')) {
+      this.optionValuesService.createOptionValue(formValue).subscribe(res => {
+        if (this.uploadImage.has('file')) {
           this.optionValueImageService.createImage(res.id, this.uploadImage).subscribe(r => {
             this.toastr.success(this.translate.instant('OPTION_VALUE.OPTION_VALUE_UPDATED'));
             this.router.navigate(['pages/catalogue/options/options-values-list']);
-        });
+          });
         } else {
           this.toastr.success(this.translate.instant('OPTION_VALUE.OPTION_VALUE_CREATED'));
           this.router.navigate(['pages/catalogue/options/options-values-list']);

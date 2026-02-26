@@ -11,6 +11,8 @@ import { ProductDiscountComponent } from '../product-discount/product-discount.c
 import { ProductOrderingComponent } from '../product-ordering/product-ordering.component';
 import { ProductAttributesComponent } from '../attribute/product-attributes/product-attributes.component';
 import { ProductProperties } from '../property/list/product-property.component';
+import { ManageInventoryComponent } from '../inventory/manage-inventory/manage-inventory.component';
+import { PricesListComponent } from '../price/prices-list/prices-list.component';
 
 
 
@@ -58,6 +60,14 @@ const routes: Routes = [
           {
             path: 'options',
             component: ProductAttributesComponent,
+          },
+          {
+            path: 'inventory',
+            component: ManageInventoryComponent,
+          },
+          {
+            path: 'prices',
+            component: PricesListComponent,
           },
           {
             path: 'properties',

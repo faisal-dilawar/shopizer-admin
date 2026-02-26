@@ -46,9 +46,13 @@ export class ManageInventoryComponent implements OnInit {
     private router: Router,
     private storageService: StorageService,
     private toastr: ToastrService,
+    private location: Location,
   ) {
 
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
+    if (!this.productId) {
+      this.productId = this.productService.getProductIdRoute(this.router, this.location);
+    }
     this.productService.getProductById(this.productId).subscribe(product => {
       this.product = product;
     });

@@ -129,10 +129,13 @@ export class AddVariationsComponent implements OnInit {
     this.optionService.getListOfOptions({})
       .subscribe((res) => {
         res.options.map((value) => {
-          const description = value.descriptions.find(el => {
+          let description = value.descriptions.find(el => {
             return el.language === this.storageService.getLanguage();
           });
-          const name = description && description.name ? description.name : '';
+          if (!description && value.descriptions.length > 0) {
+            description = value.descriptions[0];
+          }
+          const name = description && description.name ? description.name : value.code;
           this.productOption.push({ id: value.id, code: value.code, name: name })
         })
       }, error => {
@@ -148,10 +151,13 @@ export class AddVariationsComponent implements OnInit {
       .subscribe(res => {
         // console.log(res);
         res.optionValues.map((value) => {
-          const description = value.descriptions.find(el => {
+          let description = value.descriptions.find(el => {
             return el.language === this.storageService.getLanguage();
           });
-          const name = description && description.name ? description.name : '';
+          if (!description && value.descriptions.length > 0) {
+            description = value.descriptions[0];
+          }
+          const name = description && description.name ? description.name : value.code;
           this.productOptionValue.push({ id: value.id, code: value.code, name: name })
         })
       }, error => {
@@ -232,7 +238,7 @@ export class AddVariationsComponent implements OnInit {
     }
   }
   goToback() {
-    this.router.navigate(['pages/catalogue/options/varations/list']);
+    this.router.navigate(['pages/catalogue/options/variations/list']);
   }
   // setSelected(e) {
   //   //console.log(e)

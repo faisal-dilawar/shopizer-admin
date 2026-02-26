@@ -16,6 +16,9 @@ export class VariationsListComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   loadingList = false;
   settings = {};
+  perPage = 10;
+  currentPage = 1;
+  totalCount = 0;
 
   constructor(
     private variationService: VariationService,
@@ -35,14 +38,24 @@ export class VariationsListComponent implements OnInit {
   getList() {
 
     this.loadingList = true;
-    this.variationService.getListOfVariations().subscribe((res) => {
+    const params = {
+      page: this.currentPage - 1,
+      count: this.perPage
+    };
+    this.variationService.getListOfVariations(params).subscribe((res) => {
       this.source.load(res.items);
+      this.totalCount = res.recordsTotal;
       this.loadingList = false;
     });
     this.setSettings();
     this.translate.onLangChange.subscribe((lang) => {
       this.setSettings();
     });
+  }
+
+  changePage(event) {
+    this.currentPage = event;
+    this.getList();
   }
 
   setSettings() {
@@ -87,18 +100,15 @@ export class VariationsListComponent implements OnInit {
           type: 'string',
           filter: true,
           valuePrepareFunction: (value) => {
-            return value.name;
+            return value ? value.name : '';
           }
         },
-        values: {
+        optionValue: {
           title: this.translate.instant('COMPONENTS.OPTIONS_VALUE'),
           type: 'string',
           filter: false,
-          valuePrepareFunction: (data) => {
-            if (data != null) {
-              let value = data.map(a => a.name).join(", ");
-              return value;
-            }
+          valuePrepareFunction: (value) => {
+            return value ? value.name : '';
           }
         },
         // productTypes: {
