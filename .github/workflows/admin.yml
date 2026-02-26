@@ -28,7 +28,7 @@ jobs:
         continue-on-error: true
 
       - name: Build
-        run: npm run build
+        run: npm run build -- --base-href /admin/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
